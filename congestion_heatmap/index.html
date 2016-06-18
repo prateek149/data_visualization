@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <style>
+      h2 {
+        position: relative;
+        left: 250px;
+        font-family: verdana;
+        font-size: 18px;
+      }
+      
+      h3 {
+        position: relative;
+        left: 250px;
+        font-family: verdana;
+        font-size: 14px;
+      }
+      
+      path {
+        stroke: rgba(180,180,180,.5);
+        stroke-width: 0.3;
+      }
+
+      path.roads  {
+        fill: rgba(0,0,0,0);
+        stroke: rgba(110,110,110,1);
+        stroke-width: 0.4;
+
+      }
+
+      div.hours_weekday {
+        position: fixed;
+        top: 70px;
+        left: 30px;
+      } 
+
+      div.hours_weekend {
+        position: fixed;
+        top: 70px;
+        left: 90px;
+      } 
+
+      div.hours_weekday div {
+        background-color: lightBlue;
+        padding: 3px;
+        margin: 5px;
+        font-family: verdana;
+        font-size: 11px;
+        color: white;
+        text-align: center;
+      }
+
+      div.hours_weekend div {
+        background-color: lightBlue;
+        padding: 3px;
+        margin: 5px;
+        font-family: verdana;
+        font-size: 11px;
+        color: white;
+        text-align: center;
+      }
+
+      circle {
+        fill: orange;
+        stroke: black;
+        stroke-width: 0.5;
+        opacity: 0.6;
+      }
+
+      .d3-tip {
+        line-height: 1.2;
+        font-family: verdana;
+        font-size: 13px;
+        padding: 5px;
+        background: rgba(0, 0, 0, 0.7);
+        color: #ccc;
+        border-radius: 2px;
+      }
+
+    </style>
+
+    <script type="text/javascript"> 
+
+        function draw(geo_data) {
+            "use strict";
+            var margin = 50;
+            var width = 800 - margin;
+            var height = 600 - margin;
+
+            var tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([10, 0])
+            .html(function(d) { debugger;
+                   return(d.properties["8_overall_"]);
+                  });
+
+
+
+            function color_fill(d) {
+              var heat_color = "#FEEDDE";
+              if(d>0.2) { heat_color = "#FDBE85"; }
+              if(d>0.4) { heat_color = "#FD8D3C"; }
+              if(d>0.6) { heat_color = "#E6550D"; }
+              if(d>0.8) { heat_color = "#A63603"; }
+              if(d>1) { heat_color = "#681000"; }
+              return heat_color;
+            }
+
+            d3.select("body")
+              .append("h2")
+              .text("Delhi Congestion Heatmap");
+
+            d3.select("body")
+              .append("h3")
+              .attr("class","dynamic_text")
+              .text("Overall Congestion");
+            
+            var svg = d3.select("body")
+                        .append("svg")
+                        .attr("width",width + margin)
+                        .attr("height", height + margin)
+                        .append("g")
+                        .attr("class","map");
+
+            var projection = d3.geo.mercator()
+                               .scale(1)
+                               .translate([0,0]);
+
+            svg.call(tip);
+
+
+            var path = d3.geo.path().projection(projection);
+
+            // Compute the bounds of a feature of interest, then derive scale & translate.
+            var b = path.bounds(geo_data),
+                s = 1 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+                t = [(width - s * (b[1][0] + b[0][0])) / 2+50, (height - s * (b[1][1] + b[0][1])) / 2+50]
+
+            projection
+                .scale(s)
+                .translate(t);
+                
+            var map = svg.append("g").selectAll("path")
+                         .data(geo_data.features)
+                         .enter()  
+                         .append("path")
+                         .attr("d", path)
+                         .attr("class","grid")
+                         .attr("fill",function(d) {
+                            return(color_fill(d.properties["8_overall_"]));
+                         })
+                         .on("mouseover", tip.show)
+                         .on("mouseout", tip.hide);
+
+            var hours1 = [];
+            hours1.push(["Weekday","Weekday"]);
+
+            for(var i = 0; i < 24; i += 1) {
+                  hours1.push([i,"Weekday"]);
+            };
+
+            var hours2 = [];
+            hours2.push(["Weekend","Weekend"]);
+
+            for(var i = 0; i < 24; i += 1) {
+                  hours2.push([i,"Weekend"]);
+            };
+
+            var buttons1 = d3.select("body")
+                            .append("div")
+                            .attr("class","buttons hours_weekday")
+                            .selectAll("div")
+                            .data(hours1)
+                            .enter()
+                            .append("div")
+                            .text(function(d) { return d[0];});
+
+            var buttons2 = d3.select("body")
+                            .append("div")
+                            .attr("class","buttons hours_weekend")
+                            .selectAll("div")
+                            .data(hours2)
+                            .enter()
+                            .append("div")
+                            .text(function(d) { return d[0];});
+
+
+            function draw_roads (roads) {
+
+                var roads_svg = svg.append("g").selectAll("path")
+                         .data(roads.features)
+                         .enter()  
+                         .append("path")
+                         .attr("d", path)
+                         .attr("class","roads");
+
+            };
+
+            d3.json("https://raw.githubusercontent.com/prateek149/data_visualization/master/congestion_heatmap/data/delhi_major_roads.json",draw_roads);
+
+            function draw_points (points) {
+
+                var roads_svg = svg.append("g").selectAll("path")
+                         .data(roads.features)
+                         .enter()  
+                         .append("path")
+                         .attr("d", path)
+                         .attr("class","query_points");
+
+            };
+
+            d3.json("https://raw.githubusercontent.com/prateek149/data_visualization/master/congestion_heatmap/data/delhi_grid_8_8_points.json",draw_points);
+
+            function update(d) {
+
+              if(d[0]!="Weekday" && d[0]!="Weekend") {
+
+                if (d[1] == "Weekday") { var comp1 = "wkdy";}
+                if (d[1] == "Weekend") { var comp1 = "wknd";}
+
+                var comp2 = "C_" + d[0];
+                if(d[0] == 0) {comp2 = "Con";}
+                if(d[0] > 9) {comp2 = "C" + d[0];}
+
+                var field = "8_" + comp1 + "_" + comp2;
+
+                var tip2 = d3.tip()
+                  .attr('class', 'd3-tip')
+                  .offset([10, 0])
+                  .html(function(d) { debugger;
+                        return(d.properties[field]);
+                  });
+
+                svg.call(tip2);
+
+                svg.selectAll("path")
+                    .classed("grid", true)
+                    .transition()
+                    .duration(200)
+                    .attr("fill",function(d1) { debugger;
+                            return(color_fill(d1.properties[field]));
+                            //return("blue");
+                         });
+
+                  svg.selectAll("path")
+                    .classed("grid", true)
+                    .on("mouseover",tip2.show)
+                    .on("mouseout", tip2.hide);
+
+                  d3.select("h3.dynamic_text")
+                    .text(d[1] + " " + d[0] + " hours");
+              }
+            };
+
+
+            buttons1.on("mouseover", function(d) {
+                        d3.select(".hours_weekday")
+                          .selectAll("div")
+                          .transition()
+                          .duration(100)
+                          .style("background","lightBlue")
+                          .style("color","white");
+
+                        d3.select(".hours_weekend")
+                          .selectAll("div")
+                          .transition()
+                          .duration(100)
+                          .style("background","lightBlue")
+                          .style("color","white");
+
+                        d3.select(this)
+                          .transition()
+                          .duration(100)
+                          .style("background","orange")
+                          .style("color","black");
+
+                        update(d)
+                        
+                });
+
+
+            buttons2.on("mouseover", function(d) {
+                        d3.select(".hours_weekend")
+                          .selectAll("div")
+                          .transition()
+                          .duration(100)
+                          .style("background","lightBlue")
+                          .style("color","white");
+
+                        d3.select(".hours_weekday")
+                          .selectAll("div")
+                          .transition()
+                          .duration(100)
+                          .style("background","lightBlue")
+                          .style("color","white");
+
+                        d3.select(this)
+                          .transition()
+                          .duration(100)
+                          .style("background","orange")
+                          .style("color","black");
+                        
+                        update(d);
+                });
+
+        };  
+
+    </script>
+
+  </head>
+
+<body>
+  <script type="text/javascript">
+    d3.json("https://raw.githubusercontent.com/prateek149/data_visualization/master/congestion_heatmap/data/delhi_grid_8_8_data.json", draw);
+  </script>
+</body>
+
+</html>
