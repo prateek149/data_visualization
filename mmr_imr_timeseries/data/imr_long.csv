@@ -1,685 +1,685 @@
-"","state","year","imr"
-"1","India",1995,74
-"2","Andhra Pradesh",1995,67
-"3","Assam",1995,77
-"4","Bihar",1995,73
-"5","Chhattisgarh",1995,NA
-"6","Gujarat",1995,62
-"7","Haryana",1995,69
-"8","Jharkhand",1995,NA
-"9","Karnataka",1995,62
-"10","Kerala",1995,15
-"11","Madhya Pradesh",1995,99
-"12","Maharashtra",1995,55
-"13","Odisha",1995,103
-"14","Punjab",1995,54
-"15","Rajasthan",1995,86
-"16","Tamil Nadu",1995,54
-"17","Uttar Pradesh",1995,86
-"18","West Bengal",1995,58
-"19","Arunachal Pradesh",1995,NA
-"20","Delhi",1995,NA
-"21","Goa",1995,NA
-"22","Himachal Pradesh",1995,63
-"23","Jammu & Kashmir",1995,NA
-"24","Manipur",1995,NA
-"25","Meghalaya",1995,NA
-"26","Mizoram",1995,NA
-"27","Nagaland",1995,NA
-"28","Sikkim",1995,NA
-"29","Tripura",1995,NA
-"30","Uttarakhand",1995,NA
-"31","Andaman & Nicobar Islands",1995,NA
-"32","Chandigarh",1995,NA
-"33","Dadra and Nagar Haveli",1995,NA
-"34","Daman and Diu",1995,NA
-"35","Lakshadweep",1995,NA
-"36","Puducherry",1995,NA
-"37","India",1996,72
-"38","Andhra Pradesh",1996,65
-"39","Assam",1996,74
-"40","Bihar",1996,71
-"41","Chhattisgarh",1996,NA
-"42","Gujarat",1996,61
-"43","Haryana",1996,68
-"44","Jharkhand",1996,NA
-"45","Karnataka",1996,53
-"46","Kerala",1996,14
-"47","Madhya Pradesh",1996,97
-"48","Maharashtra",1996,48
-"49","Odisha",1996,95
-"50","Punjab",1996,51
-"51","Rajasthan",1996,85
-"52","Tamil Nadu",1996,53
-"53","Uttar Pradesh",1996,85
-"54","West Bengal",1996,55
-"55","Arunachal Pradesh",1996,NA
-"56","Delhi",1996,NA
-"57","Goa",1996,NA
-"58","Himachal Pradesh",1996,63
-"59","Jammu & Kashmir",1996,NA
-"60","Manipur",1996,NA
-"61","Meghalaya",1996,NA
-"62","Mizoram",1996,NA
-"63","Nagaland",1996,NA
-"64","Sikkim",1996,NA
-"65","Tripura",1996,NA
-"66","Uttarakhand",1996,NA
-"67","Andaman & Nicobar Islands",1996,NA
-"68","Chandigarh",1996,NA
-"69","Dadra and Nagar Haveli",1996,NA
-"70","Daman and Diu",1996,NA
-"71","Lakshadweep",1996,NA
-"72","Puducherry",1996,NA
-"73","India",1997,71
-"74","Andhra Pradesh",1997,63
-"75","Assam",1997,76
-"76","Bihar",1997,71
-"77","Chhattisgarh",1997,89
-"78","Gujarat",1997,62
-"79","Haryana",1997,68
-"80","Jharkhand",1997,68
-"81","Karnataka",1997,53
-"82","Kerala",1997,12
-"83","Madhya Pradesh",1997,94
-"84","Maharashtra",1997,47
-"85","Odisha",1997,96
-"86","Punjab",1997,51
-"87","Rajasthan",1997,85
-"88","Tamil Nadu",1997,53
-"89","Uttar Pradesh",1997,85
-"90","West Bengal",1997,55
-"91","Arunachal Pradesh",1997,47
-"92","Delhi",1997,35
-"93","Goa",1997,19
-"94","Himachal Pradesh",1997,63
-"95","Jammu & Kashmir",1997,NA
-"96","Manipur",1997,30
-"97","Meghalaya",1997,54
-"98","Mizoram",1997,19
-"99","Nagaland",1997,NA
-"100","Sikkim",1997,51
-"101","Tripura",1997,51
-"102","Uttarakhand",1997,NA
-"103","Andaman & Nicobar Islands",1997,33
-"104","Chandigarh",1997,40
-"105","Dadra and Nagar Haveli",1997,63
-"106","Daman and Diu",1997,38
-"107","Lakshadweep",1997,36
-"108","Puducherry",1997,22
-"109","India",1998,72
-"110","Andhra Pradesh",1998,66
-"111","Assam",1998,76
-"112","Bihar",1998,67
-"113","Chhattisgarh",1998,94
-"114","Gujarat",1998,64
-"115","Haryana",1998,70
-"116","Jharkhand",1998,62
-"117","Karnataka",1998,58
-"118","Kerala",1998,16
-"119","Madhya Pradesh",1998,98
-"120","Maharashtra",1998,49
-"121","Odisha",1998,98
-"122","Punjab",1998,54
-"123","Rajasthan",1998,83
-"124","Tamil Nadu",1998,53
-"125","Uttar Pradesh",1998,85
-"126","West Bengal",1998,53
-"127","Arunachal Pradesh",1998,44
-"128","Delhi",1998,36
-"129","Goa",1998,23
-"130","Himachal Pradesh",1998,68
-"131","Jammu & Kashmir",1998,45
-"132","Manipur",1998,25
-"133","Meghalaya",1998,52
-"134","Mizoram",1998,23
-"135","Nagaland",1998,NA
-"136","Sikkim",1998,52
-"137","Tripura",1998,49
-"138","Uttarakhand",1998,NA
-"139","Andaman & Nicobar Islands",1998,30
-"140","Chandigarh",1998,32
-"141","Dadra and Nagar Haveli",1998,61
-"142","Daman and Diu",1998,51
-"143","Lakshadweep",1998,26
-"144","Puducherry",1998,21
-"145","India",1999,70
-"146","Andhra Pradesh",1999,66
-"147","Assam",1999,76
-"148","Bihar",1999,63
-"149","Chhattisgarh",1999,78
-"150","Gujarat",1999,63
-"151","Haryana",1999,68
-"152","Jharkhand",1999,71
-"153","Karnataka",1999,58
-"154","Kerala",1999,14
-"155","Madhya Pradesh",1999,90
-"156","Maharashtra",1999,48
-"157","Odisha",1999,97
-"158","Punjab",1999,53
-"159","Rajasthan",1999,81
-"160","Tamil Nadu",1999,52
-"161","Uttar Pradesh",1999,84
-"162","West Bengal",1999,52
-"163","Arunachal Pradesh",1999,43
-"164","Delhi",1999,31
-"165","Goa",1999,21
-"166","Himachal Pradesh",1999,54
-"167","Jammu & Kashmir",1999,52
-"168","Manipur",1999,25
-"169","Meghalaya",1999,56
-"170","Mizoram",1999,19
-"171","Nagaland",1999,NA
-"172","Sikkim",1999,49
-"173","Tripura",1999,42
-"174","Uttarakhand",1999,52
-"175","Andaman & Nicobar Islands",1999,25
-"176","Chandigarh",1999,28
-"177","Dadra and Nagar Haveli",1999,56
-"178","Daman and Diu",1999,35
-"179","Lakshadweep",1999,32
-"180","Puducherry",1999,22
-"181","India",2000,68
-"182","Andhra Pradesh",2000,65
-"183","Assam",2000,75
-"184","Bihar",2000,62
-"185","Chhattisgarh",2000,79
-"186","Gujarat",2000,62
-"187","Haryana",2000,67
-"188","Jharkhand",2000,70
-"189","Karnataka",2000,57
-"190","Kerala",2000,14
-"191","Madhya Pradesh",2000,87
-"192","Maharashtra",2000,48
-"193","Odisha",2000,95
-"194","Punjab",2000,52
-"195","Rajasthan",2000,79
-"196","Tamil Nadu",2000,51
-"197","Uttar Pradesh",2000,83
-"198","West Bengal",2000,51
-"199","Arunachal Pradesh",2000,44
-"200","Delhi",2000,32
-"201","Goa",2000,23
-"202","Himachal Pradesh",2000,51
-"203","Jammu & Kashmir",2000,50
-"204","Manipur",2000,23
-"205","Meghalaya",2000,58
-"206","Mizoram",2000,21
-"207","Nagaland",2000,NA
-"208","Sikkim",2000,49
-"209","Tripura",2000,41
-"210","Uttarakhand",2000,50
-"211","Andaman & Nicobar Islands",2000,23
-"212","Chandigarh",2000,28
-"213","Dadra and Nagar Haveli",2000,58
-"214","Daman and Diu",2000,48
-"215","Lakshadweep",2000,27
-"216","Puducherry",2000,23
-"217","India",2001,66
-"218","Andhra Pradesh",2001,66
-"219","Assam",2001,74
-"220","Bihar",2001,62
-"221","Chhattisgarh",2001,77
-"222","Gujarat",2001,60
-"223","Haryana",2001,66
-"224","Jharkhand",2001,62
-"225","Karnataka",2001,58
-"226","Kerala",2001,11
-"227","Madhya Pradesh",2001,86
-"228","Maharashtra",2001,45
-"229","Odisha",2001,91
-"230","Punjab",2001,52
-"231","Rajasthan",2001,80
-"232","Tamil Nadu",2001,49
-"233","Uttar Pradesh",2001,83
-"234","West Bengal",2001,51
-"235","Arunachal Pradesh",2001,39
-"236","Delhi",2001,29
-"237","Goa",2001,19
-"238","Himachal Pradesh",2001,43
-"239","Jammu & Kashmir",2001,48
-"240","Manipur",2001,20
-"241","Meghalaya",2001,56
-"242","Mizoram",2001,19
-"243","Nagaland",2001,NA
-"244","Sikkim",2001,42
-"245","Tripura",2001,39
-"246","Uttarakhand",2001,48
-"247","Andaman & Nicobar Islands",2001,18
-"248","Chandigarh",2001,24
-"249","Dadra and Nagar Haveli",2001,58
-"250","Daman and Diu",2001,40
-"251","Lakshadweep",2001,33
-"252","Puducherry",2001,22
-"253","India",2002,63
-"254","Andhra Pradesh",2002,62
-"255","Assam",2002,70
-"256","Bihar",2002,61
-"257","Chhattisgarh",2002,73
-"258","Gujarat",2002,60
-"259","Haryana",2002,62
-"260","Jharkhand",2002,51
-"261","Karnataka",2002,55
-"262","Kerala",2002,10
-"263","Madhya Pradesh",2002,85
-"264","Maharashtra",2002,45
-"265","Odisha",2002,87
-"266","Punjab",2002,51
-"267","Rajasthan",2002,78
-"268","Tamil Nadu",2002,44
-"269","Uttar Pradesh",2002,80
-"270","West Bengal",2002,49
-"271","Arunachal Pradesh",2002,37
-"272","Delhi",2002,30
-"273","Goa",2002,17
-"274","Himachal Pradesh",2002,61
-"275","Jammu & Kashmir",2002,45
-"276","Manipur",2002,14
-"277","Meghalaya",2002,61
-"278","Mizoram",2002,14
-"279","Nagaland",2002,NA
-"280","Sikkim",2002,34
-"281","Tripura",2002,34
-"282","Uttarakhand",2002,41
-"283","Andaman & Nicobar Islands",2002,15
-"284","Chandigarh",2002,21
-"285","Dadra and Nagar Haveli",2002,56
-"286","Daman and Diu",2002,42
-"287","Lakshadweep",2002,25
-"288","Puducherry",2002,22
-"289","India",2003,60
-"290","Andhra Pradesh",2003,59
-"291","Assam",2003,67
-"292","Bihar",2003,60
-"293","Chhattisgarh",2003,70
-"294","Gujarat",2003,57
-"295","Haryana",2003,59
-"296","Jharkhand",2003,51
-"297","Karnataka",2003,52
-"298","Kerala",2003,11
-"299","Madhya Pradesh",2003,82
-"300","Maharashtra",2003,42
-"301","Odisha",2003,83
-"302","Punjab",2003,49
-"303","Rajasthan",2003,75
-"304","Tamil Nadu",2003,43
-"305","Uttar Pradesh",2003,76
-"306","West Bengal",2003,46
-"307","Arunachal Pradesh",2003,34
-"308","Delhi",2003,28
-"309","Goa",2003,16
-"310","Himachal Pradesh",2003,42
-"311","Jammu & Kashmir",2003,45
-"312","Manipur",2003,16
-"313","Meghalaya",2003,57
-"314","Mizoram",2003,16
-"315","Nagaland",2003,NA
-"316","Sikkim",2003,33
-"317","Tripura",2003,32
-"318","Uttarakhand",2003,41
-"319","Andaman & Nicobar Islands",2003,18
-"320","Chandigarh",2003,19
-"321","Dadra and Nagar Haveli",2003,54
-"322","Daman and Diu",2003,39
-"323","Lakshadweep",2003,26
-"324","Puducherry",2003,24
-"325","India",2004,58
-"326","Andhra Pradesh",2004,59
-"327","Assam",2004,66
-"328","Bihar",2004,61
-"329","Chhattisgarh",2004,60
-"330","Gujarat",2004,53
-"331","Haryana",2004,61
-"332","Jharkhand",2004,49
-"333","Karnataka",2004,49
-"334","Kerala",2004,12
-"335","Madhya Pradesh",2004,79
-"336","Maharashtra",2004,36
-"337","Odisha",2004,77
-"338","Punjab",2004,45
-"339","Rajasthan",2004,67
-"340","Tamil Nadu",2004,41
-"341","Uttar Pradesh",2004,72
-"342","West Bengal",2004,40
-"343","Arunachal Pradesh",2004,38
-"344","Delhi",2004,32
-"345","Goa",2004,17
-"346","Himachal Pradesh",2004,51
-"347","Jammu & Kashmir",2004,49
-"348","Manipur",2004,14
-"349","Meghalaya",2004,54
-"350","Mizoram",2004,19
-"351","Nagaland",2004,17
-"352","Sikkim",2004,32
-"353","Tripura",2004,32
-"354","Uttarakhand",2004,42
-"355","Andaman & Nicobar Islands",2004,19
-"356","Chandigarh",2004,21
-"357","Dadra and Nagar Haveli",2004,48
-"358","Daman and Diu",2004,37
-"359","Lakshadweep",2004,30
-"360","Puducherry",2004,24
-"361","India",2005,58
-"362","Andhra Pradesh",2005,57
-"363","Assam",2005,68
-"364","Bihar",2005,61
-"365","Chhattisgarh",2005,63
-"366","Gujarat",2005,54
-"367","Haryana",2005,60
-"368","Jharkhand",2005,50
-"369","Karnataka",2005,50
-"370","Kerala",2005,14
-"371","Madhya Pradesh",2005,76
-"372","Maharashtra",2005,36
-"373","Odisha",2005,75
-"374","Punjab",2005,44
-"375","Rajasthan",2005,68
-"376","Tamil Nadu",2005,37
-"377","Uttar Pradesh",2005,73
-"378","West Bengal",2005,38
-"379","Arunachal Pradesh",2005,37
-"380","Delhi",2005,35
-"381","Goa",2005,16
-"382","Himachal Pradesh",2005,49
-"383","Jammu & Kashmir",2005,50
-"384","Manipur",2005,13
-"385","Meghalaya",2005,49
-"386","Mizoram",2005,20
-"387","Nagaland",2005,18
-"388","Sikkim",2005,30
-"389","Tripura",2005,31
-"390","Uttarakhand",2005,42
-"391","Andaman & Nicobar Islands",2005,27
-"392","Chandigarh",2005,19
-"393","Dadra and Nagar Haveli",2005,42
-"394","Daman and Diu",2005,28
-"395","Lakshadweep",2005,22
-"396","Puducherry",2005,28
-"397","India",2006,57
-"398","Andhra Pradesh",2006,56
-"399","Assam",2006,67
-"400","Bihar",2006,60
-"401","Chhattisgarh",2006,61
-"402","Gujarat",2006,53
-"403","Haryana",2006,57
-"404","Jharkhand",2006,49
-"405","Karnataka",2006,48
-"406","Kerala",2006,15
-"407","Madhya Pradesh",2006,74
-"408","Maharashtra",2006,35
-"409","Odisha",2006,73
-"410","Punjab",2006,44
-"411","Rajasthan",2006,67
-"412","Tamil Nadu",2006,37
-"413","Uttar Pradesh",2006,71
-"414","West Bengal",2006,38
-"415","Arunachal Pradesh",2006,40
-"416","Delhi",2006,37
-"417","Goa",2006,15
-"418","Himachal Pradesh",2006,50
-"419","Jammu & Kashmir",2006,52
-"420","Manipur",2006,11
-"421","Meghalaya",2006,53
-"422","Mizoram",2006,25
-"423","Nagaland",2006,20
-"424","Sikkim",2006,33
-"425","Tripura",2006,36
-"426","Uttarakhand",2006,43
-"427","Andaman & Nicobar Islands",2006,31
-"428","Chandigarh",2006,23
-"429","Dadra and Nagar Haveli",2006,35
-"430","Daman and Diu",2006,28
-"431","Lakshadweep",2006,25
-"432","Puducherry",2006,28
-"433","India",2007,55
-"434","Andhra Pradesh",2007,54
-"435","Assam",2007,66
-"436","Bihar",2007,58
-"437","Chhattisgarh",2007,59
-"438","Gujarat",2007,52
-"439","Haryana",2007,55
-"440","Jharkhand",2007,48
-"441","Karnataka",2007,47
-"442","Kerala",2007,13
-"443","Madhya Pradesh",2007,72
-"444","Maharashtra",2007,34
-"445","Odisha",2007,71
-"446","Punjab",2007,43
-"447","Rajasthan",2007,65
-"448","Tamil Nadu",2007,35
-"449","Uttar Pradesh",2007,69
-"450","West Bengal",2007,37
-"451","Arunachal Pradesh",2007,37
-"452","Delhi",2007,36
-"453","Goa",2007,13
-"454","Himachal Pradesh",2007,47
-"455","Jammu & Kashmir",2007,51
-"456","Manipur",2007,12
-"457","Meghalaya",2007,56
-"458","Mizoram",2007,23
-"459","Nagaland",2007,21
-"460","Sikkim",2007,34
-"461","Tripura",2007,39
-"462","Uttarakhand",2007,48
-"463","Andaman & Nicobar Islands",2007,34
-"464","Chandigarh",2007,27
-"465","Dadra and Nagar Haveli",2007,34
-"466","Daman and Diu",2007,27
-"467","Lakshadweep",2007,24
-"468","Puducherry",2007,25
-"469","India",2008,53
-"470","Andhra Pradesh",2008,52
-"471","Assam",2008,64
-"472","Bihar",2008,56
-"473","Chhattisgarh",2008,57
-"474","Gujarat",2008,50
-"475","Haryana",2008,54
-"476","Jharkhand",2008,46
-"477","Karnataka",2008,45
-"478","Kerala",2008,12
-"479","Madhya Pradesh",2008,70
-"480","Maharashtra",2008,33
-"481","Odisha",2008,69
-"482","Punjab",2008,41
-"483","Rajasthan",2008,63
-"484","Tamil Nadu",2008,31
-"485","Uttar Pradesh",2008,67
-"486","West Bengal",2008,35
-"487","Arunachal Pradesh",2008,32
-"488","Delhi",2008,35
-"489","Goa",2008,10
-"490","Himachal Pradesh",2008,44
-"491","Jammu & Kashmir",2008,49
-"492","Manipur",2008,14
-"493","Meghalaya",2008,58
-"494","Mizoram",2008,37
-"495","Nagaland",2008,26
-"496","Sikkim",2008,33
-"497","Tripura",2008,34
-"498","Uttarakhand",2008,44
-"499","Andaman & Nicobar Islands",2008,31
-"500","Chandigarh",2008,28
-"501","Dadra and Nagar Haveli",2008,34
-"502","Daman and Diu",2008,31
-"503","Lakshadweep",2008,31
-"504","Puducherry",2008,25
-"505","India",2009,50
-"506","Andhra Pradesh",2009,49
-"507","Assam",2009,61
-"508","Bihar",2009,52
-"509","Chhattisgarh",2009,54
-"510","Gujarat",2009,48
-"511","Haryana",2009,51
-"512","Jharkhand",2009,44
-"513","Karnataka",2009,41
-"514","Kerala",2009,12
-"515","Madhya Pradesh",2009,67
-"516","Maharashtra",2009,31
-"517","Odisha",2009,65
-"518","Punjab",2009,38
-"519","Rajasthan",2009,59
-"520","Tamil Nadu",2009,28
-"521","Uttar Pradesh",2009,63
-"522","West Bengal",2009,33
-"523","Arunachal Pradesh",2009,32
-"524","Delhi",2009,33
-"525","Goa",2009,11
-"526","Himachal Pradesh",2009,45
-"527","Jammu & Kashmir",2009,45
-"528","Manipur",2009,16
-"529","Meghalaya",2009,59
-"530","Mizoram",2009,36
-"531","Nagaland",2009,26
-"532","Sikkim",2009,34
-"533","Tripura",2009,31
-"534","Uttarakhand",2009,41
-"535","Andaman & Nicobar Islands",2009,27
-"536","Chandigarh",2009,25
-"537","Dadra and Nagar Haveli",2009,37
-"538","Daman and Diu",2009,24
-"539","Lakshadweep",2009,25
-"540","Puducherry",2009,22
-"541","India",2010,47
-"542","Andhra Pradesh",2010,46
-"543","Assam",2010,58
-"544","Bihar",2010,48
-"545","Chhattisgarh",2010,51
-"546","Gujarat",2010,44
-"547","Haryana",2010,48
-"548","Jharkhand",2010,42
-"549","Karnataka",2010,38
-"550","Kerala",2010,13
-"551","Madhya Pradesh",2010,62
-"552","Maharashtra",2010,28
-"553","Odisha",2010,61
-"554","Punjab",2010,34
-"555","Rajasthan",2010,55
-"556","Tamil Nadu",2010,24
-"557","Uttar Pradesh",2010,61
-"558","West Bengal",2010,31
-"559","Arunachal Pradesh",2010,31
-"560","Delhi",2010,30
-"561","Goa",2010,10
-"562","Himachal Pradesh",2010,40
-"563","Jammu & Kashmir",2010,43
-"564","Manipur",2010,14
-"565","Meghalaya",2010,55
-"566","Mizoram",2010,37
-"567","Nagaland",2010,23
-"568","Sikkim",2010,30
-"569","Tripura",2010,27
-"570","Uttarakhand",2010,38
-"571","Andaman & Nicobar Islands",2010,25
-"572","Chandigarh",2010,22
-"573","Dadra and Nagar Haveli",2010,38
-"574","Daman and Diu",2010,23
-"575","Lakshadweep",2010,25
-"576","Puducherry",2010,22
-"577","India",2011,44
-"578","Andhra Pradesh",2011,43
-"579","Assam",2011,55
-"580","Bihar",2011,44
-"581","Chhattisgarh",2011,48
-"582","Gujarat",2011,41
-"583","Haryana",2011,44
-"584","Jharkhand",2011,39
-"585","Karnataka",2011,35
-"586","Kerala",2011,12
-"587","Madhya Pradesh",2011,59
-"588","Maharashtra",2011,25
-"589","Odisha",2011,57
-"590","Punjab",2011,30
-"591","Rajasthan",2011,52
-"592","Tamil Nadu",2011,22
-"593","Uttar Pradesh",2011,57
-"594","West Bengal",2011,32
-"595","Arunachal Pradesh",2011,32
-"596","Delhi",2011,28
-"597","Goa",2011,11
-"598","Himachal Pradesh",2011,38
-"599","Jammu & Kashmir",2011,41
-"600","Manipur",2011,11
-"601","Meghalaya",2011,52
-"602","Mizoram",2011,34
-"603","Nagaland",2011,21
-"604","Sikkim",2011,26
-"605","Tripura",2011,29
-"606","Uttarakhand",2011,36
-"607","Andaman & Nicobar Islands",2011,23
-"608","Chandigarh",2011,20
-"609","Dadra and Nagar Haveli",2011,35
-"610","Daman and Diu",2011,22
-"611","Lakshadweep",2011,24
-"612","Puducherry",2011,19
-"613","India",2012,42
-"614","Andhra Pradesh",2012,41
-"615","Assam",2012,55
-"616","Bihar",2012,43
-"617","Chhattisgarh",2012,47
-"618","Gujarat",2012,38
-"619","Haryana",2012,42
-"620","Jharkhand",2012,38
-"621","Karnataka",2012,32
-"622","Kerala",2012,12
-"623","Madhya Pradesh",2012,56
-"624","Maharashtra",2012,25
-"625","Odisha",2012,53
-"626","Punjab",2012,28
-"627","Rajasthan",2012,49
-"628","Tamil Nadu",2012,21
-"629","Uttar Pradesh",2012,53
-"630","West Bengal",2012,32
-"631","Arunachal Pradesh",2012,33
-"632","Delhi",2012,25
-"633","Goa",2012,10
-"634","Himachal Pradesh",2012,36
-"635","Jammu & Kashmir",2012,39
-"636","Manipur",2012,10
-"637","Meghalaya",2012,49
-"638","Mizoram",2012,35
-"639","Nagaland",2012,18
-"640","Sikkim",2012,24
-"641","Tripura",2012,28
-"642","Uttarakhand",2012,34
-"643","Andaman & Nicobar Islands",2012,24
-"644","Chandigarh",2012,20
-"645","Dadra and Nagar Haveli",2012,33
-"646","Daman and Diu",2012,22
-"647","Lakshadweep",2012,24
-"648","Puducherry",2012,17
-"649","India",2013,40
-"650","Andhra Pradesh",2013,39
-"651","Assam",2013,54
-"652","Bihar",2013,42
-"653","Chhattisgarh",2013,46
-"654","Gujarat",2013,36
-"655","Haryana",2013,41
-"656","Jharkhand",2013,37
-"657","Karnataka",2013,31
-"658","Kerala",2013,12
-"659","Madhya Pradesh",2013,54
-"660","Maharashtra",2013,24
-"661","Odisha",2013,51
-"662","Punjab",2013,26
-"663","Rajasthan",2013,47
-"664","Tamil Nadu",2013,21
-"665","Uttar Pradesh",2013,50
-"666","West Bengal",2013,31
-"667","Arunachal Pradesh",2013,32
-"668","Delhi",2013,24
-"669","Goa",2013,9
-"670","Himachal Pradesh",2013,35
-"671","Jammu & Kashmir",2013,37
-"672","Manipur",2013,10
-"673","Meghalaya",2013,47
-"674","Mizoram",2013,35
-"675","Nagaland",2013,18
-"676","Sikkim",2013,22
-"677","Tripura",2013,26
-"678","Uttarakhand",2013,32
-"679","Andaman & Nicobar Islands",2013,24
-"680","Chandigarh",2013,21
-"681","Dadra and Nagar Haveli",2013,31
-"682","Daman and Diu",2013,20
-"683","Lakshadweep",2013,24
-"684","Puducherry",2013,17
+"state","year","imr"
+"India",1995,74
+"Andhra Pradesh",1995,67
+"Assam",1995,77
+"Bihar",1995,73
+"Chhattisgarh",1995,NA
+"Gujarat",1995,62
+"Haryana",1995,69
+"Jharkhand",1995,NA
+"Karnataka",1995,62
+"Kerala",1995,15
+"Madhya Pradesh",1995,99
+"Maharashtra",1995,55
+"Odisha",1995,103
+"Punjab",1995,54
+"Rajasthan",1995,86
+"Tamil Nadu",1995,54
+"Uttar Pradesh",1995,86
+"West Bengal",1995,58
+"Arunachal Pradesh",1995,NA
+"Delhi",1995,NA
+"Goa",1995,NA
+"Himachal Pradesh",1995,63
+"Jammu & Kashmir",1995,NA
+"Manipur",1995,NA
+"Meghalaya",1995,NA
+"Mizoram",1995,NA
+"Nagaland",1995,NA
+"Sikkim",1995,NA
+"Tripura",1995,NA
+"Uttarakhand",1995,NA
+"Andaman & Nicobar Islands",1995,NA
+"Chandigarh",1995,NA
+"Dadra and Nagar Haveli",1995,NA
+"Daman and Diu",1995,NA
+"Lakshadweep",1995,NA
+"Puducherry",1995,NA
+"India",1996,72
+"Andhra Pradesh",1996,65
+"Assam",1996,74
+"Bihar",1996,71
+"Chhattisgarh",1996,NA
+"Gujarat",1996,61
+"Haryana",1996,68
+"Jharkhand",1996,NA
+"Karnataka",1996,53
+"Kerala",1996,14
+"Madhya Pradesh",1996,97
+"Maharashtra",1996,48
+"Odisha",1996,95
+"Punjab",1996,51
+"Rajasthan",1996,85
+"Tamil Nadu",1996,53
+"Uttar Pradesh",1996,85
+"West Bengal",1996,55
+"Arunachal Pradesh",1996,NA
+"Delhi",1996,NA
+"Goa",1996,NA
+"Himachal Pradesh",1996,63
+"Jammu & Kashmir",1996,NA
+"Manipur",1996,NA
+"Meghalaya",1996,NA
+"Mizoram",1996,NA
+"Nagaland",1996,NA
+"Sikkim",1996,NA
+"Tripura",1996,NA
+"Uttarakhand",1996,NA
+"Andaman & Nicobar Islands",1996,NA
+"Chandigarh",1996,NA
+"Dadra and Nagar Haveli",1996,NA
+"Daman and Diu",1996,NA
+"Lakshadweep",1996,NA
+"Puducherry",1996,NA
+"India",1997,71
+"Andhra Pradesh",1997,63
+"Assam",1997,76
+"Bihar",1997,71
+"Chhattisgarh",1997,89
+"Gujarat",1997,62
+"Haryana",1997,68
+"Jharkhand",1997,68
+"Karnataka",1997,53
+"Kerala",1997,12
+"Madhya Pradesh",1997,94
+"Maharashtra",1997,47
+"Odisha",1997,96
+"Punjab",1997,51
+"Rajasthan",1997,85
+"Tamil Nadu",1997,53
+"Uttar Pradesh",1997,85
+"West Bengal",1997,55
+"Arunachal Pradesh",1997,47
+"Delhi",1997,35
+"Goa",1997,19
+"Himachal Pradesh",1997,63
+"Jammu & Kashmir",1997,NA
+"Manipur",1997,30
+"Meghalaya",1997,54
+"Mizoram",1997,19
+"Nagaland",1997,NA
+"Sikkim",1997,51
+"Tripura",1997,51
+"Uttarakhand",1997,NA
+"Andaman & Nicobar Islands",1997,33
+"Chandigarh",1997,40
+"Dadra and Nagar Haveli",1997,63
+"Daman and Diu",1997,38
+"Lakshadweep",1997,36
+"Puducherry",1997,22
+"India",1998,72
+"Andhra Pradesh",1998,66
+"Assam",1998,76
+"Bihar",1998,67
+"Chhattisgarh",1998,94
+"Gujarat",1998,64
+"Haryana",1998,70
+"Jharkhand",1998,62
+"Karnataka",1998,58
+"Kerala",1998,16
+"Madhya Pradesh",1998,98
+"Maharashtra",1998,49
+"Odisha",1998,98
+"Punjab",1998,54
+"Rajasthan",1998,83
+"Tamil Nadu",1998,53
+"Uttar Pradesh",1998,85
+"West Bengal",1998,53
+"Arunachal Pradesh",1998,44
+"Delhi",1998,36
+"Goa",1998,23
+"Himachal Pradesh",1998,68
+"Jammu & Kashmir",1998,45
+"Manipur",1998,25
+"Meghalaya",1998,52
+"Mizoram",1998,23
+"Nagaland",1998,NA
+"Sikkim",1998,52
+"Tripura",1998,49
+"Uttarakhand",1998,NA
+"Andaman & Nicobar Islands",1998,30
+"Chandigarh",1998,32
+"Dadra and Nagar Haveli",1998,61
+"Daman and Diu",1998,51
+"Lakshadweep",1998,26
+"Puducherry",1998,21
+"India",1999,70
+"Andhra Pradesh",1999,66
+"Assam",1999,76
+"Bihar",1999,63
+"Chhattisgarh",1999,78
+"Gujarat",1999,63
+"Haryana",1999,68
+"Jharkhand",1999,71
+"Karnataka",1999,58
+"Kerala",1999,14
+"Madhya Pradesh",1999,90
+"Maharashtra",1999,48
+"Odisha",1999,97
+"Punjab",1999,53
+"Rajasthan",1999,81
+"Tamil Nadu",1999,52
+"Uttar Pradesh",1999,84
+"West Bengal",1999,52
+"Arunachal Pradesh",1999,43
+"Delhi",1999,31
+"Goa",1999,21
+"Himachal Pradesh",1999,54
+"Jammu & Kashmir",1999,52
+"Manipur",1999,25
+"Meghalaya",1999,56
+"Mizoram",1999,19
+"Nagaland",1999,NA
+"Sikkim",1999,49
+"Tripura",1999,42
+"Uttarakhand",1999,52
+"Andaman & Nicobar Islands",1999,25
+"Chandigarh",1999,28
+"Dadra and Nagar Haveli",1999,56
+"Daman and Diu",1999,35
+"Lakshadweep",1999,32
+"Puducherry",1999,22
+"India",2000,68
+"Andhra Pradesh",2000,65
+"Assam",2000,75
+"Bihar",2000,62
+"Chhattisgarh",2000,79
+"Gujarat",2000,62
+"Haryana",2000,67
+"Jharkhand",2000,70
+"Karnataka",2000,57
+"Kerala",2000,14
+"Madhya Pradesh",2000,87
+"Maharashtra",2000,48
+"Odisha",2000,95
+"Punjab",2000,52
+"Rajasthan",2000,79
+"Tamil Nadu",2000,51
+"Uttar Pradesh",2000,83
+"West Bengal",2000,51
+"Arunachal Pradesh",2000,44
+"Delhi",2000,32
+"Goa",2000,23
+"Himachal Pradesh",2000,51
+"Jammu & Kashmir",2000,50
+"Manipur",2000,23
+"Meghalaya",2000,58
+"Mizoram",2000,21
+"Nagaland",2000,NA
+"Sikkim",2000,49
+"Tripura",2000,41
+"Uttarakhand",2000,50
+"Andaman & Nicobar Islands",2000,23
+"Chandigarh",2000,28
+"Dadra and Nagar Haveli",2000,58
+"Daman and Diu",2000,48
+"Lakshadweep",2000,27
+"Puducherry",2000,23
+"India",2001,66
+"Andhra Pradesh",2001,66
+"Assam",2001,74
+"Bihar",2001,62
+"Chhattisgarh",2001,77
+"Gujarat",2001,60
+"Haryana",2001,66
+"Jharkhand",2001,62
+"Karnataka",2001,58
+"Kerala",2001,11
+"Madhya Pradesh",2001,86
+"Maharashtra",2001,45
+"Odisha",2001,91
+"Punjab",2001,52
+"Rajasthan",2001,80
+"Tamil Nadu",2001,49
+"Uttar Pradesh",2001,83
+"West Bengal",2001,51
+"Arunachal Pradesh",2001,39
+"Delhi",2001,29
+"Goa",2001,19
+"Himachal Pradesh",2001,43
+"Jammu & Kashmir",2001,48
+"Manipur",2001,20
+"Meghalaya",2001,56
+"Mizoram",2001,19
+"Nagaland",2001,NA
+"Sikkim",2001,42
+"Tripura",2001,39
+"Uttarakhand",2001,48
+"Andaman & Nicobar Islands",2001,18
+"Chandigarh",2001,24
+"Dadra and Nagar Haveli",2001,58
+"Daman and Diu",2001,40
+"Lakshadweep",2001,33
+"Puducherry",2001,22
+"India",2002,63
+"Andhra Pradesh",2002,62
+"Assam",2002,70
+"Bihar",2002,61
+"Chhattisgarh",2002,73
+"Gujarat",2002,60
+"Haryana",2002,62
+"Jharkhand",2002,51
+"Karnataka",2002,55
+"Kerala",2002,10
+"Madhya Pradesh",2002,85
+"Maharashtra",2002,45
+"Odisha",2002,87
+"Punjab",2002,51
+"Rajasthan",2002,78
+"Tamil Nadu",2002,44
+"Uttar Pradesh",2002,80
+"West Bengal",2002,49
+"Arunachal Pradesh",2002,37
+"Delhi",2002,30
+"Goa",2002,17
+"Himachal Pradesh",2002,61
+"Jammu & Kashmir",2002,45
+"Manipur",2002,14
+"Meghalaya",2002,61
+"Mizoram",2002,14
+"Nagaland",2002,NA
+"Sikkim",2002,34
+"Tripura",2002,34
+"Uttarakhand",2002,41
+"Andaman & Nicobar Islands",2002,15
+"Chandigarh",2002,21
+"Dadra and Nagar Haveli",2002,56
+"Daman and Diu",2002,42
+"Lakshadweep",2002,25
+"Puducherry",2002,22
+"India",2003,60
+"Andhra Pradesh",2003,59
+"Assam",2003,67
+"Bihar",2003,60
+"Chhattisgarh",2003,70
+"Gujarat",2003,57
+"Haryana",2003,59
+"Jharkhand",2003,51
+"Karnataka",2003,52
+"Kerala",2003,11
+"Madhya Pradesh",2003,82
+"Maharashtra",2003,42
+"Odisha",2003,83
+"Punjab",2003,49
+"Rajasthan",2003,75
+"Tamil Nadu",2003,43
+"Uttar Pradesh",2003,76
+"West Bengal",2003,46
+"Arunachal Pradesh",2003,34
+"Delhi",2003,28
+"Goa",2003,16
+"Himachal Pradesh",2003,42
+"Jammu & Kashmir",2003,45
+"Manipur",2003,16
+"Meghalaya",2003,57
+"Mizoram",2003,16
+"Nagaland",2003,NA
+"Sikkim",2003,33
+"Tripura",2003,32
+"Uttarakhand",2003,41
+"Andaman & Nicobar Islands",2003,18
+"Chandigarh",2003,19
+"Dadra and Nagar Haveli",2003,54
+"Daman and Diu",2003,39
+"Lakshadweep",2003,26
+"Puducherry",2003,24
+"India",2004,58
+"Andhra Pradesh",2004,59
+"Assam",2004,66
+"Bihar",2004,61
+"Chhattisgarh",2004,60
+"Gujarat",2004,53
+"Haryana",2004,61
+"Jharkhand",2004,49
+"Karnataka",2004,49
+"Kerala",2004,12
+"Madhya Pradesh",2004,79
+"Maharashtra",2004,36
+"Odisha",2004,77
+"Punjab",2004,45
+"Rajasthan",2004,67
+"Tamil Nadu",2004,41
+"Uttar Pradesh",2004,72
+"West Bengal",2004,40
+"Arunachal Pradesh",2004,38
+"Delhi",2004,32
+"Goa",2004,17
+"Himachal Pradesh",2004,51
+"Jammu & Kashmir",2004,49
+"Manipur",2004,14
+"Meghalaya",2004,54
+"Mizoram",2004,19
+"Nagaland",2004,17
+"Sikkim",2004,32
+"Tripura",2004,32
+"Uttarakhand",2004,42
+"Andaman & Nicobar Islands",2004,19
+"Chandigarh",2004,21
+"Dadra and Nagar Haveli",2004,48
+"Daman and Diu",2004,37
+"Lakshadweep",2004,30
+"Puducherry",2004,24
+"India",2005,58
+"Andhra Pradesh",2005,57
+"Assam",2005,68
+"Bihar",2005,61
+"Chhattisgarh",2005,63
+"Gujarat",2005,54
+"Haryana",2005,60
+"Jharkhand",2005,50
+"Karnataka",2005,50
+"Kerala",2005,14
+"Madhya Pradesh",2005,76
+"Maharashtra",2005,36
+"Odisha",2005,75
+"Punjab",2005,44
+"Rajasthan",2005,68
+"Tamil Nadu",2005,37
+"Uttar Pradesh",2005,73
+"West Bengal",2005,38
+"Arunachal Pradesh",2005,37
+"Delhi",2005,35
+"Goa",2005,16
+"Himachal Pradesh",2005,49
+"Jammu & Kashmir",2005,50
+"Manipur",2005,13
+"Meghalaya",2005,49
+"Mizoram",2005,20
+"Nagaland",2005,18
+"Sikkim",2005,30
+"Tripura",2005,31
+"Uttarakhand",2005,42
+"Andaman & Nicobar Islands",2005,27
+"Chandigarh",2005,19
+"Dadra and Nagar Haveli",2005,42
+"Daman and Diu",2005,28
+"Lakshadweep",2005,22
+"Puducherry",2005,28
+"India",2006,57
+"Andhra Pradesh",2006,56
+"Assam",2006,67
+"Bihar",2006,60
+"Chhattisgarh",2006,61
+"Gujarat",2006,53
+"Haryana",2006,57
+"Jharkhand",2006,49
+"Karnataka",2006,48
+"Kerala",2006,15
+"Madhya Pradesh",2006,74
+"Maharashtra",2006,35
+"Odisha",2006,73
+"Punjab",2006,44
+"Rajasthan",2006,67
+"Tamil Nadu",2006,37
+"Uttar Pradesh",2006,71
+"West Bengal",2006,38
+"Arunachal Pradesh",2006,40
+"Delhi",2006,37
+"Goa",2006,15
+"Himachal Pradesh",2006,50
+"Jammu & Kashmir",2006,52
+"Manipur",2006,11
+"Meghalaya",2006,53
+"Mizoram",2006,25
+"Nagaland",2006,20
+"Sikkim",2006,33
+"Tripura",2006,36
+"Uttarakhand",2006,43
+"Andaman & Nicobar Islands",2006,31
+"Chandigarh",2006,23
+"Dadra and Nagar Haveli",2006,35
+"Daman and Diu",2006,28
+"Lakshadweep",2006,25
+"Puducherry",2006,28
+"India",2007,55
+"Andhra Pradesh",2007,54
+"Assam",2007,66
+"Bihar",2007,58
+"Chhattisgarh",2007,59
+"Gujarat",2007,52
+"Haryana",2007,55
+"Jharkhand",2007,48
+"Karnataka",2007,47
+"Kerala",2007,13
+"Madhya Pradesh",2007,72
+"Maharashtra",2007,34
+"Odisha",2007,71
+"Punjab",2007,43
+"Rajasthan",2007,65
+"Tamil Nadu",2007,35
+"Uttar Pradesh",2007,69
+"West Bengal",2007,37
+"Arunachal Pradesh",2007,37
+"Delhi",2007,36
+"Goa",2007,13
+"Himachal Pradesh",2007,47
+"Jammu & Kashmir",2007,51
+"Manipur",2007,12
+"Meghalaya",2007,56
+"Mizoram",2007,23
+"Nagaland",2007,21
+"Sikkim",2007,34
+"Tripura",2007,39
+"Uttarakhand",2007,48
+"Andaman & Nicobar Islands",2007,34
+"Chandigarh",2007,27
+"Dadra and Nagar Haveli",2007,34
+"Daman and Diu",2007,27
+"Lakshadweep",2007,24
+"Puducherry",2007,25
+"India",2008,53
+"Andhra Pradesh",2008,52
+"Assam",2008,64
+"Bihar",2008,56
+"Chhattisgarh",2008,57
+"Gujarat",2008,50
+"Haryana",2008,54
+"Jharkhand",2008,46
+"Karnataka",2008,45
+"Kerala",2008,12
+"Madhya Pradesh",2008,70
+"Maharashtra",2008,33
+"Odisha",2008,69
+"Punjab",2008,41
+"Rajasthan",2008,63
+"Tamil Nadu",2008,31
+"Uttar Pradesh",2008,67
+"West Bengal",2008,35
+"Arunachal Pradesh",2008,32
+"Delhi",2008,35
+"Goa",2008,10
+"Himachal Pradesh",2008,44
+"Jammu & Kashmir",2008,49
+"Manipur",2008,14
+"Meghalaya",2008,58
+"Mizoram",2008,37
+"Nagaland",2008,26
+"Sikkim",2008,33
+"Tripura",2008,34
+"Uttarakhand",2008,44
+"Andaman & Nicobar Islands",2008,31
+"Chandigarh",2008,28
+"Dadra and Nagar Haveli",2008,34
+"Daman and Diu",2008,31
+"Lakshadweep",2008,31
+"Puducherry",2008,25
+"India",2009,50
+"Andhra Pradesh",2009,49
+"Assam",2009,61
+"Bihar",2009,52
+"Chhattisgarh",2009,54
+"Gujarat",2009,48
+"Haryana",2009,51
+"Jharkhand",2009,44
+"Karnataka",2009,41
+"Kerala",2009,12
+"Madhya Pradesh",2009,67
+"Maharashtra",2009,31
+"Odisha",2009,65
+"Punjab",2009,38
+"Rajasthan",2009,59
+"Tamil Nadu",2009,28
+"Uttar Pradesh",2009,63
+"West Bengal",2009,33
+"Arunachal Pradesh",2009,32
+"Delhi",2009,33
+"Goa",2009,11
+"Himachal Pradesh",2009,45
+"Jammu & Kashmir",2009,45
+"Manipur",2009,16
+"Meghalaya",2009,59
+"Mizoram",2009,36
+"Nagaland",2009,26
+"Sikkim",2009,34
+"Tripura",2009,31
+"Uttarakhand",2009,41
+"Andaman & Nicobar Islands",2009,27
+"Chandigarh",2009,25
+"Dadra and Nagar Haveli",2009,37
+"Daman and Diu",2009,24
+"Lakshadweep",2009,25
+"Puducherry",2009,22
+"India",2010,47
+"Andhra Pradesh",2010,46
+"Assam",2010,58
+"Bihar",2010,48
+"Chhattisgarh",2010,51
+"Gujarat",2010,44
+"Haryana",2010,48
+"Jharkhand",2010,42
+"Karnataka",2010,38
+"Kerala",2010,13
+"Madhya Pradesh",2010,62
+"Maharashtra",2010,28
+"Odisha",2010,61
+"Punjab",2010,34
+"Rajasthan",2010,55
+"Tamil Nadu",2010,24
+"Uttar Pradesh",2010,61
+"West Bengal",2010,31
+"Arunachal Pradesh",2010,31
+"Delhi",2010,30
+"Goa",2010,10
+"Himachal Pradesh",2010,40
+"Jammu & Kashmir",2010,43
+"Manipur",2010,14
+"Meghalaya",2010,55
+"Mizoram",2010,37
+"Nagaland",2010,23
+"Sikkim",2010,30
+"Tripura",2010,27
+"Uttarakhand",2010,38
+"Andaman & Nicobar Islands",2010,25
+"Chandigarh",2010,22
+"Dadra and Nagar Haveli",2010,38
+"Daman and Diu",2010,23
+"Lakshadweep",2010,25
+"Puducherry",2010,22
+"India",2011,44
+"Andhra Pradesh",2011,43
+"Assam",2011,55
+"Bihar",2011,44
+"Chhattisgarh",2011,48
+"Gujarat",2011,41
+"Haryana",2011,44
+"Jharkhand",2011,39
+"Karnataka",2011,35
+"Kerala",2011,12
+"Madhya Pradesh",2011,59
+"Maharashtra",2011,25
+"Odisha",2011,57
+"Punjab",2011,30
+"Rajasthan",2011,52
+"Tamil Nadu",2011,22
+"Uttar Pradesh",2011,57
+"West Bengal",2011,32
+"Arunachal Pradesh",2011,32
+"Delhi",2011,28
+"Goa",2011,11
+"Himachal Pradesh",2011,38
+"Jammu & Kashmir",2011,41
+"Manipur",2011,11
+"Meghalaya",2011,52
+"Mizoram",2011,34
+"Nagaland",2011,21
+"Sikkim",2011,26
+"Tripura",2011,29
+"Uttarakhand",2011,36
+"Andaman & Nicobar Islands",2011,23
+"Chandigarh",2011,20
+"Dadra and Nagar Haveli",2011,35
+"Daman and Diu",2011,22
+"Lakshadweep",2011,24
+"Puducherry",2011,19
+"India",2012,42
+"Andhra Pradesh",2012,41
+"Assam",2012,55
+"Bihar",2012,43
+"Chhattisgarh",2012,47
+"Gujarat",2012,38
+"Haryana",2012,42
+"Jharkhand",2012,38
+"Karnataka",2012,32
+"Kerala",2012,12
+"Madhya Pradesh",2012,56
+"Maharashtra",2012,25
+"Odisha",2012,53
+"Punjab",2012,28
+"Rajasthan",2012,49
+"Tamil Nadu",2012,21
+"Uttar Pradesh",2012,53
+"West Bengal",2012,32
+"Arunachal Pradesh",2012,33
+"Delhi",2012,25
+"Goa",2012,10
+"Himachal Pradesh",2012,36
+"Jammu & Kashmir",2012,39
+"Manipur",2012,10
+"Meghalaya",2012,49
+"Mizoram",2012,35
+"Nagaland",2012,18
+"Sikkim",2012,24
+"Tripura",2012,28
+"Uttarakhand",2012,34
+"Andaman & Nicobar Islands",2012,24
+"Chandigarh",2012,20
+"Dadra and Nagar Haveli",2012,33
+"Daman and Diu",2012,22
+"Lakshadweep",2012,24
+"Puducherry",2012,17
+"India",2013,40
+"Andhra Pradesh",2013,39
+"Assam",2013,54
+"Bihar",2013,42
+"Chhattisgarh",2013,46
+"Gujarat",2013,36
+"Haryana",2013,41
+"Jharkhand",2013,37
+"Karnataka",2013,31
+"Kerala",2013,12
+"Madhya Pradesh",2013,54
+"Maharashtra",2013,24
+"Odisha",2013,51
+"Punjab",2013,26
+"Rajasthan",2013,47
+"Tamil Nadu",2013,21
+"Uttar Pradesh",2013,50
+"West Bengal",2013,31
+"Arunachal Pradesh",2013,32
+"Delhi",2013,24
+"Goa",2013,9
+"Himachal Pradesh",2013,35
+"Jammu & Kashmir",2013,37
+"Manipur",2013,10
+"Meghalaya",2013,47
+"Mizoram",2013,35
+"Nagaland",2013,18
+"Sikkim",2013,22
+"Tripura",2013,26
+"Uttarakhand",2013,32
+"Andaman & Nicobar Islands",2013,24
+"Chandigarh",2013,21
+"Dadra and Nagar Haveli",2013,31
+"Daman and Diu",2013,20
+"Lakshadweep",2013,24
+"Puducherry",2013,17
