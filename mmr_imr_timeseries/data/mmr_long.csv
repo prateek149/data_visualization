@@ -1,113 +1,113 @@
-"state","year","mmr"
-"India",1998,398
-"Andhra Pradesh",1998,197
-"Assam",1998,568
-"Bihar/Jharkhand",1998,531
-"Gujarat",1998,46
-"Haryana",1998,136
-"Karnataka",1998,245
-"Kerala",1998,150
-"Madhya Pradesh/Chhatisgarh",1998,441
-"Maharashtra",1998,166
-"Odisha",1998,346
-"Punjab",1998,280
-"Rajasthan",1998,508
-"Tamil Nadu",1998,131
-"Uttar Pradesh/Uttarakhand",1998,606
-"West Bengal",1998,303
-"India",2000,327
-"Andhra Pradesh",2000,220
-"Assam",2000,398
-"Bihar/Jharkhand",2000,400
-"Gujarat",2000,202
-"Haryana",2000,176
-"Karnataka",2000,266
-"Kerala",2000,149
-"Madhya Pradesh/Chhatisgarh",2000,407
-"Maharashtra",2000,169
-"Odisha",2000,424
-"Punjab",2000,177
-"Rajasthan",2000,501
-"Tamil Nadu",2000,167
-"Uttar Pradesh/Uttarakhand",2000,539
-"West Bengal",2000,218
-"India",2002,301
-"Andhra Pradesh",2002,195
-"Assam",2002,490
-"Bihar/Jharkhand",2002,371
-"Gujarat",2002,172
-"Haryana",2002,162
-"Karnataka",2002,228
-"Kerala",2002,110
-"Madhya Pradesh/Chhatisgarh",2002,379
-"Maharashtra",2002,149
-"Odisha",2002,358
-"Punjab",2002,178
-"Rajasthan",2002,445
-"Tamil Nadu",2002,134
-"Uttar Pradesh/Uttarakhand",2002,517
-"West Bengal",2002,194
-"India",2005,254
-"Andhra Pradesh",2005,154
-"Assam",2005,480
-"Bihar/Jharkhand",2005,312
-"Gujarat",2005,160
-"Haryana",2005,186
-"Karnataka",2005,213
-"Kerala",2005,95
-"Madhya Pradesh/Chhatisgarh",2005,335
-"Maharashtra",2005,130
-"Odisha",2005,303
-"Punjab",2005,192
-"Rajasthan",2005,388
-"Tamil Nadu",2005,111
-"Uttar Pradesh/Uttarakhand",2005,440
-"West Bengal",2005,141
-"India",2008,212
-"Andhra Pradesh",2008,134
-"Assam",2008,390
-"Bihar/Jharkhand",2008,261
-"Gujarat",2008,148
-"Haryana",2008,153
-"Karnataka",2008,178
-"Kerala",2008,81
-"Madhya Pradesh/Chhatisgarh",2008,269
-"Maharashtra",2008,104
-"Odisha",2008,258
-"Punjab",2008,172
-"Rajasthan",2008,318
-"Tamil Nadu",2008,97
-"Uttar Pradesh/Uttarakhand",2008,359
-"West Bengal",2008,145
-"India",2011,178
-"Andhra Pradesh",2011,110
-"Assam",2011,328
-"Bihar/Jharkhand",2011,219
-"Gujarat",2011,122
-"Haryana",2011,146
-"Karnataka",2011,144
-"Kerala",2011,66
-"Madhya Pradesh/Chhatisgarh",2011,230
-"Maharashtra",2011,87
-"Odisha",2011,235
-"Punjab",2011,155
-"Rajasthan",2011,255
-"Tamil Nadu",2011,90
-"Uttar Pradesh/Uttarakhand",2011,292
-"West Bengal",2011,117
-"India",2012,167
-"Andhra Pradesh",2012,92
-"Assam",2012,300
-"Bihar/Jharkhand",2012,208
-"Gujarat",2012,112
-"Haryana",2012,127
-"Karnataka",2012,133
-"Kerala",2012,61
-"Madhya Pradesh/Chhatisgarh",2012,221
-"Maharashtra",2012,68
-"Odisha",2012,222
-"Punjab",2012,141
-"Rajasthan",2012,244
-"Tamil Nadu",2012,79
-"Uttar Pradesh/Uttarakhand",2012,285
-"West Bengal",2012,113
+state,year,mmr
+Assam,2012,300
+Uttar Pradesh/Uttarakhand,2012,285
+Rajasthan,2012,244
+Odisha,2012,222
+Madhya Pradesh/Chhatisgarh,2012,221
+Bihar/Jharkhand,2012,208
+India,2012,167
+Punjab,2012,141
+Karnataka,2012,133
+Haryana,2012,127
+West Bengal,2012,113
+Gujarat,2012,112
+Andhra Pradesh,2012,92
+Tamil Nadu,2012,79
+Maharashtra,2012,68
+Kerala,2012,61
+Assam,2011,328
+Uttar Pradesh/Uttarakhand,2011,292
+Rajasthan,2011,255
+Odisha,2011,235
+Madhya Pradesh/Chhatisgarh,2011,230
+Bihar/Jharkhand,2011,219
+India,2011,178
+Punjab,2011,155
+Haryana,2011,146
+Karnataka,2011,144
+Gujarat,2011,122
+West Bengal,2011,117
+Andhra Pradesh,2011,110
+Tamil Nadu,2011,90
+Maharashtra,2011,87
+Kerala,2011,66
+Assam,2008,390
+Uttar Pradesh/Uttarakhand,2008,359
+Rajasthan,2008,318
+Madhya Pradesh/Chhatisgarh,2008,269
+Bihar/Jharkhand,2008,261
+Odisha,2008,258
+India,2008,212
+Karnataka,2008,178
+Punjab,2008,172
+Haryana,2008,153
+Gujarat,2008,148
+West Bengal,2008,145
+Andhra Pradesh,2008,134
+Maharashtra,2008,104
+Tamil Nadu,2008,97
+Kerala,2008,81
+Assam,2005,480
+Uttar Pradesh/Uttarakhand,2005,440
+Rajasthan,2005,388
+Madhya Pradesh/Chhatisgarh,2005,335
+Bihar/Jharkhand,2005,312
+Odisha,2005,303
+India,2005,254
+Karnataka,2005,213
+Punjab,2005,192
+Haryana,2005,186
+Gujarat,2005,160
+Andhra Pradesh,2005,154
+West Bengal,2005,141
+Maharashtra,2005,130
+Tamil Nadu,2005,111
+Kerala,2005,95
+Uttar Pradesh/Uttarakhand,2002,517
+Assam,2002,490
+Rajasthan,2002,445
+Madhya Pradesh/Chhatisgarh,2002,379
+Bihar/Jharkhand,2002,371
+Odisha,2002,358
+India,2002,301
+Karnataka,2002,228
+Andhra Pradesh,2002,195
+West Bengal,2002,194
+Punjab,2002,178
+Gujarat,2002,172
+Haryana,2002,162
+Maharashtra,2002,149
+Tamil Nadu,2002,134
+Kerala,2002,110
+Uttar Pradesh/Uttarakhand,2000,539
+Rajasthan,2000,501
+Odisha,2000,424
+Madhya Pradesh/Chhatisgarh,2000,407
+Bihar/Jharkhand,2000,400
+Assam,2000,398
+India,2000,327
+Karnataka,2000,266
+Andhra Pradesh,2000,220
+West Bengal,2000,218
+Gujarat,2000,202
+Punjab,2000,177
+Haryana,2000,176
+Maharashtra,2000,169
+Tamil Nadu,2000,167
+Kerala,2000,149
+Uttar Pradesh/Uttarakhand,1998,606
+Assam,1998,568
+Bihar/Jharkhand,1998,531
+Rajasthan,1998,508
+Madhya Pradesh/Chhatisgarh,1998,441
+India,1998,398
+Odisha,1998,346
+West Bengal,1998,303
+Punjab,1998,280
+Karnataka,1998,245
+Andhra Pradesh,1998,197
+Maharashtra,1998,166
+Kerala,1998,150
+Haryana,1998,136
+Tamil Nadu,1998,131
+Gujarat,1998,46
