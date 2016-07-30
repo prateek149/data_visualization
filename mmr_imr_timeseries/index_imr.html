@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+        <style> /* set the CSS */
+
+            body { font: 12px Arial;}
+
+            h2 {
+                position: relative;
+                left: 500px;
+                font-family: futura;
+                font-size: 24px;
+            }
+
+            h3 {
+                position: relative;;
+                left: 50px;
+                font-family: futura;
+                font-size: 15px;
+            }
+
+
+            div.other_buttons {
+                position: fixed;
+                top: 17px;
+                right: 290px;
+            }
+
+            div.other_buttons div {
+                background-color: lightBlue;
+                padding: 3px;
+                margin: 5px;
+                font-family: verdana;
+                font-size: 14px;
+                color: white;
+                text-align: center;
+            }
+
+            div.buttons {
+                position: fixed;
+                top: 20px;
+                right: 120px;
+            } 
+
+            div.buttons div {
+                background-color: rgba(220,220,220,.3);
+                border-style : solid;
+                border-color: rgba(0,0,0,.3);
+                border-width: 1px;
+                width: 130px;
+                padding: 1px;
+                padding-left: 3px;
+                overflow: hidden;
+                margin: 1px;
+                font-family: verdana;
+                font-size: 10px;
+                color: black;
+                text-align: left;
+            }
+
+            path { 
+                stroke: steelblue;
+                stroke-width: 1.5;
+                fill: none;
+            }
+
+
+            .states #India {
+                stroke-dasharray : 8,3;
+            }
+
+            .axis path,
+            .axis line {
+                fill: none;
+                stroke: grey;
+                stroke-width: 1;
+                shape-rendering: crispEdges;
+            }
+
+            .d3-tip {
+                line-height: 1.2;
+                font-family: verdana;
+                font-size: 13px;
+                padding: 5px;
+                background: rgba(150, 150, 150, .8);
+                color: rgba(250, 250, 250, 1);
+                border-radius: 2px;
+            }
+
+        </style>
+
+        <script type="text/javascript">
+
+            function draw(data) {
+
+                //Reshaping data
+                function agg_state(leaves) {
+
+                    var xy = [];
+
+                    leaves.forEach(function(d) {
+                        xy.push([d.year, d.imr]);
+                    });
+
+                    return {
+                        'data':xy                      
+                    };
+                };
+
+                var nested = d3.nest()
+                               .key(function(d) {
+                                  return d['state'];;
+                               })
+                               .rollup(agg_state)
+                               .entries(data);
+
+
+                var allkeys = []
+                
+                nested.forEach(function(d) {
+                    allkeys.push({key:d.key,active:1});
+                });
+
+
+                var margin = {top: 20, right: 20, bottom: 20, left: 50},
+                    width = 1000 - margin.left - margin.right,
+                    height = 580 - margin.top - margin.bottom;
+
+
+                var x = d3.time.scale()
+                    .range([0, width])
+                    .domain(d3.extent(data, function(d) { return d.year; }));
+
+                var y = d3.scale.linear()
+                    .range([height, 0])
+                    .domain([0, d3.max(data, function(d) { return d.imr; })]);
+
+                var color = d3.scale.category20();
+
+                var xAxis = d3.svg.axis().scale(x)
+                    .orient("bottom").ticks(6);
+
+                var yAxis = d3.svg.axis().scale(y)
+                    .orient("left").ticks(5);
+
+                var valueline = d3.svg.line()
+                    .x(function(d) { return x(d[0]); })
+                    .y(function(d) { return y(d[1]); })
+                    .interpolate("cardinal");
+
+                d3.select("body")
+                    .append("h2")
+                    .text("IMR by State");
+
+                var svg = d3.select("body")
+                    .append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                
+
+
+ 
+
+
+/*************************************************************************************************/
+/* All the interactive functions */
+
+
+                var tippoint = d3.tip()
+                    .attr('class', 'd3-tip')
+                    .offset([-10, 0])
+                    .html(function(d) {
+                           return d.state + "<br> Year : " + d.year.getFullYear() + "<br>IMR : " + d.imr;
+                          });
+
+                svg.call(tippoint);
+
+                function line_on (d) {
+                    d3.selectAll(".states path")
+                        .transition()
+                        .duration(100)
+                        .style("stroke-width",".7");
+
+                    d3.select(this)
+                        .transition()
+                        .duration(100)
+                        .style("stroke-width","4");
+
+                    var buttonid = d.key;
+                    buttonid = buttonid.replace(" ", "\\ ");
+
+                    d3.select(".buttons div#"+buttonid)
+                        .transition()
+                        .duration(100)
+                        .style("font-weight","bold")
+                        .style("font-size","13px");
+
+                 };
+
+
+                function line_out (d) {
+                    d3.selectAll(".states path")
+                        .transition()
+                        .duration(100)
+                        .style("stroke-width","1.5");
+
+                    d3.selectAll(".buttons div")
+                        .transition()
+                        .duration(100)
+                        .style("font-weight","normal")
+                        .style("font-size","10px");
+
+                 };
+
+                function button_on (d) { 
+
+                    d3.selectAll(".states path")
+                        .transition()
+                        .duration(100)
+                        .style("stroke-width",".7");
+
+                    var pathid = d.key;
+                    pathid = pathid.replace(" ", "\\ ");
+
+                    d3.select(this)
+                        .transition()
+                        .duration(100)
+                        .style("font-weight","bold")
+                        .style("font-size","12px");
+
+                        
+
+                    d3.select(".line#"+pathid)
+                        .transition()
+                        .duration(100)
+                        .style("stroke-width","4");
+
+
+                };
+
+                function button_out (d) { 
+
+                    d3.selectAll("path")
+                        .transition()
+                        .duration(100)
+                        .style("stroke-width","1.5");
+
+                    d3.selectAll(".buttons div")
+                        .transition()
+                        .duration(100)
+                        .style("font-weight","normal")
+                        .style("font-size","10px");
+
+                };
+
+
+                function button_click (d) { 
+
+                    var index = -1;
+
+                    for(var i = 0; i < allkeys.length; i++) {
+                       if(allkeys[i].key === d.key) {
+                         index=i;
+                       }
+                    }
+
+                    if(allkeys[index].active==1) {allkeys[index].active = 0}
+                        else {allkeys[index].active = 1};
+
+                    var filtered = nested.filter(function(d1) { 
+                        var index2 = -1;
+                        for(var i = 0; i < allkeys.length; i++) {
+                            if(allkeys[i].key === d1.key) {
+                            index2=i; 
+                            }
+                        }
+                        return allkeys[index2].active;
+                    });
+
+                    var buttons2 = d3.selectAll('div.buttons div')
+                               .data(filtered, function(d) {
+                                    return d['key'];
+                                });
+
+                    d3.selectAll('div.buttons div')
+                        .style("border-color", "rgba(0,0,0,.3)");
+
+                    buttons2.exit()
+                        .style("border-color", "rgba(0,0,0,0)");
+
+                    var lines = svg.selectAll(".states")
+                                .data(filtered, function(d) { 
+                                    return d.key;})
+                                .enter()
+                                .append("g")
+                                .attr("class", "states")
+                                .append("path")
+                                .attr("class", "line")
+                                .attr("id",function(d) { 
+                                    return d.key;})
+                                .attr("d", function(d) { return valueline(d.values.data)})
+                                .attr("data-legend",function(d) { return d.values.data[0]})
+                                .style("stroke", function(d) { return color(d.key); })
+                                .on("mouseover",line_on)
+                                .on("mouseout",line_out);
+
+
+
+                    var lines2 = svg.selectAll('.states')
+                                  .data(filtered, function(d) {
+                                    return d['key'];})
+                                  .exit()
+                                  .remove();
+                    
+                };
+
+
+                function button_other_click (d)
+                {
+                    if(d=="ADD ALL") {
+                        allkeys.forEach(function(d) {
+                        d.active = 1;
+                        })
+                    }
+
+                    if(d=="CLEAR") {
+                        allkeys.forEach(function(d) {
+                        d.active = 0;
+                        })
+                    }
+
+                    var filtered = nested.filter(function(d) { 
+                        var index2 = -1;
+                        for(var i = 0; i < allkeys.length; i++) {
+                            if(allkeys[i].key === d.key) {
+                            index2=i; 
+                            }
+                        }
+                        return allkeys[index2].active;
+                    });
+
+                    var buttons2 = d3.selectAll('div.buttons div')
+                               .data(filtered, function(d) {
+                      return d['key'];
+                    });
+
+                    d3.selectAll('div.buttons div')
+                        .style("border-color", "rgba(0,0,0,.3)");
+
+                    buttons2.exit()
+                        .style("border-color", "rgba(0,0,0,0)");
+
+
+                    var lines = svg.selectAll(".states")
+                                .data(filtered, function(d) { 
+                                    return d.key;})
+                                .enter()
+                                .append("g")
+                                .attr("class", "states")
+                                .append("path")
+                                .attr("class", "line")
+                                .attr("id",function(d) { 
+                                    return d.key;})
+                                .attr("d", function(d) { return valueline(d.values.data)})
+                                .attr("d", function(d) { return valueline(d.values.data)})
+                                .attr("data-legend",function(d) { return d.values.data[0]})
+                                .style("stroke", function(d) { return color(d.key); })
+                                .on("mouseover",line_on)
+                                .on("mouseout",line_out);
+
+                    var lines2 = d3.selectAll('.states')
+                               .data(filtered, function(d) {
+                      return d['key'];})
+                               .exit()
+                               .remove();
+                };
+/*************************************************************************************************/
+
+
+/*************************************************************************************************/
+/* Add Elements */
+
+                var lines = svg.append("g")
+                                .selectAll(".states")
+                                .data(nested, function(d) { 
+                                    return d.key;})
+                                .enter()
+                                .append("g")
+                                .attr("class", "states")
+                                .append("path")
+                                .attr("class", "line")
+                                .attr("id",function(d) { 
+                                    return d.key;})
+                                .attr("d", function(d) { return valueline(d.values.data)})
+                                .attr("data-legend",function(d) { return d.values.data[0]})
+                                .style("stroke", function(d) { return color(d.key); });
+               
+                
+                var bubbles = svg.append('g')
+                               .attr("class","bubble")
+                               .selectAll("circle")
+                               .data(data)
+                               .enter()
+                               .append("circle")
+                               .attr("cx", function(d) { return x(d.year); })
+                               .attr("cy", function(d) { return y(d.imr); })
+                               .attr("r", "2")
+                               .style("fill","rgba(100,100,100,0.2)");
+
+
+                var bubbles_buffer = svg.append('g')
+                               .attr("class","bubble_buffer")
+                               .selectAll("circle")
+                               .data(data)
+                               .enter()
+                               .append("circle")
+                               .attr("cx", function(d) { return x(d.year); })
+                               .attr("cy", function(d) { return y(d.imr); })
+                               .attr("r", "6")
+                               .style("fill","rgba(100,100,100,0)")
+                               .on("mouseover", tippoint.show)
+                               .on("mouseout", tippoint.hide);
+
+
+                svg.append("g")
+                    .attr("class", "x axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(xAxis);
+
+                svg.append("g")
+                    .attr("class", "y axis")
+                    .call(yAxis);
+
+                var buttons = d3.select("body")
+                                .append("div")
+                                .attr("class","buttons")
+                                .selectAll("div")
+                                .data(nested, function(d) { 
+                                    return d.key;})
+                                .enter()
+                                .append("div")
+                                .attr("id",function(d) { 
+                                    return d.key;})
+                                .text(function(d) { return d.key;})
+                                .style("color", function(d) { return color(d.key); });
+
+                var buttons_other = d3.select("body")
+                                .append("div")
+                                .attr("class","other_buttons")
+                                .selectAll("div")
+                                .data(["ADD ALL", "CLEAR"])
+                                .enter()
+                                .append("div")
+                                .text(function(d) { return d;});
+
+/*************************************************************************************************/
+/** Assining interaction to elements */
+
+
+                lines.on("mouseover",line_on)
+                     .on("mouseout",line_out);
+                
+                buttons.on("click", button_click)
+                       .on("mouseover", button_on)
+                       .on("mouseout", button_out);             
+
+                buttons_other.on("click", button_other_click);
+
+                buttons_other.on("mouseover", function(d) {
+                    d3.selectAll(".other_buttons div")
+                        .style("background-color","lightBlue")
+                        .style("color","white");
+
+                    d3.select(this)
+                        .style("background-color","Orange")
+                        .style("color","black");
+                });
+
+                buttons_other.on("mouseout", function(d) {
+                    d3.selectAll(".other_buttons div")
+                        .style("background-color","lightBlue")
+                        .style("color","white");
+                });
+
+            };
+
+        </script>
+<body>
+
+        <script type="text/javascript">
+
+
+        // Parse the date / time
+        var parseDate = d3.time.format("%Y").parse;
+
+        var start_year = 1998;
+
+        // Get the data
+        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/mmr_imr_timeseries/data/imr_long.csv", function(d) {
+            d.year = parseDate(d.year);
+            if(d.year.getFullYear() < start_year) {
+                return null;}
+            if (d.imr=="NA") { return null; }
+            d.imr = +d.imr;
+            if(d.state == "Jammu & Kashmir") { d.state = "Jammu Kashmir" ;}
+            if(d.state == "Dadra and Nagar Haveli") { d.state = "DN_Haveli" ;}
+            if(d.state == "Andaman & Nicobar Islands") { d.state = "A_N Islands" ;}
+            if(d.state == "Daman and Diu") { d.state = "Daman Diu" ;}
+            return d;
+        }, draw);
+
+        </script>
+</body>
+</html>
