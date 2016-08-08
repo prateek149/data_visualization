@@ -13,7 +13,7 @@
 
                     var w = 600;
                     var h = 450;
-                    
+
                     var m = w/12;
 
                     var margin = {top: m, right: m, bottom: m, left: m},
@@ -23,40 +23,40 @@
 
                     var x = d3.scaleLinear()
                         .rangeRound([0, width])
-                        .domain([0,15000]);
+                        .domain([0,360000]);
 
-                    var iphs_sc = data.map(function(value,index) { return value.iphs_sc; });
-                    var iphs_sc_anm = data.map(function(value,index) { return value.iphs_sc_anm; });
+                    var iphs_hosp = data.map(function(value,index) { return value.iphs_hosp; });
+                    var iphs_hosp_gynec = data.map(function(value,index) { return value.iphs_hosp_gynec; });
 
-                    var thresholds_array = d3.range(0, 15000, 1000)
+                    var thresholds_array = d3.range(0, 360000, 30000)
                     
-                    var bins_sc = d3.histogram()
+                    var bins_hosp = d3.histogram()
                         .domain(x.domain())
                         .thresholds(thresholds_array)
-                        (iphs_sc);
+                        (iphs_hosp);
 
-                    var bins_sc_anm = d3.histogram()
+                    var bins_hosp_gynec = d3.histogram()
                         .domain(x.domain())
                         .thresholds(thresholds_array)
-                        (iphs_sc_anm);
+                        (iphs_hosp_gynec);
 
-                    var bins = bins_sc
+                    var bins = bins_hosp
 
-                    var max = d3.max([d3.max(bins_sc, function(d) { return d.length; }),d3.max(bins_sc_anm, function(d) { return d.length; })])
+                    var max = d3.max([d3.max(bins_hosp, function(d) { return d.length; }),d3.max(bins_hosp_gynec, function(d) { return d.length; })])
 
                     var y = d3.scaleLinear()
                         .domain([0, max])
                         .range([height, 0]);
 
-                    var iphs_standard = 5000;
+                    var iphs_standard = 120000;
 
-                    var q1_iphs_sc = data.filter(function(x){return x.iphs_sc<=iphs_standard}).length;
-                    var q2_iphs_sc = data.filter(function(x){return x.iphs_sc>iphs_standard & x.iphs_sc<=2*iphs_standard}).length;
-                    var q3_iphs_sc = data.filter(function(x){return x.iphs_sc>2*iphs_standard}).length;
+                    var q1_iphs_hosp = data.filter(function(x){return x.iphs_hosp<=iphs_standard}).length;
+                    var q2_iphs_hosp = data.filter(function(x){return x.iphs_hosp>iphs_standard & x.iphs_hosp<=2*iphs_standard}).length;
+                    var q3_iphs_hosp = data.filter(function(x){return x.iphs_hosp>2*iphs_standard}).length;
 
-                    var q1_iphs_sc_anm = data.filter(function(x){return x.iphs_sc_anm<=iphs_standard}).length;
-                    var q2_iphs_sc_anm = data.filter(function(x){return x.iphs_sc_anm>iphs_standard & x.iphs_sc_anm<=2*iphs_standard}).length;
-                    var q3_iphs_sc_anm = data.filter(function(x){return x.iphs_sc_anm>2*iphs_standard}).length;
+                    var q1_iphs_hosp_gynec = data.filter(function(x){return x.iphs_hosp_gynec<=iphs_standard}).length;
+                    var q2_iphs_hosp_gynec = data.filter(function(x){return x.iphs_hosp_gynec>iphs_standard & x.iphs_hosp_gynec<=2*iphs_standard}).length;
+                    var q3_iphs_hosp_gynec = data.filter(function(x){return x.iphs_hosp_gynec>2*iphs_standard}).length;
 
                      
 
@@ -68,17 +68,17 @@
 
                     function button_click (d) { 
 
-                        if (d == "Sub-Centre") { 
-                            var bins = bins_sc;
-                            var q1 = q1_iphs_sc;
-                            var q2 = q2_iphs_sc;
-                            var q3 = q3_iphs_sc;
+                        if (d == "Hospital") { 
+                            var bins = bins_hosp;
+                            var q1 = q1_iphs_hosp;
+                            var q2 = q2_iphs_hosp;
+                            var q3 = q3_iphs_hosp;
                         };
-                        if (d == "Sub-Centre with an ANM") { 
-                            var bins = bins_sc_anm;
-                            var q1 = q1_iphs_sc_anm;
-                            var q2 = q2_iphs_sc_anm;
-                            var q3 = q3_iphs_sc_anm;
+                        if (d == "Hospital with a Gynecologist") { 
+                            var bins = bins_hosp_gynec;
+                            var q1 = q1_iphs_hosp_gynec;
+                            var q2 = q2_iphs_hosp_gynec;
+                            var q3 = q3_iphs_hosp_gynec;
                         };
 
                         var bar = svg.selectAll(".bar")
@@ -138,7 +138,7 @@
                     svg.append("g")
                         .attr("class", "xaxis")
                         .attr("transform", "translate(0," + height + ")")
-                        .call(d3.axisBottom(x));
+                        .call(d3.axisBottom(x).tickValues([0, 60000, 120000, 180000, 240000, 300000, 360000]));
 
                     svg.append("g")
                         .attr("class", "yaxis")
@@ -170,17 +170,17 @@
                                 .style("top","30px")
                                 .style("left","195px")
                                 .selectAll("div")
-                                .data(["Sub-Centre", "Sub-Centre with an ANM"])
+                                .data(["Hospital", "Hospital with a Gynecologist"])
                                 .enter()
                                 .append("div")
                                 .text(function(d) { return d;})
                                 .style("color",function(d) {
-                                    if(d=="Sub-Centre") {return "white";}
-                                    if(d=="Sub-Centre with an ANM") {return "black";}
+                                    if(d=="Hospital") {return "white";}
+                                    if(d=="Hospital with a Gynecologist") {return "black";}
                                 })
                                 .style("background-color",function(d) {
-                                    if(d=="Sub-Centre") {return "black";}
-                                    if(d=="Sub-Centre with an ANM") {return "white";}
+                                    if(d=="Hospital") {return "black";}
+                                    if(d=="Hospital with a Gynecologist") {return "white";}
                                 })
                                 .style("border-style","solid")
                                 .style("border-color","rgba(0,0,0,.3)")
@@ -207,12 +207,30 @@
                                 .style("color","black")
                                 .style("text-align","left");
 
+                    var explainer_text = svg.append("text")
+                                .attr("text-anchor","start")
+                                .attr("class","explainer_text")
+                                .attr("x",-15)
+                                .attr("y",10)
+                                .style("font-family","verdana")
+                                .style("font-size","7px")
+                                .style("color","black");
+                    explainer_text.append("tspan")
+                        .text("Hospital includes District Hospitals,");
+                    explainer_text.append("tspan")
+                        .text("Sub-District Hospitals and")
+                        .attr("dy","8")
+                        .attr("x",-15);
+                    explainer_text.append("tspan")
+                        .text("Community Health Centres")
+                        .attr("dy","8")
+                        .attr("x",-15);
 
                     var source_text = svg.append("text")
                                 .attr("text-anchor","start")
                                 .attr("class","source_text")
                                 .attr("x",-15)
-                                .attr("y",10)
+                                .attr("y",40)
                                 .text("Source: DLHS-4")
                                 .style("font-family","verdana")
                                 .style("font-size","7px")
@@ -254,7 +272,7 @@
                             std_text.append("tspan")
                                 .text("IPHS Standard is");
                             std_text.append("tspan")
-                                .text("5000 or less")
+                                .text("120,000 or less")
                                 .attr("dy","11")
                                 .attr("x",x(iphs_standard)-4);
 
@@ -277,7 +295,7 @@
                                     .style("font-family","verdana")
                                     .style("font-size","12px")
                                     .style("fill","white")
-                                    .text(q1_iphs_sc);
+                                    .text(q1_iphs_hosp);
 
                     var q1_text = svg.append("text")
                                     .attr("text-anchor","middle")
@@ -308,7 +326,7 @@
                                     .style("font-family","verdana")
                                     .style("font-size","12px")
                                     .style("fill","white")
-                                    .text(q2_iphs_sc);
+                                    .text(q2_iphs_hosp);
 
                     var q2_text = svg.append("text")
                                     .attr("text-anchor","middle")
@@ -325,7 +343,7 @@
                                 .attr("dy","11")
                                 .attr("x",width/2);
                             q2_text.append("tspan")
-                                .text("between 5000 & 10,000")
+                                .text("between 120,000 & 240,000")
                                 .attr("dy","11")
                                 .attr("x",width/2);
 
@@ -343,7 +361,7 @@
                                     .style("font-family","verdana")
                                     .style("font-size","12px")
                                     .style("fill","white")
-                                    .text(q3_iphs_sc);
+                                    .text(q3_iphs_hosp);
 
 
                     var q3_text = svg.append("text")
@@ -361,7 +379,7 @@
                                 .attr("dy","11")
                                 .attr("x",5*width/6);
                             q3_text.append("tspan")
-                                .text("more than 10,000")
+                                .text("more than 240,000")
                                 .attr("dy","11")
                                 .attr("x",5*width/6);
 
@@ -370,7 +388,7 @@
                                     .attr("text-anchor","start")
                                     .attr("class","axis_text")
                                     .attr("y", height + 27)
-                                    .attr("x", width - 46)
+                                    .attr("x", width - 17)
                                     .style("font-family","verdana")
                                     .style("font-size","9px")
                                     .style("fill","black")
@@ -393,8 +411,8 @@
         <script type="text/javascript">
         // Get the data
         d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/health_oped/data/oped_data_selected.csv", function(d) {
-            d.iphs_sc = +d.iphs_sc
-            d.iphs_sc_anm = +d.iphs_sc_anm
+            d.iphs_hosp = +d.iphs_hosp
+            d.iphs_hosp_gynec = +d.iphs_hosp_gynec
             return d;
         }, draw);
 
