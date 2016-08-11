@@ -22,14 +22,20 @@
                 height = h - margin.top - margin.bottom;
 
 
+                var per_anm = geo_data.features.map(function(d) { 
+                    return d.properties.dlhs4_sc_per_anm;
+                });
+                per_anm = per_anm.filter(function(n){ return n != undefined });
+
+                var per_anm_scale = d3.scaleQuantile()
+                  .domain(per_anm)
+                  .range(['#f7f7f7', '#cccccc', '#969696', '#525252']);
+
+                var scale = per_anm_scale;
+
               function color_fill(d) {
-                var heat_color = "#FEEDDE";
-                if(d>0.2) { heat_color = "#FDBE85"; }
-                if(d>0.4) { heat_color = "#FD8D3C"; }
-                if(d>0.6) { heat_color = "#E6550D"; }
-                if(d>0.8) { heat_color = "#A63603"; }
-                if(d>1) { heat_color = "#681000"; }
-                return heat_color;
+                  if (d != undefined) { return scale(d);}
+                  else { return "#fdbe85" }
               };
 
 
@@ -56,6 +62,77 @@
               projection
                   .scale(s)
                   .translate(t);
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* All the interactive functions */
+
+              function map_mouseover(d) {
+debugger;
+                  var alt_color = "#CA7914";
+
+                  var anno_x = width/2.15;
+                  var anno_y = 10;
+                  var dy = 13;
+
+
+                  var iphs_sc_text = d3.format(',.0f')(d.properties.iphs_sc_anm);
+                  var iphs_hosp_text = d3.format(',.0f')(d.properties.iphs_hosp_gynec);
+
+                  if(d.properties.iphs_sc_anm == 15000) {
+                      iphs_sc_text = "15,000 or more"
+                  };
+
+                  if(d.properties.iphs_sc_anm == null) {
+                      iphs_sc_text = "No Data"
+                  };
+
+                  if(d.properties.iphs_hosp_gynec == 360000) {
+                      iphs_hosp_text = "360,000 or more"
+                  };
+
+                  svg.append("text")
+                      .attr("x",anno_x).attr("y",anno_y)
+                      .attr("font-size",10).style("color","black")
+                      .append("tspan").text("District:   ")
+                      .append("tspan").text(d.properties.hmis_district).attr("font-size",12).style("fill",alt_color);
+
+                  svg.append("text")
+                      .attr("x",anno_x).attr("y",anno_y + dy)
+                      .attr("font-size",10).style("color","black")
+                      .append("tspan").text("Percentage of Sub-Centres with an ANM:   ")
+                      .append("tspan").text(d3.format(".0%")(d.properties.dlhs4_sc_per_anm)).attr("font-size",12).style("fill",alt_color);
+
+
+                  svg.append("text")
+                      .attr("x",anno_x).attr("y",anno_y + 2*dy)
+                      .attr("font-size",10).style("color","black")
+                      .append("tspan").text("Percentage of Hospitals with a Gynecologist:   ")
+                      .append("tspan").text(d3.format(".0%")(d.properties.dlhs4_hosp_per_gynec)).attr("font-size",12).style("fill",alt_color);
+
+                  svg.append("text")
+                      .attr("x",anno_x).attr("y",anno_y + 3*dy)
+                      .attr("font-size",10).style("color","black")
+                      .append("tspan").text("Population per Sub-Centre with an ANM:   ")
+                      .append("tspan").text(iphs_sc_text).attr("font-size",12).style("fill",alt_color);
+
+                  svg.append("text")
+                      .attr("x",anno_x).attr("y",anno_y + 4*dy)
+                      .attr("font-size",10).style("color","black")
+                      .append("tspan").text("Population per Hospital with a Gynecologist:   ")
+                      .append("tspan").text(iphs_hosp_text).attr("font-size",12).style("fill",alt_color);
+                            
+                };
+                
+                function map_mouseout(d) {
+
+                svg.selectAll("text").remove();
+                        
+                };
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* All the interactive functions */
                 
               var map = svg.append("g").selectAll("path")
                            .data(geo_data.features)
@@ -63,10 +140,10 @@
                            .append("path")
                            .attr("d", path)
                            .attr("class","grid")
-                           .attr("fill","black");
-
-
-debugger;
+                           .attr("fill", function(d) {
+                              return(color_fill(d.properties.dlhs4_sc_per_anm)); })
+                           .on("mouseover", map_mouseover)
+                           .on("mouseout", map_mouseout);
 
         };  
 
