@@ -10,7 +10,8 @@
     <script type="text/javascript"> 
 
         function draw(geo_data) {
-              "use strict";
+
+                "use strict";
 
                 var w = 600;
                 var h = 450;
@@ -21,130 +22,379 @@
                 width = w - margin.left - margin.right,
                 height = h - margin.top - margin.bottom;
 
+/*************************************************************************************************/
+/* Reversing personnel */
+
+  
+                geo_data.features.forEach(function(d, index) {
+
+                  if(geo_data.features[index].properties.dlhs4_sc_per_anm) {
+                  geo_data.features[index].properties.dlhs4_sc_per_anm = 1-geo_data.features[index].properties.dlhs4_sc_per_anm;}
+
+                  if(geo_data.features[index].properties.dlhs4_hosp_per_gynec) {
+                  geo_data.features[index].properties.dlhs4_hosp_per_gynec = 1-geo_data.features[index].properties.dlhs4_hosp_per_gynec;}
+             
+                });
+
+
+
+/*************************************************************************************************/
+/* Generating arrays anf quantile thresholds */
 
                 var per_anm = geo_data.features.map(function(d) { 
                     return d.properties.dlhs4_sc_per_anm;
                 });
-                per_anm = per_anm.filter(function(n){ return n != undefined });
+                  per_anm = per_anm.filter(function(n){ return n != undefined });
+                  per_anm = per_anm.sort(d3.descending);
+                  var per_anm_q = [d3.quantile(per_anm, 0.75),d3.quantile(per_anm, 0.5),d3.quantile(per_anm, 0.25)];
 
-                var per_anm_scale = d3.scaleQuantile()
-                  .domain(per_anm)
-                  .range(['#f7f7f7', '#cccccc', '#969696', '#525252']);
+                var per_gynec = geo_data.features.map(function(d) { 
+                    return d.properties.dlhs4_hosp_per_gynec;
+                });
+                  per_gynec = per_gynec.filter(function(n){ return n != undefined });
+                  per_gynec = per_gynec.sort(d3.descending);
+                  var per_gynec_q = [d3.quantile(per_gynec, 0.75),d3.quantile(per_gynec, 0.5),d3.quantile(per_gynec, 0.25)];
 
-                var scale = per_anm_scale;
+                var iphs_anm = geo_data.features.map(function(d) { 
+                    return d.properties.iphs_sc_anm;
+                });
+                  iphs_anm = iphs_anm.filter(function(n){ return n != undefined });
+                  iphs_anm = iphs_anm.sort(d3.descending);
+                  var iphs_anm_q = [d3.quantile(iphs_anm, 0.75),d3.quantile(iphs_anm, 0.5),d3.quantile(iphs_anm, 0.25)];
 
-              function color_fill(d) {
-                  if (d != undefined) { return scale(d);}
-                  else { return "#fdbe85" }
-              };
+                var iphs_gynec = geo_data.features.map(function(d) { 
+                    return d.properties.iphs_hosp_gynec;
+                });
+                  iphs_gynec = iphs_gynec.filter(function(n){ return n != undefined });
+                  iphs_gynec = iphs_gynec.sort(d3.descending);
+                  var iphs_gynec_q = [d3.quantile(iphs_gynec, 0.75),d3.quantile(iphs_gynec, 0.5),d3.quantile(iphs_gynec, 0.25)];
 
+/*************************************************************************************************/
+                var data_array = per_anm;
+                var data_array_q = per_anm_q;
+                var fill_var = "dlhs4_sc_per_anm";
 
-              var svg = d3.select("body")
-                          .append("svg")
-                          .attr("width",width)
-                          .attr("height", height)
-                          .append("g")
-                          .attr("class","map");
+                var color_array = ['#dedede', '#aaaaaa', '#737373', '#323232'];
+                var na_color = "#fc9e85";
+                var color_array_na = color_array.concat(na_color);
+                
 
-              var projection = d3.geoMercator()
-                                 .scale(1)
-                                 .translate([0,0]);
+                var scale = d3.scaleQuantile()
+                  .domain(data_array)
+                  .range(color_array);
 
+                function color_fill(d) {
+                    if (d != undefined) { return scale(d);}
+                    else { return na_color }
+                };
 
+                function legend_cat_text(d,i) {
+                    var text_format = d3.format(",.1%");
+                    if(i == 0) { return "Less than " + text_format(data_array_q[0]);}
+                    if(i == 1) { return text_format(data_array_q[0]) + " to " + text_format(data_array_q[1]);}
+                    if(i == 2) { return text_format(data_array_q[1]) + " to " + text_format(data_array_q[2]);}
+                    if(i == 3) { return text_format(data_array_q[2]) + " and higher";}
+                    if(i == 4) { return "No Data";}
+                };
 
-              var path = d3.geoPath().projection(projection);
+                var svg = d3.select("body")
+                            .append("svg")
+                            .attr("width",width)
+                            .attr("height", height)
+                            .append("g")
+                            .attr("class","map");
 
-            
-              var b = path.bounds(geo_data),
-                s = 1 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
-                t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+                var projection = d3.geoMercator()
+                                   .scale(1)
+                                   .translate([0,0]);
 
-              projection
-                  .scale(s)
-                  .translate(t);
+                var path = d3.geoPath().projection(projection);
+              
+                var b = path.bounds(geo_data),
+                  s = 1 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+                  t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+
+                projection
+                    .scale(s)
+                    .translate(t);
 
 /*************************************************************************************************/
 /*************************************************************************************************/
 /* All the interactive functions */
 
-              function map_mouseover(d) {
-debugger;
-                  var alt_color = "#CA7914";
+                function map_mouseover(d) {
 
-                  var anno_x = width/2.15;
-                  var anno_y = 10;
-                  var dy = 13;
+                    var alt_color = "#CA7914";
+
+                    var anno_x = width/2.15;
+                    var anno_y = 10;
+                    var dy = 13;
+
+                    var iphs_sc_text = d3.format(',.0f')(d.properties.iphs_sc_anm);
+                        if(d.properties.iphs_sc_anm == 15000) {
+                            iphs_sc_text = "15,000 or more"
+                        };
+                        if(d.properties.iphs_sc_anm == null) {
+                            iphs_sc_text = "No Data"
+                        };
+
+                    var iphs_hosp_text = d3.format(',.0f')(d.properties.iphs_hosp_gynec);
+                        if(d.properties.iphs_hosp_gynec == 360000) {
+                            iphs_hosp_text = "360,000 or more"
+                        };
+                        if(d.properties.iphs_hosp_gynec == null) {
+                            iphs_hosp_text = "No Data"
+                        };
+
+                    var per_anm_text = d3.format(".0%")(d.properties.dlhs4_sc_per_anm);
+                        if(d.properties.dlhs4_sc_per_anm == null) {
+                              per_anm_text = "No Data"
+                        };
+
+                    var per_gynec_text = d3.format(".0%")(d.properties.dlhs4_hosp_per_gynec);
+                        if(d.properties.dlhs4_hosp_per_gynec == null) {
+                              per_gynec_text = "No Data"
+                        };
+
+                    var anno_text = svg.append("g")
+                                        .attr("class","anno_text");
+
+                    anno_text.append("text")
+                        .attr("x",anno_x).attr("y",anno_y)
+                        .attr("font-size",10).style("color","black")
+                        .append("tspan").text("District:   ")
+                        .append("tspan").text(d.properties.hmis_district +  " , " + d.properties.hmis_state).attr("font-size",12).style("fill",alt_color);
+
+                    anno_text.append("text")
+                        .attr("x",anno_x).attr("y",anno_y + dy)
+                        .attr("font-size",10).style("color","black")
+                        .append("tspan").text("Percentage of Sub-Centres with an ANM:   ")
+                        .append("tspan").text(per_anm_text).attr("font-size",12).style("fill",alt_color);
 
 
-                  var iphs_sc_text = d3.format(',.0f')(d.properties.iphs_sc_anm);
-                  var iphs_hosp_text = d3.format(',.0f')(d.properties.iphs_hosp_gynec);
+                    anno_text.append("text")
+                        .attr("x",anno_x).attr("y",anno_y + 2*dy)
+                        .attr("font-size",10).style("color","black")
+                        .append("tspan").text("Percentage of Hospitals with a Gynecologist:   ")
+                        .append("tspan").text(per_gynec_text).attr("font-size",12).style("fill",alt_color);
 
-                  if(d.properties.iphs_sc_anm == 15000) {
-                      iphs_sc_text = "15,000 or more"
+                    anno_text.append("text")
+                        .attr("x",anno_x).attr("y",anno_y + 3*dy)
+                        .attr("font-size",10).style("color","black")
+                        .append("tspan").text("Population per Sub-Centre with an ANM:   ")
+                        .append("tspan").text(iphs_sc_text).attr("font-size",12).style("fill",alt_color);
+
+                    anno_text.append("text")
+                        .attr("x",anno_x).attr("y",anno_y + 4*dy)
+                        .attr("font-size",10).style("color","black")
+                        .append("tspan").text("Population per Hospital with a Gynecologist:   ")
+                        .append("tspan").text(iphs_hosp_text).attr("font-size",12).style("fill",alt_color);
+                              
+                  };
+                  
+
+                  function map_mouseout(d) {
+
+                      svg.selectAll(".anno_text").remove();
+                          
                   };
 
-                  if(d.properties.iphs_sc_anm == null) {
-                      iphs_sc_text = "No Data"
-                  };
 
-                  if(d.properties.iphs_hosp_gynec == 360000) {
-                      iphs_hosp_text = "360,000 or more"
-                  };
+                  function button_mouseover (d) { 
+                      
+                      if (d == "% Sub-Centre without ANM")
+                        {
+                           data_array = per_anm;
+                           data_array_q =  per_anm_q;
+                           fill_var = "dlhs4_sc_per_anm";
+                           var legend_head_text = "% of Facilities";
+                           var text_format = d3.format(",.1%");
+                           legend.selectAll("text.cat_text")
+                                .attr("fill","black");
+                           legend.selectAll("text#q0")
+                                .attr("fill","#ffffff");
+                        };
 
-                  svg.append("text")
-                      .attr("x",anno_x).attr("y",anno_y)
-                      .attr("font-size",10).style("color","black")
-                      .append("tspan").text("District:   ")
-                      .append("tspan").text(d.properties.hmis_district).attr("font-size",12).style("fill",alt_color);
+                      if (d == "% Hospital without Gynecologist")
+                        {
+                           data_array = per_gynec;
+                           data_array_q =  per_gynec_q;
+                           fill_var = "dlhs4_hosp_per_gynec";
+                           var legend_head_text = "% of Facilities";
+                           var text_format = d3.format(",.1%");
+                           legend.selectAll("text.cat_text")
+                                .attr("fill","black");
+                        };
 
-                  svg.append("text")
-                      .attr("x",anno_x).attr("y",anno_y + dy)
-                      .attr("font-size",10).style("color","black")
-                      .append("tspan").text("Percentage of Sub-Centres with an ANM:   ")
-                      .append("tspan").text(d3.format(".0%")(d.properties.dlhs4_sc_per_anm)).attr("font-size",12).style("fill",alt_color);
+                      if (d == "Population per Sub-Centre with ANM")
+                        {
+                           data_array = iphs_anm;
+                           data_array_q =  iphs_anm_q;
+                           fill_var = "iphs_sc_anm";
+                           var legend_head_text = "Population per Facility";
+                           var text_format = d3.format(",.0f");
+                           legend.selectAll("text.cat_text")
+                                .attr("fill","black");
+                        };
 
+                      if (d == "Population per Hospital with Gynecologist")
+                        {
+                           data_array = iphs_gynec;
+                           data_array_q =  iphs_gynec_q;
+                           fill_var = "iphs_hosp_gynec";
+                           var legend_head_text = "Population per Facility";
+                           var text_format = d3.format(",.0f");
+                           legend.selectAll("text.cat_text")
+                                .attr("fill","black");
+                           legend.selectAll("text#q2")
+                                .attr("fill","#ffffff");
+                        };
 
-                  svg.append("text")
-                      .attr("x",anno_x).attr("y",anno_y + 2*dy)
-                      .attr("font-size",10).style("color","black")
-                      .append("tspan").text("Percentage of Hospitals with a Gynecologist:   ")
-                      .append("tspan").text(d3.format(".0%")(d.properties.dlhs4_hosp_per_gynec)).attr("font-size",12).style("fill",alt_color);
+                  
 
-                  svg.append("text")
-                      .attr("x",anno_x).attr("y",anno_y + 3*dy)
-                      .attr("font-size",10).style("color","black")
-                      .append("tspan").text("Population per Sub-Centre with an ANM:   ")
-                      .append("tspan").text(iphs_sc_text).attr("font-size",12).style("fill",alt_color);
+                        var scale = d3.scaleQuantile()
+                          .domain(data_array)
+                          .range(color_array);
 
-                  svg.append("text")
-                      .attr("x",anno_x).attr("y",anno_y + 4*dy)
-                      .attr("font-size",10).style("color","black")
-                      .append("tspan").text("Population per Hospital with a Gynecologist:   ")
-                      .append("tspan").text(iphs_hosp_text).attr("font-size",12).style("fill",alt_color);
-                            
-                };
-                
-                function map_mouseout(d) {
+                        function color_fill(d) {
+                            if (d != undefined) { return scale(d);}
+                            else { return na_color }
+                        };
 
-                svg.selectAll("text").remove();
+                        svg.selectAll("path")
+                               .attr("fill", function(d) {
+                                  return(color_fill(d.properties[fill_var])); })
+                               .on("mouseover", map_mouseover)
+                               .on("mouseout", map_mouseout);
+
+                        function legend_cat_text(d,i) {
+                            if(i == 0) { return "Less than " + text_format(data_array_q[0]);}
+                            if(i == 1) { return text_format(data_array_q[0]) + " to " + text_format(data_array_q[1]);}
+                            if(i == 2) { return text_format(data_array_q[1]) + " to " + text_format(data_array_q[2]);}
+                            if(i == 3) { return text_format(data_array_q[2]) + " and higher";}
+                            if(i == 4) { return "No Data";}
+                        };
+
+                        legend.selectAll("text.heading_text")
+                            .text(legend_head_text);
+
+                        legend.selectAll("text.cat_text")
+                        .text(function(d,i){
+                          return legend_cat_text(d,i);});
                         
-                };
+                        d3.selectAll(".buttons div")
+                            .style("background-color","white")
+                            .style("color","black");
+
+                        d3.select(this)
+                            .style("background-color","black")
+                            .style("color","white");
+                    };
 
 /*************************************************************************************************/
 /*************************************************************************************************/
-/* All the interactive functions */
+/* Adding the SVG elements functions */
                 
-              var map = svg.append("g").selectAll("path")
-                           .data(geo_data.features)
-                           .enter()  
-                           .append("path")
-                           .attr("d", path)
-                           .attr("class","grid")
-                           .attr("fill", function(d) {
-                              return(color_fill(d.properties.dlhs4_sc_per_anm)); })
-                           .on("mouseover", map_mouseover)
-                           .on("mouseout", map_mouseout);
+                  var map = svg.append("g").selectAll("path")
+                               .data(geo_data.features)
+                               .enter()  
+                               .append("path")
+                               .attr("d", path)
+                               .attr("class","grid")
+                               .attr("fill", function(d) {
+                                  return(color_fill(d.properties[fill_var])); })
+                               .on("mouseover", map_mouseover)
+                               .on("mouseout", map_mouseout);
+                  var source_text = svg.append("text")
+                                .attr("text-anchor","start")
+                                .attr("class","source_text")
+                                .attr("x",0)
+                                .attr("y",height/2.4)
+                                .text("Source: DLHS-4")
+                                .style("font-family","verdana")
+                                .style("font-size","7px")
+                                .style("color","black");
 
+
+/*************************************************************************************************/
+/* Adding Legend */
+
+                  var legend = svg.append("g")
+                                  .attr("class","legend");
+
+                  legend.append("text")
+                        .attr("class","heading_text")
+                        .text("% of Facilities")
+                        .attr("x", width/2.1)
+                        .attr("y", height/1.3)
+                        .attr("font-size",12);
+
+                  legend.selectAll("rect")
+                        .data(color_array_na)
+                        .enter()
+                        .append("rect")
+                        .attr("class","colors")
+                        .attr("x", width/2.1)
+                        .attr("y", function(d,i){ return (height/1.3 + i*13 + 8); })
+                        .attr("width",15)
+                        .attr("height",10)
+                        .style("fill",function(d,i) { return color_array_na[i]; });
+
+                  legend.selectAll("text.cat_text")
+                        .data(color_array_na)
+                        .enter()
+                        .append("text")
+                        .attr("class","cat_text")
+                        .attr("id", function(d,i){return "q" + i;})
+                        .attr("x", width/1.95)
+                        .attr("y", function(d,i){ return (height/1.3 + i*13 + 8 + 10); })
+                        .attr("font-size",11)
+                        .text(function(d,i){
+                          return legend_cat_text(d,i);});
+
+                  legend.selectAll("text#q0")
+                        .attr("fill","#ffffff");
+
+                  
+
+
+/*************************************************************************************************/
+/* Adding Buttons */
+
+                  var buttons = d3.select("body")
+                                .append("div")
+                                .attr("class","buttons")
+                                .style("position","fixed")
+                                .style("top","10px")
+                                .style("left","5px")
+                                .selectAll("div")
+                                .data(["% Sub-Centre without ANM", "% Hospital without Gynecologist",
+                                       "Population per Sub-Centre with ANM","Population per Hospital with Gynecologist"])
+                                .enter()
+                                .append("div")
+                                .text(function(d) { return d;})
+                                .style("color",function(d) {
+                                    if(d=="% Sub-Centre without ANM") {return "white";}
+                                    else { return "black";}
+                                })
+                                .style("background-color",function(d) {
+                                    if(d=="% Sub-Centre without ANM") {return "black";}
+                                    else {return "white";}
+                                })
+                                .style("border-style","solid")
+                                .style("border-color","rgba(0,0,0,.3)")
+                                .style("border-width","1px")
+                                .style("padding","2px")
+                                .style("margin","0px")
+                                .style("font-family","verdana")
+                                .style("font-size","10px")
+                                .style("width","100px")
+                                .style("text-align","left");
+
+                    buttons.on("mouseover", button_mouseover);
+
+/*************************************************************************************************/
+/* Closing the draw function */
         };  
 
     </script>

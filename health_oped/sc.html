@@ -24,10 +24,12 @@
                     var x = d3.scaleLinear()
                         .rangeRound([0, width])
                         .domain([0,15000]);
-
+debugger;
                     var iphs_sc = data.map(function(value,index) { return value.iphs_sc; });
+                        iphs_sc = iphs_sc.filter(function(n){ return n != undefined });
                     var iphs_sc_anm = data.map(function(value,index) { return value.iphs_sc_anm; });
-
+                        iphs_sc_anm = iphs_sc_anm.filter(function(n){ return n != undefined });
+                    
                     var thresholds_array = d3.range(0, 15000, 1000)
                     
                     var bins_sc = d3.histogram()
@@ -43,6 +45,7 @@
                     var bins = bins_sc
 
                     var max = d3.max([d3.max(bins_sc, function(d) { return d.length; }),d3.max(bins_sc_anm, function(d) { return d.length; })])
+                    max = 110; /* manual overide for y range*/
 
                     var y = d3.scaleLinear()
                         .domain([0, max])
@@ -50,13 +53,13 @@
 
                     var iphs_standard = 5000;
 
-                    var q1_iphs_sc = data.filter(function(x){return x.iphs_sc<=iphs_standard}).length;
-                    var q2_iphs_sc = data.filter(function(x){return x.iphs_sc>iphs_standard & x.iphs_sc<=2*iphs_standard}).length;
-                    var q3_iphs_sc = data.filter(function(x){return x.iphs_sc>2*iphs_standard}).length;
+                    var q1_iphs_sc = iphs_sc.filter(function(x){return x <= iphs_standard}).length;
+                    var q2_iphs_sc = iphs_sc.filter(function(x){return x > iphs_standard & x<=2*iphs_standard}).length;
+                    var q3_iphs_sc = iphs_sc.filter(function(x){return x > 2*iphs_standard}).length;
 
-                    var q1_iphs_sc_anm = data.filter(function(x){return x.iphs_sc_anm<=iphs_standard}).length;
-                    var q2_iphs_sc_anm = data.filter(function(x){return x.iphs_sc_anm>iphs_standard & x.iphs_sc_anm<=2*iphs_standard}).length;
-                    var q3_iphs_sc_anm = data.filter(function(x){return x.iphs_sc_anm>2*iphs_standard}).length;
+                    var q1_iphs_sc_anm = iphs_sc_anm.filter(function(x){return x<=iphs_standard}).length;
+                    var q2_iphs_sc_anm = iphs_sc_anm.filter(function(x){return x>iphs_standard & x<=2*iphs_standard}).length;
+                    var q3_iphs_sc_anm = iphs_sc_anm.filter(function(x){return x>2*iphs_standard}).length;
 
                      
 
@@ -245,11 +248,11 @@
                     var std_text = svg.append("text")
                                     .attr("text-anchor","end")
                                     .attr("class","std_text")
-                                    .attr("y",height/2 + 8)
+                                    .attr("y",height/2.9)
                                     .attr("x",x(iphs_standard)-4)
                                     .style("font-family","verdana")
                                     .style("font-size","11px")
-                                    .style("color","black");
+                                    .style("fill","black");
 
                             std_text.append("tspan")
                                 .text("IPHS Standard is");
@@ -260,19 +263,19 @@
 
 
 
-
+                    var anno_start_h = height/4;
 
 
                     var q1_box = svg.append("circle")
                                     .attr("cx",width/6)
-                                    .attr("cy",height/3-4)
+                                    .attr("cy",anno_start_h-4)
                                     .attr("r","14")
                                     .attr("fill","black");
 
                     var q1_num = svg.append("text")
                                     .attr("text-anchor","middle")
                                     .attr("class","q1_num")
-                                    .attr("y",height/3)
+                                    .attr("y",anno_start_h)
                                     .attr("x",width/6)
                                     .style("font-family","verdana")
                                     .style("font-size","12px")
@@ -282,7 +285,7 @@
                     var q1_text = svg.append("text")
                                     .attr("text-anchor","middle")
                                     .attr("class","q1_text")
-                                    .attr("y",height/3 - 35)
+                                    .attr("y",anno_start_h - 35)
                                     .attr("x",width/6)
                                     .style("font-family","verdana")
                                     .style("font-size","9px")
@@ -296,14 +299,14 @@
 
                     var q2_box = svg.append("circle")
                                     .attr("cx",width/2)
-                                    .attr("cy",height/3-4)
+                                    .attr("cy",anno_start_h-4)
                                     .attr("r","14")
                                     .attr("fill","black");
 
                     var q2_num = svg.append("text")
                                     .attr("text-anchor","middle")
                                     .attr("class","q2_num")
-                                    .attr("y",height/3)
+                                    .attr("y",anno_start_h)
                                     .attr("x",width/2)
                                     .style("font-family","verdana")
                                     .style("font-size","12px")
@@ -313,7 +316,7 @@
                     var q2_text = svg.append("text")
                                     .attr("text-anchor","middle")
                                     .attr("class","q2_text")
-                                    .attr("y",height/3 - 46)
+                                    .attr("y",anno_start_h - 46)
                                     .attr("x",width/2)
                                     .style("font-family","verdana")
                                     .style("font-size","9px")
@@ -331,14 +334,14 @@
 
                     var q3_box = svg.append("circle")
                                     .attr("cx",5*width/6)
-                                    .attr("cy",height/3-4)
+                                    .attr("cy",anno_start_h-4)
                                     .attr("r","14")
                                     .attr("fill","black");
 
                     var q3_num = svg.append("text")
                                     .attr("text-anchor","middle")
                                     .attr("class","q3_num")
-                                    .attr("y",height/3)
+                                    .attr("y",anno_start_h)
                                     .attr("x",5*width/6)
                                     .style("font-family","verdana")
                                     .style("font-size","12px")
@@ -349,7 +352,7 @@
                     var q3_text = svg.append("text")
                                     .attr("text-anchor","middle")
                                     .attr("class","q3_text")
-                                    .attr("y",height/3 - 46)
+                                    .attr("y",anno_start_h - 46)
                                     .attr("x",5*width/6)
                                     .style("font-family","verdana")
                                     .style("font-size","9px")
@@ -394,8 +397,10 @@
         // Get the data
         d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/health_oped/data/oped_data_selected.csv", function(d) {
             d.iphs_sc = +d.iphs_sc
-            d.iphs_sc_anm = +d.iphs_sc_anm
-            return d;
+            if(d.iphs_sc_anm=="") {d.iphs_sc_anm = null;}
+            else {d.iphs_sc_anm = +d.iphs_sc_anm;
+                return d;
+            }
         }, draw);
 
         </script>

@@ -26,7 +26,9 @@
                         .domain([0,360000]);
 
                     var iphs_hosp = data.map(function(value,index) { return value.iphs_hosp; });
+                        iphs_hosp = iphs_hosp.filter(function(n){ return n != undefined });
                     var iphs_hosp_gynec = data.map(function(value,index) { return value.iphs_hosp_gynec; });
+                        iphs_hosp_gynec = iphs_hosp_gynec.filter(function(n){ return n != undefined });
 
                     var thresholds_array = d3.range(0, 360000, 30000)
                     
@@ -50,13 +52,13 @@
 
                     var iphs_standard = 120000;
 
-                    var q1_iphs_hosp = data.filter(function(x){return x.iphs_hosp<=iphs_standard}).length;
-                    var q2_iphs_hosp = data.filter(function(x){return x.iphs_hosp>iphs_standard & x.iphs_hosp<=2*iphs_standard}).length;
-                    var q3_iphs_hosp = data.filter(function(x){return x.iphs_hosp>2*iphs_standard}).length;
+                    var q1_iphs_hosp = iphs_hosp.filter(function(x){return x <=iphs_standard}).length;
+                    var q2_iphs_hosp = iphs_hosp.filter(function(x){return x>iphs_standard & x<=2*iphs_standard}).length;
+                    var q3_iphs_hosp = iphs_hosp.filter(function(x){return x>2*iphs_standard}).length;
 
-                    var q1_iphs_hosp_gynec = data.filter(function(x){return x.iphs_hosp_gynec<=iphs_standard}).length;
-                    var q2_iphs_hosp_gynec = data.filter(function(x){return x.iphs_hosp_gynec>iphs_standard & x.iphs_hosp_gynec<=2*iphs_standard}).length;
-                    var q3_iphs_hosp_gynec = data.filter(function(x){return x.iphs_hosp_gynec>2*iphs_standard}).length;
+                    var q1_iphs_hosp_gynec = iphs_hosp_gynec.filter(function(x){return x<=iphs_standard}).length;
+                    var q2_iphs_hosp_gynec = iphs_hosp_gynec.filter(function(x){return x>iphs_standard & x<=2*iphs_standard}).length;
+                    var q3_iphs_hosp_gynec = iphs_hosp_gynec.filter(function(x){return x>2*iphs_standard}).length;
 
                      
 
@@ -412,8 +414,11 @@
         // Get the data
         d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/health_oped/data/oped_data_selected.csv", function(d) {
             d.iphs_hosp = +d.iphs_hosp
-            d.iphs_hosp_gynec = +d.iphs_hosp_gynec
-            return d;
+            if(d.iphs_hosp_gynec=="") {d.iphs_hosp_gynec = null;}
+            else {d.iphs_hosp_gynec = +d.iphs_hosp_gynec;
+                return d;
+            }
+            
         }, draw);
 
         </script>
