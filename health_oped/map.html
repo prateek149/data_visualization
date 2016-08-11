@@ -168,14 +168,14 @@
                     anno_text.append("text")
                         .attr("x",anno_x).attr("y",anno_y + dy)
                         .attr("font-size",10).style("color","black")
-                        .append("tspan").text("Percentage of Sub-Centres with an ANM:   ")
+                        .append("tspan").text("Percentage of Sub-Centres without an ANM:   ")
                         .append("tspan").text(per_anm_text).attr("font-size",12).style("fill",alt_color);
 
 
                     anno_text.append("text")
                         .attr("x",anno_x).attr("y",anno_y + 2*dy)
                         .attr("font-size",10).style("color","black")
-                        .append("tspan").text("Percentage of Hospitals with a Gynecologist:   ")
+                        .append("tspan").text("Percentage of Hospitals without a Gynecologist:   ")
                         .append("tspan").text(per_gynec_text).attr("font-size",12).style("fill",alt_color);
 
                     anno_text.append("text")
