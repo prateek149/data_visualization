@@ -141,13 +141,13 @@
                     svg.append("g")
                         .attr("class", "xaxis")
                         .attr("transform", "translate(0," + height + ")")
-                        .call(d3.axisBottom(x))
+                        .call(d3.axisBottom(x).tickSizeInner(3))
                         .style("font-size","7px");
 
                     svg.append("g")
                         .attr("class", "yaxis")
                         .attr("transform", "translate("+ width + ", 0)")
-                        .call(d3.axisRight(y))
+                        .call(d3.axisRight(y).tickSizeInner(3))
                         .style("font-size","7px");
 
                     var std_line = svg.append("line")
@@ -226,8 +226,8 @@
                     var xaxis_label = svg.append("text")
                                 .attr("text-anchor","middle")
                                 .attr("class","axis_label")
-                                .attr("x",width/2-10)
-                                .attr("y",height+30)
+                                .attr("x",width/2-15)
+                                .attr("y",height+23)
                                 .text("average population per facility by district")
                                 .style("padding","3px")
                                 .style("font-family","verdana")
@@ -238,14 +238,14 @@
                     var yaxis_label = svg.append("text")
                                 .attr("text-anchor","middle")
                                 .attr("class","axis_label")
-                                .attr("x",width+28)
+                                .attr("x",width+24)
                                 .attr("y",height/2)
                                 .text("number of districts")
                                 .style("padding","3px")
                                 .style("font-family","verdana")
                                 .style("font-size","9px")
                                 .style("color","black")
-                                .attr("transform", "rotate(-90,"+ (width+28) +","+ height/2 + ")");
+                                .attr("transform", "rotate(-90,"+ (width+24) +","+ height/2 + ")");
 
                     var std_text = svg.append("text")
                                     .attr("text-anchor","end")
@@ -388,8 +388,8 @@
                     var axis_text = svg.append("text")
                                     .attr("text-anchor","start")
                                     .attr("class","axis_text")
-                                    .attr("y", height + 22)
-                                    .attr("x", width - 23)
+                                    .attr("y", height + 19)
+                                    .attr("x", width - 24)
                                     .style("font-family","verdana")
                                     .style("font-size","7px")
                                     .style("fill","black")
