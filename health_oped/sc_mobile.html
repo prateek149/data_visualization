@@ -172,7 +172,7 @@
                                 .append("div")
                                 .attr("class","buttons")
                                 .style("position","fixed")
-                                .style("top","10px")
+                                .style("top","5px")
                                 .style("left","150px")
                                 .selectAll("div")
                                 .data(["Sub-Centre", "Sub-Centre with an ANM"])
@@ -193,7 +193,7 @@
                                 .style("padding","1px")
                                 .style("margin","0px")
                                 .style("font-family","verdana")
-                                .style("font-size","8px")
+                                .style("font-size","9px")
                                 .style("text-align","left");
 
 
@@ -202,9 +202,9 @@
                                 .append("div")
                                 .attr("class","title_text")
                                 .style("position","fixed")
-                                .style("top","16px")
+                                .style("top","12px")
                                 .style("left","20px")
-                                .text("Number of people per ")
+                                .text("Number of people per")
                                 .style("padding","1px")
                                 .style("padding-left","3px")
                                 .style("font-family","verdana")
@@ -293,7 +293,7 @@
                                     .style("font-size","7px")
                                     .style("fill","grey")
                             q1_text.append("tspan")
-                                .text("Number of district");
+                                .text("Number of districts");
                             q1_text.append("tspan")
                                 .text("complying with")
                                 .attr("dy","8")
@@ -360,25 +360,25 @@
                                     .style("fill","white")
                                     .text(q3_iphs_sc);
 
-                    var q2_text = svg.append("text")
+                    var q3_text = svg.append("text")
                                     .attr("text-anchor","middle")
-                                    .attr("class","q2_text")
+                                    .attr("class","q3_text")
                                     .attr("y",anno_start_h - 44)
                                     .attr("x",5*width/6)
                                     .style("font-family","verdana")
                                     .style("font-size","7px")
                                     .style("fill","grey")
-                            q2_text.append("tspan")
+                            q3_text.append("tspan")
                                 .text("Number of districts");
-                            q2_text.append("tspan")
+                            q3_text.append("tspan")
                                 .text("with avg. population")
                                 .attr("dy","8")
                                 .attr("x",5*width/6)
-                            q2_text.append("tspan")
-                                .text("per facility between")
+                            q3_text.append("tspan")
+                                .text("per facility")
                                 .attr("dy","8")
                                 .attr("x",5*width/6)
-                            q2_text.append("tspan")
+                            q3_text.append("tspan")
                                 .text("more than 10,000")
                                 .attr("dy","8")
                                 .attr("x",5*width/6);
