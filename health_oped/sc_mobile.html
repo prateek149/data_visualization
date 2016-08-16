@@ -11,10 +11,10 @@
 
             function draw(data) {
 
-                    var w = 600;
-                    var h = 450;
+                    var w = 290;
+                    var h = 300;
                     
-                    var m = w/12;
+                    var m = w/9;
 
                     var margin = {top: m, right: m, bottom: m, left: m},
                     width = w - margin.left - margin.right,
@@ -141,12 +141,14 @@
                     svg.append("g")
                         .attr("class", "xaxis")
                         .attr("transform", "translate(0," + height + ")")
-                        .call(d3.axisBottom(x));
+                        .call(d3.axisBottom(x))
+                        .style("font-size","7px");
 
                     svg.append("g")
                         .attr("class", "yaxis")
                         .attr("transform", "translate("+ width + ", 0)")
-                        .call(d3.axisRight(y));
+                        .call(d3.axisRight(y))
+                        .style("font-size","7px");
 
                     var std_line = svg.append("line")
                         .attr("x1",x(iphs_standard)-2)
@@ -170,8 +172,8 @@
                                 .append("div")
                                 .attr("class","buttons")
                                 .style("position","fixed")
-                                .style("top","30px")
-                                .style("left","195px")
+                                .style("top","10px")
+                                .style("left","150px")
                                 .selectAll("div")
                                 .data(["Sub-Centre", "Sub-Centre with an ANM"])
                                 .enter()
@@ -188,10 +190,10 @@
                                 .style("border-style","solid")
                                 .style("border-color","rgba(0,0,0,.3)")
                                 .style("border-width","1px")
-                                .style("padding","3px")
+                                .style("padding","1px")
                                 .style("margin","0px")
                                 .style("font-family","verdana")
-                                .style("font-size","11px")
+                                .style("font-size","8px")
                                 .style("text-align","left");
 
 
@@ -200,13 +202,13 @@
                                 .append("div")
                                 .attr("class","title_text")
                                 .style("position","fixed")
-                                .style("top","40px")
-                                .style("left","40px")
+                                .style("top","16px")
+                                .style("left","20px")
                                 .text("Number of people per ")
                                 .style("padding","1px")
                                 .style("padding-left","3px")
                                 .style("font-family","verdana")
-                                .style("font-size","13px")
+                                .style("font-size","11px")
                                 .style("color","black")
                                 .style("text-align","left");
 
@@ -214,36 +216,36 @@
                     var source_text = svg.append("text")
                                 .attr("text-anchor","start")
                                 .attr("class","source_text")
-                                .attr("x",-15)
-                                .attr("y",10)
+                                .attr("x",-17)
+                                .attr("y",-2)
                                 .text("Source: DLHS-4")
                                 .style("font-family","verdana")
-                                .style("font-size","7px")
+                                .style("font-size","6px")
                                 .style("color","black");
 
                     var xaxis_label = svg.append("text")
                                 .attr("text-anchor","middle")
                                 .attr("class","axis_label")
-                                .attr("x",width/2)
-                                .attr("y",height+35)
+                                .attr("x",width/2-10)
+                                .attr("y",height+30)
                                 .text("average population per facility by district")
                                 .style("padding","3px")
                                 .style("font-family","verdana")
-                                .style("font-size","11px")
+                                .style("font-size","9px")
                                 .style("color","black");
 
 
                     var yaxis_label = svg.append("text")
                                 .attr("text-anchor","middle")
                                 .attr("class","axis_label")
-                                .attr("x",width + 40)
+                                .attr("x",width+28)
                                 .attr("y",height/2)
                                 .text("number of districts")
                                 .style("padding","3px")
                                 .style("font-family","verdana")
-                                .style("font-size","11px")
+                                .style("font-size","9px")
                                 .style("color","black")
-                                .attr("transform", "rotate(-90,"+ (width+40) +","+ height/2 + ")");
+                                .attr("transform", "rotate(-90,"+ (width+28) +","+ height/2 + ")");
 
                     var std_text = svg.append("text")
                                     .attr("text-anchor","end")
@@ -251,7 +253,7 @@
                                     .attr("y",height/2.9)
                                     .attr("x",x(iphs_standard)-4)
                                     .style("font-family","verdana")
-                                    .style("font-size","11px")
+                                    .style("font-size","9px")
                                     .style("fill","black");
 
                             std_text.append("tspan")
@@ -269,7 +271,7 @@
                     var q1_box = svg.append("circle")
                                     .attr("cx",width/6)
                                     .attr("cy",anno_start_h-4)
-                                    .attr("r","14")
+                                    .attr("r","10")
                                     .attr("fill","black");
 
                     var q1_num = svg.append("text")
@@ -278,7 +280,7 @@
                                     .attr("y",anno_start_h)
                                     .attr("x",width/6)
                                     .style("font-family","verdana")
-                                    .style("font-size","12px")
+                                    .style("font-size","9px")
                                     .style("fill","white")
                                     .text(q1_iphs_sc);
 
@@ -288,19 +290,23 @@
                                     .attr("y",anno_start_h - 35)
                                     .attr("x",width/6)
                                     .style("font-family","verdana")
-                                    .style("font-size","9px")
+                                    .style("font-size","7px")
                                     .style("fill","grey")
                             q1_text.append("tspan")
                                 .text("Number of district");
                             q1_text.append("tspan")
-                                .text("complying with IPHS standards")
-                                .attr("dy","11")
+                                .text("complying with")
+                                .attr("dy","8")
+                                .attr("x",width/6)
+                            q1_text.append("tspan")
+                                .text("IPHS standards")
+                                .attr("dy","8")
                                 .attr("x",width/6);
 
                     var q2_box = svg.append("circle")
                                     .attr("cx",width/2)
                                     .attr("cy",anno_start_h-4)
-                                    .attr("r","14")
+                                    .attr("r","10")
                                     .attr("fill","black");
 
                     var q2_num = svg.append("text")
@@ -309,33 +315,39 @@
                                     .attr("y",anno_start_h)
                                     .attr("x",width/2)
                                     .style("font-family","verdana")
-                                    .style("font-size","12px")
+                                    .style("font-size","9px")
                                     .style("fill","white")
                                     .text(q2_iphs_sc);
 
                     var q2_text = svg.append("text")
                                     .attr("text-anchor","middle")
                                     .attr("class","q2_text")
-                                    .attr("y",anno_start_h - 46)
+                                    .attr("y",anno_start_h - 44)
                                     .attr("x",width/2)
                                     .style("font-family","verdana")
-                                    .style("font-size","9px")
+                                    .style("font-size","7px")
                                     .style("fill","grey")
                             q2_text.append("tspan")
-                                .text("Number of districts with average");
+                                .text("Number of districts");
                             q2_text.append("tspan")
-                                .text("population per facility")
-                                .attr("dy","11")
-                                .attr("x",width/2);
+                                .text("with avg. population")
+                                .attr("dy","8")
+                                .attr("x",width/2)
                             q2_text.append("tspan")
-                                .text("between 5000 & 10,000")
-                                .attr("dy","11")
+                                .text("per facility between")
+                                .attr("dy","8")
+                                .attr("x",width/2)
+                            q2_text.append("tspan")
+                                .text("5000 & 10,000")
+                                .attr("dy","8")
                                 .attr("x",width/2);
+
+
 
                     var q3_box = svg.append("circle")
                                     .attr("cx",5*width/6)
                                     .attr("cy",anno_start_h-4)
-                                    .attr("r","14")
+                                    .attr("r","10")
                                     .attr("fill","black");
 
                     var q3_num = svg.append("text")
@@ -344,38 +356,42 @@
                                     .attr("y",anno_start_h)
                                     .attr("x",5*width/6)
                                     .style("font-family","verdana")
-                                    .style("font-size","12px")
+                                    .style("font-size","9px")
                                     .style("fill","white")
                                     .text(q3_iphs_sc);
 
-
-                    var q3_text = svg.append("text")
+                    var q2_text = svg.append("text")
                                     .attr("text-anchor","middle")
-                                    .attr("class","q3_text")
-                                    .attr("y",anno_start_h - 46)
+                                    .attr("class","q2_text")
+                                    .attr("y",anno_start_h - 44)
                                     .attr("x",5*width/6)
                                     .style("font-family","verdana")
-                                    .style("font-size","9px")
+                                    .style("font-size","7px")
                                     .style("fill","grey")
-                            q3_text.append("tspan")
-                                .text("Number of districts with average");
-                            q3_text.append("tspan")
-                                .text("population per facility")
-                                .attr("dy","11")
-                                .attr("x",5*width/6);
-                            q3_text.append("tspan")
+                            q2_text.append("tspan")
+                                .text("Number of districts");
+                            q2_text.append("tspan")
+                                .text("with avg. population")
+                                .attr("dy","8")
+                                .attr("x",5*width/6)
+                            q2_text.append("tspan")
+                                .text("per facility between")
+                                .attr("dy","8")
+                                .attr("x",5*width/6)
+                            q2_text.append("tspan")
                                 .text("more than 10,000")
-                                .attr("dy","11")
+                                .attr("dy","8")
                                 .attr("x",5*width/6);
+
 
 
                     var axis_text = svg.append("text")
                                     .attr("text-anchor","start")
                                     .attr("class","axis_text")
-                                    .attr("y", height + 27)
-                                    .attr("x", width - 46)
+                                    .attr("y", height + 22)
+                                    .attr("x", width - 23)
                                     .style("font-family","verdana")
-                                    .style("font-size","9px")
+                                    .style("font-size","7px")
                                     .style("fill","black")
                                     .text("and higher")
 /*************************************************************************************************/
