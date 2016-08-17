@@ -242,10 +242,10 @@
 
 
                         svg.selectAll("path")
+                               .transition()
+                               .duration(500)
                                .attr("fill", function(d) {
-                                  return(color_fill(d.properties[fill_var])); })
-                               .on("mouseover", map_mouseover)
-                               .on("mouseout", map_mouseout);
+                                  return(color_fill(d.properties[fill_var])); });
 
                         function legend_cat_text(d,i) {
                             if(i == 0) { return "Less than " + text_format(thresholds[0]);}
