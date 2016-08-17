@@ -41,42 +41,59 @@
 /*************************************************************************************************/
 /* Generating arrays anf quantile thresholds */
 
+                var per_anm = geo_data.features.map(function(d) { 
+                    return d.properties.dlhs4_sc_per_anm;
+                });
+                  per_anm = per_anm.filter(function(n){ return n != undefined });
+                  per_anm = per_anm.sort(d3.descending);
+                  var per_anm_q = [d3.quantile(per_anm, 0.75),d3.quantile(per_anm, 0.5),d3.quantile(per_anm, 0.25)];
 
+                var per_gynec = geo_data.features.map(function(d) { 
+                    return d.properties.dlhs4_hosp_per_gynec;
+                });
+                  per_gynec = per_gynec.filter(function(n){ return n != undefined });
+                  per_gynec = per_gynec.sort(d3.descending);
+                  var per_gynec_q = [d3.quantile(per_gynec, 0.75),d3.quantile(per_gynec, 0.5),d3.quantile(per_gynec, 0.25)];
 
-                var per_anm_thresholds = [.05,0.1,.2];
-                var per_gynec_thresholds = [0.4,0.6,0.8];
-                var iphs_anm_thresholds = [5000,10000,15000];
-                var iphs_gynec_thresholds = [120000,240000,360000];
+                var iphs_anm = geo_data.features.map(function(d) { 
+                    return d.properties.iphs_sc_anm;
+                });
+                  iphs_anm = iphs_anm.filter(function(n){ return n != undefined });
+                  iphs_anm = iphs_anm.sort(d3.descending);
+                  var iphs_anm_q = [d3.quantile(iphs_anm, 0.75),d3.quantile(iphs_anm, 0.5),d3.quantile(iphs_anm, 0.25)];
+
+                var iphs_gynec = geo_data.features.map(function(d) { 
+                    return d.properties.iphs_hosp_gynec;
+                });
+                  iphs_gynec = iphs_gynec.filter(function(n){ return n != undefined });
+                  iphs_gynec = iphs_gynec.sort(d3.descending);
+                  var iphs_gynec_q = [d3.quantile(iphs_gynec, 0.75),d3.quantile(iphs_gynec, 0.5),d3.quantile(iphs_gynec, 0.25)];
 
 /*************************************************************************************************/
-
-                var thresholds = per_anm_thresholds;
+                var data_array = per_anm;
+                var data_array_q = per_anm_q;
                 var fill_var = "dlhs4_sc_per_anm";
 
                 var color_array = ['#dedede', '#aaaaaa', '#737373', '#323232'];
-                var na_color = "#cc9955";
+                var na_color = "#fc9e85";
                 var color_array_na = color_array.concat(na_color);
                 
 
+                var scale = d3.scaleQuantile()
+                  .domain(data_array)
+                  .range(color_array);
+
                 function color_fill(d) {
-                    
-                    if (d != undefined) { 
-                      if(d < thresholds[0]) { return color_array_na[0];}
-                      if(d >= thresholds[0] && d < thresholds[1]) { return color_array_na[1];}
-                      if(d >= thresholds[1] && d < thresholds[2]) { return color_array_na[2];}
-                      if(d >= thresholds[2]) { return color_array_na[3];}
-                    }
+                    if (d != undefined) { return scale(d);}
                     else { return na_color }
                 };
 
-    
-
                 function legend_cat_text(d,i) {
-                    var text_format = d3.format(",.0%");
-                    if(i == 0) { return "Less than " + text_format(thresholds[0]);}
-                    if(i == 1) { return text_format(thresholds[0]) + " to " + text_format(thresholds[1]);}
-                    if(i == 2) { return text_format(thresholds[1]) + " to " + text_format(thresholds[2]);}
-                    if(i == 3) { return text_format(thresholds[2]) + " and higher";}
+                    var text_format = d3.format(",.1%");
+                    if(i == 0) { return "Less than " + text_format(data_array_q[0]);}
+                    if(i == 1) { return text_format(data_array_q[0]) + " to " + text_format(data_array_q[1]);}
+                    if(i == 2) { return text_format(data_array_q[1]) + " to " + text_format(data_array_q[2]);}
+                    if(i == 3) { return text_format(data_array_q[2]) + " and higher";}
                     if(i == 4) { return "No Data";}
                 };
 
@@ -184,62 +201,65 @@
 
 
                   function button_mouseover (d) { 
-
-
-
-                    var thresholds = per_anm_thresholds;s
-
-                
                       
                       if (d == "% Sub-Centre without ANM")
                         {
-                           thresholds = per_anm_thresholds;
+                           data_array = per_anm;
+                           data_array_q =  per_anm_q;
                            fill_var = "dlhs4_sc_per_anm";
                            var legend_head_text = "% of Facilities";
                            var text_format = d3.format(",.1%");
-            
+                           legend.selectAll("text.cat_text")
+                                .attr("fill","black");
+                           legend.selectAll("text#q0")
+                                .attr("fill","#ffffff");
                         };
 
                       if (d == "% Hospital without Gynecologist")
                         {
-                           thresholds = per_gynec_thresholds;
+                           data_array = per_gynec;
+                           data_array_q =  per_gynec_q;
                            fill_var = "dlhs4_hosp_per_gynec";
                            var legend_head_text = "% of Facilities";
-                           var text_format = d3.format(",.0%");
-      
+                           var text_format = d3.format(",.1%");
+                           legend.selectAll("text.cat_text")
+                                .attr("fill","black");
                         };
 
                       if (d == "Population per Sub-Centre with ANM")
                         {
-                           thresholds = iphs_anm_thresholds;
+                           data_array = iphs_anm;
+                           data_array_q =  iphs_anm_q;
                            fill_var = "iphs_sc_anm";
                            var legend_head_text = "Population per Facility";
                            var text_format = d3.format(",.0f");
-
+                           legend.selectAll("text.cat_text")
+                                .attr("fill","black");
                         };
 
                       if (d == "Population per Hospital with Gynecologist")
                         {
-                           thresholds = iphs_gynec_thresholds;
+                           data_array = iphs_gynec;
+                           data_array_q =  iphs_gynec_q;
                            fill_var = "iphs_hosp_gynec";
                            var legend_head_text = "Population per Facility";
                            var text_format = d3.format(",.0f");
-      
+                           legend.selectAll("text.cat_text")
+                                .attr("fill","black");
+                           legend.selectAll("text#q2")
+                                .attr("fill","#ffffff");
                         };
 
-                      
+                  
 
-                      function color_fill(d) {
-                    
-                          if (d != undefined) { 
-                            if(d < thresholds[0]) { return color_array_na[0];}
-                            if(d >= thresholds[0] && d < thresholds[1]) { return color_array_na[1];}
-                            if(d >= thresholds[1] && d < thresholds[2]) { return color_array_na[2];}
-                            if(d >= thresholds[2]) { return color_array_na[3];}
-                          }
-                          else { return na_color }
-                      };
+                        var scale = d3.scaleQuantile()
+                          .domain(data_array)
+                          .range(color_array);
 
+                        function color_fill(d) {
+                            if (d != undefined) { return scale(d);}
+                            else { return na_color }
+                        };
 
                         svg.selectAll("path")
                                .attr("fill", function(d) {
@@ -248,10 +268,10 @@
                                .on("mouseout", map_mouseout);
 
                         function legend_cat_text(d,i) {
-                            if(i == 0) { return "Less than " + text_format(thresholds[0]);}
-                            if(i == 1) { return text_format(thresholds[0]) + " to " + text_format(thresholds[1]);}
-                            if(i == 2) { return text_format(thresholds[1]) + " to " + text_format(thresholds[2]);}
-                            if(i == 3) { return text_format(thresholds[2]) + " and higher";}
+                            if(i == 0) { return "Less than " + text_format(data_array_q[0]);}
+                            if(i == 1) { return text_format(data_array_q[0]) + " to " + text_format(data_array_q[1]);}
+                            if(i == 2) { return text_format(data_array_q[1]) + " to " + text_format(data_array_q[2]);}
+                            if(i == 3) { return text_format(data_array_q[2]) + " and higher";}
                             if(i == 4) { return "No Data";}
                         };
 
@@ -332,7 +352,8 @@
                         .text(function(d,i){
                           return legend_cat_text(d,i);});
 
-
+                  legend.selectAll("text#q0")
+                        .attr("fill","#ffffff");
 
                   
 
