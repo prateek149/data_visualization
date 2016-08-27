@@ -13,7 +13,7 @@
 
                     var w = 300;
                     var h = 300;
-                    
+
                     var m = w/9;
 
                     var margin = {top: m, right: m, bottom: m, left: m},
@@ -23,43 +23,42 @@
 
                     var x = d3.scaleLinear()
                         .rangeRound([0, width])
-                        .domain([0,15000]);
-                        
-                    var iphs_sc = data.map(function(value,index) { return value.iphs_sc; });
-                        iphs_sc = iphs_sc.filter(function(n){ return n != undefined });
-                    var iphs_sc_anm = data.map(function(value,index) { return value.iphs_sc_anm; });
-                        iphs_sc_anm = iphs_sc_anm.filter(function(n){ return n != undefined });
+                        .domain([0,360000]);
+
+                    var iphs_hosp = data.map(function(value,index) { return value.iphs_hosp; });
+                        iphs_hosp = iphs_hosp.filter(function(n){ return n != undefined });
+                    var iphs_hosp_gynec = data.map(function(value,index) { return value.iphs_hosp_gynec; });
+                        iphs_hosp_gynec = iphs_hosp_gynec.filter(function(n){ return n != undefined });
+
+                    var thresholds_array = d3.range(0, 360000, 30000)
                     
-                    var thresholds_array = d3.range(0, 15000, 1000)
-                    
-                    var bins_sc = d3.histogram()
+                    var bins_hosp = d3.histogram()
                         .domain(x.domain())
                         .thresholds(thresholds_array)
-                        (iphs_sc);
+                        (iphs_hosp);
 
-                    var bins_sc_anm = d3.histogram()
+                    var bins_hosp_gynec = d3.histogram()
                         .domain(x.domain())
                         .thresholds(thresholds_array)
-                        (iphs_sc_anm);
+                        (iphs_hosp_gynec);
 
-                    var bins = bins_sc
+                    var bins = bins_hosp
 
-                    var max = d3.max([d3.max(bins_sc, function(d) { return d.length; }),d3.max(bins_sc_anm, function(d) { return d.length; })])
-                    max = 110; /* manual overide for y range*/
+                    var max = d3.max([d3.max(bins_hosp, function(d) { return d.length; }),d3.max(bins_hosp_gynec, function(d) { return d.length; })])
 
                     var y = d3.scaleLinear()
                         .domain([0, max])
                         .range([height, 0]);
 
-                    var iphs_standard = 5000;
+                    var iphs_standard = 120000;
 
-                    var q1_iphs_sc = iphs_sc.filter(function(x){return x <= iphs_standard}).length;
-                    var q2_iphs_sc = iphs_sc.filter(function(x){return x > iphs_standard & x<=2*iphs_standard}).length;
-                    var q3_iphs_sc = iphs_sc.filter(function(x){return x > 2*iphs_standard}).length;
+                    var q1_iphs_hosp = iphs_hosp.filter(function(x){return x <=iphs_standard}).length;
+                    var q2_iphs_hosp = iphs_hosp.filter(function(x){return x>iphs_standard & x<=2*iphs_standard}).length;
+                    var q3_iphs_hosp = iphs_hosp.filter(function(x){return x>2*iphs_standard}).length;
 
-                    var q1_iphs_sc_anm = iphs_sc_anm.filter(function(x){return x<=iphs_standard}).length;
-                    var q2_iphs_sc_anm = iphs_sc_anm.filter(function(x){return x>iphs_standard & x<=2*iphs_standard}).length;
-                    var q3_iphs_sc_anm = iphs_sc_anm.filter(function(x){return x>2*iphs_standard}).length;
+                    var q1_iphs_hosp_gynec = iphs_hosp_gynec.filter(function(x){return x<=iphs_standard}).length;
+                    var q2_iphs_hosp_gynec = iphs_hosp_gynec.filter(function(x){return x>iphs_standard & x<=2*iphs_standard}).length;
+                    var q3_iphs_hosp_gynec = iphs_hosp_gynec.filter(function(x){return x>2*iphs_standard}).length;
 
                      
 
@@ -71,17 +70,17 @@
 
                     function button_click (d) { 
 
-                        if (d == "Sub-Centre") { 
-                            var bins = bins_sc;
-                            var q1 = q1_iphs_sc;
-                            var q2 = q2_iphs_sc;
-                            var q3 = q3_iphs_sc;
+                        if (d == "Hospital") { 
+                            var bins = bins_hosp;
+                            var q1 = q1_iphs_hosp;
+                            var q2 = q2_iphs_hosp;
+                            var q3 = q3_iphs_hosp;
                         };
-                        if (d == "Sub-Centre with an ANM") { 
-                            var bins = bins_sc_anm;
-                            var q1 = q1_iphs_sc_anm;
-                            var q2 = q2_iphs_sc_anm;
-                            var q3 = q3_iphs_sc_anm;
+                        if (d == "Hospital with a Gynecologist") { 
+                            var bins = bins_hosp_gynec;
+                            var q1 = q1_iphs_hosp_gynec;
+                            var q2 = q2_iphs_hosp_gynec;
+                            var q3 = q3_iphs_hosp_gynec;
                         };
 
                         var bar = svg.selectAll(".bar")
@@ -141,7 +140,7 @@
                     svg.append("g")
                         .attr("class", "xaxis")
                         .attr("transform", "translate(0," + height + ")")
-                        .call(d3.axisBottom(x).tickSizeInner(3))
+                        .call(d3.axisBottom(x).tickSizeInner(3).tickValues([0, 60000, 120000, 180000, 240000, 300000, 360000]))
                         .style("font-size","7px");
 
                     svg.append("g")
@@ -175,17 +174,17 @@
                                 .style("top","5px")
                                 .style("left","150px")
                                 .selectAll("div")
-                                .data(["Sub-Centre", "Sub-Centre with an ANM"])
+                                .data(["Hospital", "Hospital with a Gynecologist"])
                                 .enter()
                                 .append("div")
                                 .text(function(d) { return d;})
                                 .style("color",function(d) {
-                                    if(d=="Sub-Centre") {return "white";}
-                                    if(d=="Sub-Centre with an ANM") {return "black";}
+                                    if(d=="Hospital") {return "white";}
+                                    if(d=="Hospital with a Gynecologist") {return "black";}
                                 })
                                 .style("background-color",function(d) {
-                                    if(d=="Sub-Centre") {return "black";}
-                                    if(d=="Sub-Centre with an ANM") {return "white";}
+                                    if(d=="Hospital") {return "black";}
+                                    if(d=="Hospital with a Gynecologist") {return "white";}
                                 })
                                 .style("border-style","solid")
                                 .style("border-color","rgba(0,0,0,.3)")
@@ -204,7 +203,7 @@
                                 .style("position","fixed")
                                 .style("top","12px")
                                 .style("left","20px")
-                                .text("Number of people per")
+                                .text("Number of people per ")
                                 .style("padding","1px")
                                 .style("padding-left","3px")
                                 .style("font-family","verdana")
@@ -212,11 +211,30 @@
                                 .style("color","black")
                                 .style("text-align","left");
 
+                    var explainer_text = svg.append("text")
+                                .attr("text-anchor","start")
+                                .attr("class","explainer_text")
+                                .attr("x",-18)
+                                .attr("y",-7)
+                                .style("font-family","verdana")
+                                .style("font-size","6px")
+                                .style("color","black");
+                    explainer_text.append("tspan")
+                        .text("Hospital includes District Hospitals,");
+                    explainer_text.append("tspan")
+                        .text("Sub-District Hospitals and")
+                        .attr("dy","7")
+                        .attr("x",-18);
+                    explainer_text.append("tspan")
+                        .text("Community Health Centres")
+                        .attr("dy","7")
+                        .attr("x",-18);
+
                     var source_text = svg.append("text")
                                 .attr("text-anchor","start")
                                 .attr("class","source_text")
-                                .attr("x",-17)
-                                .attr("y",-7)
+                                .attr("x",-18)
+                                .attr("y",16)
                                 .text("Source: DLHS-4")
                                 .style("font-family","verdana")
                                 .style("font-size","6px")
@@ -237,19 +255,19 @@
                     var yaxis_label = svg.append("text")
                                 .attr("text-anchor","middle")
                                 .attr("class","axis_label")
-                                .attr("x",width+24)
+                                .attr("x",width + 28)
                                 .attr("y",height/2)
                                 .text("number of districts")
                                 .style("padding","3px")
                                 .style("font-family","verdana")
                                 .style("font-size","9px")
                                 .style("color","black")
-                                .attr("transform", "rotate(-90,"+ (width+24) +","+ height/2 + ")");
+                                .attr("transform", "rotate(-90,"+ (width+28) +","+ height/2 + ")");
 
                     var std_text = svg.append("text")
                                     .attr("text-anchor","end")
                                     .attr("class","std_text")
-                                    .attr("y",height/2.9)
+                                    .attr("y",height/2 + 15)
                                     .attr("x",x(iphs_standard)-4)
                                     .style("font-family","verdana")
                                     .style("font-size","9px")
@@ -258,13 +276,13 @@
                             std_text.append("tspan")
                                 .text("IPHS Standard is");
                             std_text.append("tspan")
-                                .text("5000 or less")
+                                .text("120,000 or less")
                                 .attr("dy","11")
                                 .attr("x",x(iphs_standard)-4);
 
 
 
-                    var anno_start_h = height/4;
+                    var anno_start_h = height/3;
 
 
                     var q1_box = svg.append("circle")
@@ -281,7 +299,7 @@
                                     .style("font-family","verdana")
                                     .style("font-size","9px")
                                     .style("fill","white")
-                                    .text(q1_iphs_sc);
+                                    .text(q1_iphs_hosp);
 
                     var q1_text = svg.append("text")
                                     .attr("text-anchor","middle")
@@ -292,11 +310,11 @@
                                     .style("font-size","7px")
                                     .style("fill","grey")
                             q1_text.append("tspan")
-                                .text("Number of districts");
+                                .text("Number of district");
                             q1_text.append("tspan")
                                 .text("complying with")
                                 .attr("dy","8")
-                                .attr("x",width/6)
+                                .attr("x",width/6);
                             q1_text.append("tspan")
                                 .text("IPHS standards")
                                 .attr("dy","8")
@@ -316,12 +334,12 @@
                                     .style("font-family","verdana")
                                     .style("font-size","9px")
                                     .style("fill","white")
-                                    .text(q2_iphs_sc);
+                                    .text(q2_iphs_hosp);
 
                     var q2_text = svg.append("text")
                                     .attr("text-anchor","middle")
                                     .attr("class","q2_text")
-                                    .attr("y",anno_start_h - 44)
+                                    .attr("y",anno_start_h - 43)
                                     .attr("x",width/2)
                                     .style("font-family","verdana")
                                     .style("font-size","7px")
@@ -329,19 +347,17 @@
                             q2_text.append("tspan")
                                 .text("Number of districts");
                             q2_text.append("tspan")
-                                .text("with avg. population")
+                                .text("with avg population")
                                 .attr("dy","8")
-                                .attr("x",width/2)
+                                .attr("x",width/2);
                             q2_text.append("tspan")
                                 .text("per facility between")
                                 .attr("dy","8")
-                                .attr("x",width/2)
+                                .attr("x",width/2);
                             q2_text.append("tspan")
-                                .text("5000 & 10,000")
+                                .text("120,000 & 240,000")
                                 .attr("dy","8")
                                 .attr("x",width/2);
-
-
 
                     var q3_box = svg.append("circle")
                                     .attr("cx",5*width/6)
@@ -357,12 +373,13 @@
                                     .style("font-family","verdana")
                                     .style("font-size","9px")
                                     .style("fill","white")
-                                    .text(q3_iphs_sc);
+                                    .text(q3_iphs_hosp);
+
 
                     var q3_text = svg.append("text")
                                     .attr("text-anchor","middle")
                                     .attr("class","q3_text")
-                                    .attr("y",anno_start_h - 44)
+                                    .attr("y",anno_start_h - 43)
                                     .attr("x",5*width/6)
                                     .style("font-family","verdana")
                                     .style("font-size","7px")
@@ -370,18 +387,17 @@
                             q3_text.append("tspan")
                                 .text("Number of districts");
                             q3_text.append("tspan")
-                                .text("with avg. population")
-                                .attr("dy","8")
-                                .attr("x",5*width/6)
-                            q3_text.append("tspan")
-                                .text("per facility")
-                                .attr("dy","8")
-                                .attr("x",5*width/6)
-                            q3_text.append("tspan")
-                                .text("more than 10,000")
+                                .text(" with avg population")
                                 .attr("dy","8")
                                 .attr("x",5*width/6);
-
+                            q3_text.append("tspan")
+                                .text("per facility more")
+                                .attr("dy","8")
+                                .attr("x",5*width/6);
+                            q3_text.append("tspan")
+                                .text("than 240,000")
+                                .attr("dy","8")
+                                .attr("x",5*width/6);
 
 
                     var axis_text = svg.append("text")
@@ -411,11 +427,12 @@
         <script type="text/javascript">
         // Get the data
         d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/health_oped/data/oped_data_selected.csv", function(d) {
-            d.iphs_sc = +d.iphs_sc
-            if(d.iphs_sc_anm=="") {d.iphs_sc_anm = null;}
-            else {d.iphs_sc_anm = +d.iphs_sc_anm;
+            d.iphs_hosp = +d.iphs_hosp
+            if(d.iphs_hosp_gynec=="") {d.iphs_hosp_gynec = null;}
+            else {d.iphs_hosp_gynec = +d.iphs_hosp_gynec;
                 return d;
             }
+            
         }, draw);
 
         </script>
