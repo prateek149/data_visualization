@@ -3,7 +3,6 @@
 <head>
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.min.js"></script>
-        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
         <style> /* set the CSS */
         </style>
 
@@ -24,7 +23,7 @@
                     var x = d3.scaleLinear()
                         .rangeRound([0, width])
                         .domain([0,15000]);
-                        
+
                     var iphs_sc = data.map(function(value,index) { return value.iphs_sc; });
                         iphs_sc = iphs_sc.filter(function(n){ return n != undefined });
                     var iphs_sc_anm = data.map(function(value,index) { return value.iphs_sc_anm; });
@@ -41,7 +40,7 @@
                         .domain(x.domain())
                         .thresholds(thresholds_array)
                         (iphs_sc_anm);
-
+  
                     var bins = bins_sc
 
                     var max = d3.max([d3.max(bins_sc, function(d) { return d.length; }),d3.max(bins_sc_anm, function(d) { return d.length; })])
