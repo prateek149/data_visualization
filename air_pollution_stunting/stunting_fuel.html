@@ -3,7 +3,18 @@
 <head>
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.min.js"></script>
-        <style> /* set the CSS */
+        <style>
+            div.tooltip {
+              position: absolute;
+              text-align: center;
+              /*width: 60px;*/
+              /*height: 28px;*/
+              padding: 2px;
+              font: 12px sans-serif;
+              background: lightsteelblue;
+              border: 0px;
+              border-radius: 2px;
+            }
         </style>
 
         <script type="text/javascript">
@@ -13,7 +24,7 @@
                     var w = 500;
                     var h = 400;
 
-                    var m = 20;
+                    var m = 30;
 
                     var margin = {top: m, right: m, bottom: m, left: m},
                     width = w - margin.left - margin.right,
@@ -24,14 +35,13 @@
                         .paddingInner(0.2);
 
                     var x1 = d3.scaleBand()
-                        .padding(0.1);
-
+                        .padding(0.15);
 
                     var y = d3.scaleLinear()
                         .rangeRound([height, 0]);
 
                     var z = d3.scaleOrdinal()
-                        .range(["#98abc5","#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+                        .range(["#555a74", "#a0543c", "#ff8c00"]);
 
                     var keys = data.columns.slice(1);
 
@@ -49,11 +59,9 @@
 /*************************************************************************************************/
 /* Add Elements */
 
-
-                    d3.select("body")
-                    .append("h2")
-                    .text("Stunting by Fuel");
-
+                    var div = d3.select("body").append("div")
+                        .attr("class", "tooltip")
+                        .style("opacity", 0);
 
                     var svg = d3.select("body").append("svg")
                         .attr("width", width + margin.left + margin.right)
@@ -61,9 +69,18 @@
                         .append("g")
                         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                    var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                    svg.append("g")
+                        .append("text")
+                        .attr("x", 10)
+                        .attr("y", 13)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","18px")
+                        .text("Percentage Stunting by Fuel Type");
 
-                    g.append("g")
+                    svg.append("g")
                         .selectAll("g")
                         .data(data)
                         .enter().append("g")
@@ -75,46 +92,47 @@
                           .attr("y", function(d) { return y(d.value); })
                           .attr("width", x1.bandwidth())
                           .attr("height", function(d) { return height - y(d.value); })
-                          .attr("fill", function(d) { return z(d.key); });
+                          .attr("fill", function(d) { return z(d.key); })
+                          .on("mouseover", function(d) {
+                                div.transition()
+                                .duration(200)
+                                .style("opacity", .9);
+                                div.html(d.value)     
+                                    .style("left", (d3.event.pageX) + "px")             
+                                    .style("top", (d3.event.pageY) + "px");
+                                });
 
 
-                    g.append("g")
-                      .attr("class", "axis")
-                      .attr("transform", "translate(0," + height + ")")
-                      .call(d3.axisBottom(x0));
+                    svg.append("g")
+                        .attr("class", "axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(d3.axisBottom(x0));
 
-                  g.append("g")
-                      .attr("class", "axis")
-                      .call(d3.axisLeft(y).ticks(null, "s"))
-                    .append("text")
-                      .attr("x", 5)
-                      .attr("y", y(y.ticks().pop()) + 0.5)
-                      .attr("dy", "0.32em")
-                      .attr("fill", "#000")
-                      .attr("font-weight", "bold")
-                      .attr("text-anchor", "start")
-                      .text("Percentage of Children");
+                    svg.append("g")
+                        .attr("class", "axis")
+                        .call(d3.axisLeft(y).tickFormat(function(d) { return d + "%"; }).ticks(5));
 
-                  var legend = g.append("g")
-                      .attr("font-family", "sans-serif")
-                      .attr("font-size", 10)
-                      .attr("text-anchor", "end")
-                    .selectAll("g")
-                    .data(keys.slice().reverse())
-                    .enter().append("g")
-                      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+                    var legend = svg.append("g")
+                        .attr("font-family", "Helvetica")
+                        .attr("font-size", "11px")
+                        .attr("text-anchor", "end")
+                        .selectAll("g")
+                        .data(keys)
+                        .enter().append("g")
+                        .attr("transform", function(d, i) { return "translate(0," + (22 + i * 20) + ")"; });
 
-                  legend.append("rect")
-                      .attr("x", width - 19)
-                      .attr("width", 19)
-                      .attr("height", 19)
-                      .attr("fill", z);
+                    legend.append("rect")
+                        .attr("x", 10)
+                        .attr("width", 20)
+                        .attr("height", 15)
+                        .attr("fill", z);
 
-                  legend.append("text")
-                      .attr("x", width - 24)
-                      .attr("y", 9.5)
-                      .attr("dy", "0.32em")
-                      .text(function(d) { return d; });
+                    legend.append("text")
+                        .attr("x", 35)
+                        .attr("y", 9)
+                        .attr("dy", "0.32em")
+                        .attr("text-anchor","start")
+                        .text(function(d) { return d; });
                         
 
             };
