@@ -15,6 +15,37 @@
               border: 0px;
               border-radius: 2px;
             }
+
+            div.buttons {
+                position: fixed;
+                top: 30px;
+                left: 400px;
+            } 
+
+            div.buttons div {
+                background-color: rgba(220,220,220,.3);
+                border-style : solid;
+                border-color: rgba(0,0,0,.3);
+                border-width: 1px;
+                padding: 0px;
+                padding-left: 3px;
+                width: 85px;
+                overflow: hidden;
+                margin: 1px;
+                font-family: verdana;
+                font-size: 9px;
+                color: black;
+                text-align: left;
+            }
+
+            .countries {
+                stroke-width: 1;
+
+            }
+
+            .countries #INDIA {
+                stroke-width: 3;
+            }
         </style>
 
         <script type="text/javascript">
@@ -30,121 +61,325 @@
                     width = w - margin.left - margin.right,
                     height = h - margin.top - margin.bottom;
 
-                    var x0 = d3.scaleBand()
-                        .rangeRound([0, width])
-                        .paddingInner(0.2);
+                    var countries = ["INDIA","BRAZIL","CHINA","SOUTH AFRICA","PAKISTAN","BANGLADESH","INDONESIA","SRI LANKA","AFGHANISTAN"];
 
-                    var x1 = d3.scaleBand()
-                        .padding(0.15);
+                    var dataFiltered = data.filter(function (d) {
+                        return countries.indexOf(d.country)>-1 })
 
+                    
+
+                    var x = d3.scaleTime()
+                        .range([0, width])
+                        .domain(d3.extent(dataFiltered, function(d) { return d.year; }));
+                    
+                    /*var y = d3.scaleLinear()
+                        .range([height, 0])
+                        .domain([0, d3.max(dataFiltered, function(d) { return d.stunting; })]);*/
                     var y = d3.scaleLinear()
-                        .rangeRound([height, 0]);
+                        .range([height, 0])
+                        .domain([0, 80]);
 
-                    var z = d3.scaleOrdinal()
-                        .range(["#555a74", "#a0543c", "#ff8c00"]);
+                    var color2 = d3.scaleOrdinal(d3.schemeCategory10);
+                    function color(d) {
+                        if (d=="INDIA") {return "#000000";}
+                        return color2(d);
+                    }
 
-                    var keys = data.columns.slice(1);
+                    var valueline = d3.line()
+                        .x(function(d) { return x(d[0]); })
+                        .y(function(d) { return y(d[1]); });
 
-                    x0.domain(data.map(function(d) { return d.fuel_type; }));
 
-                    x1.domain(keys).rangeRound([0, x0.bandwidth()]);
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Data preparation */
 
-                    var y_max = d3.max(data, function(d) { return d3.max(keys, function(key) { return +d[key]; }); });
-                    y_max = y_max + 5
+                    function agg_country(leaves) {
 
-                    y.domain([0, y_max]).nice();
+                        var xy = [];
 
+                        leaves.forEach(function(d) {
+                            xy.push([d.year, d.stunting]);
+                        });
+
+                        return {
+                            'data':xy                      
+                        };
+                    };
+
+                    var nested = d3.nest()
+                                   .key(function(d) {
+                                      return d.country;
+                                   })
+                                   .rollup(agg_country)
+                                   .entries(dataFiltered);
+
+                    var allkeys = [];
+                
+                    nested.forEach(function(d) {
+                        allkeys.push({key:d.key,active:1});
+                    });
+
+                    nested.sort(function(a, b) {
+                        return d3.descending(a.value.data[a.value.data.length-1][1], b.value.data[b.value.data.length-1][1]);  });
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Interactive Functions */
+
+                    function line_on (d) {
+                        d3.selectAll(".countries path")
+                            .transition()
+                            .duration(100)
+                            .style("stroke-width",".7");
+
+                        d3.select(this)
+                            .transition()
+                            .duration(100)
+                            .style("stroke-width","4");
+
+                        var buttonid = d.key;
+                        buttonid = buttonid.replace(" ", "\\ ");
+
+                        d3.select(".buttons div#"+buttonid)
+                            .transition()
+                            .duration(100)
+                            .style("font-weight","bold")
+                            .style("font-size","10px");
+
+                     };
+
+                     function line_out (d) {
+                        d3.selectAll(".countries path")
+                            .transition()
+                            .duration(100)
+                            .style("stroke-width","1");
+
+                        d3.selectAll(".countries #INDIA")
+                            .transition()
+                            .duration(100)
+                            .style("stroke-width","3");
+
+                        d3.selectAll(".buttons div")
+                            .transition()
+                            .duration(100)
+                            .style("font-weight","normal")
+                            .style("font-size","9px");
+
+                     };
+
+
+                    function button_on (d) { 
+
+                        d3.selectAll(".countries path")
+                            .transition()
+                            .duration(100)
+                            .style("stroke-width",".7");
+
+                        var pathid = d.key;
+                        pathid = pathid.replace(" ", "\\ ");
+
+                         d3.select(".line#"+pathid)
+                            .transition()
+                            .duration(100)
+                            .style("stroke-width","4");
+
+                        d3.select(this)
+                            .transition()
+                            .duration(100)
+                            .style("font-weight","bold")
+                            .style("font-size","10px");
+
+                    };
+
+                    function button_out (d) { 
+                        d3.selectAll(".countries path")
+                            .transition()
+                            .duration(100)
+                            .style("stroke-width","1");
+
+                        d3.selectAll(".countries #INDIA")
+                            .transition()
+                            .duration(100)
+                            .style("stroke-width","3");
+
+                        d3.selectAll(".buttons div")
+                            .transition()
+                            .duration(100)
+                            .style("font-weight","normal")
+                            .style("font-size","9px");
+
+                    };
+
+
+                    function button_click (d) { 
+
+                            var index = -1;
+
+                            for(var i = 0; i < allkeys.length; i++) {
+                               if(allkeys[i].key === d.key) {
+                                 index=i;
+                               }
+                            }
+
+                            if(allkeys[index].active==1) {allkeys[index].active = 0}
+                                else {allkeys[index].active = 1};
+
+                            var filtered = nested.filter(function(d1) { 
+                                var index2 = -1;
+                                for(var i = 0; i < allkeys.length; i++) {
+                                    if(allkeys[i].key === d1.key) {
+                                    index2=i; 
+                                    }
+                                }
+                                return allkeys[index2].active;
+                            });
+
+                            var buttons2 = d3.selectAll('div.buttons div')
+                                       .data(filtered, function(d) {
+                                            return d['key'];
+                                        });
+
+                            d3.selectAll('div.buttons div')
+                                .style("border-color", "rgba(0,0,0,.3)");
+
+                            buttons2.exit()
+                                .style("border-color", "rgba(0,0,0,0)");
+
+debugger;
+                            var lines = svg.selectAll(".countries")
+                                        .data(filtered, function(d) { 
+                                            return d.key;})
+                                        .enter()
+                                        .append("g")
+                                        .attr("class", "countries")
+                                        .append("path")
+                                        .attr("class", "line")
+                                        .attr("id",function(d) { 
+                                            return d.key;})
+                                        .attr("d", function(d) { return valueline(d.value.data)})
+                                        .attr("data-legend",function(d) { return d.value.data[0]})
+                                        .style("stroke", function(d) { return color(d.key); })
+                                        .style("opacity", "1")
+                                        .style("fill", function(d) { return "none"; })
+                                        .on("mouseover",line_on)
+                                        .on("mouseout",line_out);
+
+
+
+                            var lines2 = svg.selectAll('.countries')
+                                          .data(filtered, function(d) {
+                                            return d['key'];})
+                                          .exit()
+                                          .remove();
+                            
+                        };
 
 /*************************************************************************************************/
 /*************************************************************************************************/
 /* Add Elements */
 
-                    var div = d3.select("body").append("div")
-                        .attr("class", "tooltip")
-                        .style("opacity", 0);
 
-                    var svg = d3.select("body").append("svg")
-                        .attr("width", width + margin.left + margin.right)
-                        .attr("height", height + margin.top + margin.bottom + 20)
+                    var svg = d3.select("body")
+                        .append("svg")
+                            .attr("width", width + margin.left + margin.right)
+                            .attr("height", height + margin.top + margin.bottom)
                         .append("g")
                         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                    svg.append("g")
-                        .append("text")
-                        .attr("x", 10)
-                        .attr("y", 13)
-                        .attr("fill", "#000")
-                        .attr("font-weight", "bold")
-                        .attr("text-anchor", "start")
-                        .attr("font-family","Helvetica")
-                        .attr("font-size","18px")
-                        .text("Percentage Stunting by Fuel Type");
 
                     svg.append("g")
-                        .selectAll("g")
-                        .data(data)
-                        .enter().append("g")
-                          .attr("transform", function(d) { return "translate(" + x0(d.fuel_type) + ",0)"; })
-                        .selectAll("rect")
-                        .data(function(d) { return keys.map(function(key) { return {key: key, value: d[key]}; }); })
-                        .enter().append("rect")
-                          .attr("x", function(d) { return x1(d.key); })
-                          .attr("y", function(d) { return y(d.value); })
-                          .attr("width", x1.bandwidth())
-                          .attr("height", function(d) { return height - y(d.value); })
-                          .attr("fill", function(d) { return z(d.key); })
-                          .on("mouseover", function(d) {
-                                div.transition()
-                                .duration(200)
-                                .style("opacity", .9);
-                                div.html(d.value)     
-                                    .style("left", (d3.event.pageX) + "px")             
-                                    .style("top", (d3.event.pageY) + "px");
-                                });
+                        .append("text")
+                        .attr("x", 200)
+                        .attr("y", 10)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "middle")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","16px")
+                        .text("Stunting Rates by Country");
+
+
+                    var lines = svg.append("g")
+                                    .selectAll(".countries")
+                                    .data(nested, function(d) { 
+                                        return d.key;})
+                                    .enter()
+                                    .append("g")
+                                    .attr("class", "countries")
+                                    .append("path")
+                                    .attr("class", "line")
+                                    .attr("id",function(d) { 
+                                        return d.key;})
+                                    .attr("d", function(d) {return valueline(d.value.data)})
+                                    .attr("data-legend",function(d) { return d.value.data[0]})
+                                    .style("stroke", function(d) { return color(d.key); })
+                                    .style("opacity", "1")
+                                    /*.style("stroke-width", "1.5")*/
+                                    .style("fill", function(d) { return "none"; });
+
+                    var bubbles = svg.append('g')
+                               .attr("class","bubble")
+                               .selectAll("circle")
+                               .data(dataFiltered)
+                               .enter()
+                               .append("circle")
+                               .attr("cx", function(d) { return x(d.year); })
+                               .attr("cy", function(d) { return y(d.stunting); })
+                               .attr("r", "3")
+                               .style("fill","rgba(100,100,100,0.95)");
 
 
                     svg.append("g")
                         .attr("class", "axis")
                         .attr("transform", "translate(0," + height + ")")
-                        .call(d3.axisBottom(x0));
+                        .call(d3.axisBottom(x).ticks(4));
 
                     svg.append("g")
                         .attr("class", "axis")
                         .call(d3.axisLeft(y).tickFormat(function(d) { return d + "%"; }).ticks(5));
 
-                    var legend = svg.append("g")
-                        .attr("font-family", "Helvetica")
-                        .attr("font-size", "11px")
-                        .attr("text-anchor", "end")
-                        .selectAll("g")
-                        .data(keys)
-                        .enter().append("g")
-                        .attr("transform", function(d, i) { return "translate(0," + (22 + i * 20) + ")"; });
+                    var buttons = d3.select("body")
+                        .append("div")
+                        .attr("class","buttons")
+                        .selectAll("div")
+                        .data(nested, function(d) { 
+                            return d.key;})
+                        .enter()
+                        .append("div")
+                        .attr("id",function(d) { 
+                            return d.key;})
+                        .text(function(d) { return d.key;})
+                        .style("color", function(d) { return color(d.key); });
 
-                    legend.append("rect")
-                        .attr("x", 10)
-                        .attr("width", 20)
-                        .attr("height", 15)
-                        .attr("fill", z);
 
-                    legend.append("text")
-                        .attr("x", 35)
-                        .attr("y", 9)
-                        .attr("dy", "0.32em")
-                        .attr("text-anchor","start")
-                        .text(function(d) { return d; });
-                        
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Assigning Interaction to Elements */
 
+                    lines.on("mouseover",line_on)
+                        .on("mouseout",line_out);
+
+                    buttons.on("mouseover", button_on)
+                       .on("mouseout", button_out)
+                       .on("click", button_click);
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* End of the draw functions*/
             };
 
         </script>
 <body>
 
         <script type="text/javascript">
+        
         // Get the data
-        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/air_pollution_stunting/data/stunting_fuel_demo.csv", function(d) {
+        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/air_pollution_stunting/data/stunting_data.csv", function(d) {
+            if (d.stunting=="") { return null; }
             d.stunting = +d.stunting;
-            d.sev_stunting = +d.sev_stunting;
+            d.year = d3.timeParse("%Y")(d.year);
             return d;        
         }, draw);
 
