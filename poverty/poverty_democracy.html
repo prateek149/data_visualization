@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <style>
+        </style>
+
+        <script type="text/javascript">
+
+            function draw(data) {
+
+                    var w = 500;
+                    var h = 400;
+
+                    var m = 30;
+
+                    var margin = {top: m, right: m, bottom: m, left: m},
+                    width = w - margin.left - margin.right,
+                    height = h - margin.top - margin.bottom;
+
+
+debugger;
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Data preparation */
+
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Interactive Functions */
+
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Add Elements */
+
+
+                    var svg = d3.select("body")
+                        .append("svg")
+                            .attr("width", width + margin.left + margin.right)
+                            .attr("height", height + margin.top + margin.bottom)
+                        .append("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Assigning Interaction to Elements */
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* End of the draw functions*/
+            };
+
+        </script>
+<body>
+
+        <script type="text/javascript">
+        
+        // Get the data
+        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/poverty/data/poverty_democracy.csv", function(d) {
+            if (d.poor_pop=="") { return null; }
+            d.poor_pop = +d.poor_pop;
+            return d;        
+        }, draw);
+
+        </script>
+</body>
+</html>
+
