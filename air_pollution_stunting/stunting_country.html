@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <style>
+            div.tooltip {
+              position: absolute;
+              text-align: center;
+              /*width: 60px;*/
+              /*height: 28px;*/
+              padding: 2px;
+              font: 12px sans-serif;
+              background: lightsteelblue;
+              border: 0px;
+              border-radius: 2px;
+            }
+        </style>
+
+        <script type="text/javascript">
+
+            function draw(data) {
+
+                    var w = 500;
+                    var h = 400;
+
+                    var m = 30;
+
+                    var margin = {top: m, right: m, bottom: m, left: m},
+                    width = w - margin.left - margin.right,
+                    height = h - margin.top - margin.bottom;
+
+                    var x0 = d3.scaleBand()
+                        .rangeRound([0, width])
+                        .paddingInner(0.2);
+
+                    var x1 = d3.scaleBand()
+                        .padding(0.15);
+
+                    var y = d3.scaleLinear()
+                        .rangeRound([height, 0]);
+
+                    var z = d3.scaleOrdinal()
+                        .range(["#555a74", "#a0543c", "#ff8c00"]);
+
+                    var keys = data.columns.slice(1);
+
+                    x0.domain(data.map(function(d) { return d.fuel_type; }));
+
+                    x1.domain(keys).rangeRound([0, x0.bandwidth()]);
+
+                    var y_max = d3.max(data, function(d) { return d3.max(keys, function(key) { return +d[key]; }); });
+                    y_max = y_max + 5
+
+                    y.domain([0, y_max]).nice();
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Add Elements */
+
+                    var div = d3.select("body").append("div")
+                        .attr("class", "tooltip")
+                        .style("opacity", 0);
+
+                    var svg = d3.select("body").append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom + 20)
+                        .append("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                    svg.append("g")
+                        .append("text")
+                        .attr("x", 10)
+                        .attr("y", 13)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","18px")
+                        .text("Percentage Stunting by Fuel Type");
+
+                    svg.append("g")
+                        .selectAll("g")
+                        .data(data)
+                        .enter().append("g")
+                          .attr("transform", function(d) { return "translate(" + x0(d.fuel_type) + ",0)"; })
+                        .selectAll("rect")
+                        .data(function(d) { return keys.map(function(key) { return {key: key, value: d[key]}; }); })
+                        .enter().append("rect")
+                          .attr("x", function(d) { return x1(d.key); })
+                          .attr("y", function(d) { return y(d.value); })
+                          .attr("width", x1.bandwidth())
+                          .attr("height", function(d) { return height - y(d.value); })
+                          .attr("fill", function(d) { return z(d.key); })
+                          .on("mouseover", function(d) {
+                                div.transition()
+                                .duration(200)
+                                .style("opacity", .9);
+                                div.html(d.value)     
+                                    .style("left", (d3.event.pageX) + "px")             
+                                    .style("top", (d3.event.pageY) + "px");
+                                });
+
+
+                    svg.append("g")
+                        .attr("class", "axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(d3.axisBottom(x0));
+
+                    svg.append("g")
+                        .attr("class", "axis")
+                        .call(d3.axisLeft(y).tickFormat(function(d) { return d + "%"; }).ticks(5));
+
+                    var legend = svg.append("g")
+                        .attr("font-family", "Helvetica")
+                        .attr("font-size", "11px")
+                        .attr("text-anchor", "end")
+                        .selectAll("g")
+                        .data(keys)
+                        .enter().append("g")
+                        .attr("transform", function(d, i) { return "translate(0," + (22 + i * 20) + ")"; });
+
+                    legend.append("rect")
+                        .attr("x", 10)
+                        .attr("width", 20)
+                        .attr("height", 15)
+                        .attr("fill", z);
+
+                    legend.append("text")
+                        .attr("x", 35)
+                        .attr("y", 9)
+                        .attr("dy", "0.32em")
+                        .attr("text-anchor","start")
+                        .text(function(d) { return d; });
+                        
+
+            };
+
+        </script>
+<body>
+
+        <script type="text/javascript">
+        // Get the data
+        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/air_pollution_stunting/data/stunting_fuel_demo.csv", function(d) {
+            d.stunting = +d.stunting;
+            d.sev_stunting = +d.sev_stunting;
+            return d;        
+        }, draw);
+
+        </script>
+</body>
+</html>
+
