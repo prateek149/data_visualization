@@ -295,7 +295,16 @@ debugger;
                     if(d=="Total") {
                       force.on('tick',tick_initial).start();
 
+                      d3.selectAll("text.total_number")
+                        .style("opacity","1");
+
+                      d3.selectAll("text.democracy_number")
+                        .style("opacity","0");       
+
                       d3.selectAll("text.democracy_anno")
+                        .style("opacity","0");
+
+                      d3.selectAll("text.income_number")
                         .style("opacity","0");
 
                       d3.selectAll("text.income_anno")
