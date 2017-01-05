@@ -63,8 +63,43 @@
 /*************************************************************************************************/
 /*************************************************************************************************/
 /* Data preparation */
+                
 
+              var total = 0;
+              var democracy_total = 0;
+              var not_democracy_total = 0;
 
+              var low_income_total = 0;
+              var middle_income_total = 0;
+              var high_income_total = 0;
+
+              for(var i = 0, len = nodes.length; i < len; i++) {
+
+                  total = total + nodes[i].poor_pop;
+
+                  if(nodes[i].democracy==1) {democracy_total = democracy_total + nodes[i].poor_pop}
+                  if(nodes[i].democracy==0) {not_democracy_total = not_democracy_total + nodes[i].poor_pop}
+
+                  if(nodes[i].group2=="Low income") {low_income_total = low_income_total + nodes[i].poor_pop}
+                  if(nodes[i].group2=="Middle income") {middle_income_total = middle_income_total + nodes[i].poor_pop}
+                  if(nodes[i].group2=="High income") {high_income_total = high_income_total + nodes[i].poor_pop}
+              };
+
+              function rounding(d){
+                if (d < 1) { return Math.round(d * 10) / 10;}
+                return Math.round(d)
+              };
+
+              total = rounding(total);
+
+              democracy_total = rounding(democracy_total);
+              not_democracy_total = rounding(not_democracy_total);
+
+              low_income_total = rounding(low_income_total);
+              middle_income_total = rounding(middle_income_total);
+              high_income_total = rounding(high_income_total);
+
+debugger;
 
 
 
@@ -123,7 +158,7 @@
                         l = Math.sqrt(x * x + y * y),
                         r = d.r;
                     if (l != r) {
-                      l = (l - r) / l * 0.15* alpha;
+                      l = (l - r) / l * 0.5* alpha;
                       d.x -= x *= l;
                       d.y -= y *= l;
                     }
@@ -156,7 +191,7 @@
                         l = Math.sqrt(x * x + y * y),
                         r = d.r;
                     if (l != r) {
-                      l = (l - r) / l *0.15* alpha;
+                      l = (l - r) / l *0.5* alpha;
                       d.x -= x *= l;
                       d.y -= y *= l;
                     }
@@ -182,7 +217,7 @@
                         l = Math.sqrt(x * x + y * y),
                         r = d.r;
                     if (l != r) {
-                      l = (l - r) / l *0.15* alpha;
+                      l = (l - r) / l *0.5* alpha;
                       d.x -= x *= l;
                       d.y -= y *= l;
                     }
@@ -219,7 +254,7 @@
                         l = Math.sqrt(x * x + y * y),
                         r = d.r;
                     if (l != r) {
-                      l = (l - r) / l *0.15* alpha;
+                      l = (l - r) / l *0.5* alpha;
                       d.x -= x *= l;
                       d.y -= y *= l;
                     }
@@ -270,8 +305,17 @@
                     if(d=="Income Group") {
                       force.on('tick',tick_income_group).start();
 
+                      d3.selectAll("text.total_number")
+                        .style("opacity","0");
+
+                      d3.selectAll("text.democracy_number")
+                        .style("opacity","0");       
+
                       d3.selectAll("text.democracy_anno")
                         .style("opacity","0");
+
+                      d3.selectAll("text.income_number")
+                        .style("opacity","1");
 
                       d3.selectAll("text.income_anno")
                         .style("opacity","1");
@@ -280,8 +324,17 @@
                     if(d=="Democracy") {
                       force.on('tick',tick_democracy).start();
 
+                      d3.selectAll("text.total_number")
+                        .style("opacity","0");
+
+                      d3.selectAll("text.democracy_number")
+                        .style("opacity","1");   
+
                       d3.selectAll("text.democracy_anno")
-                        .style("opacity","1");
+                        .style("opacity","1");  
+
+                      d3.selectAll("text.income_number")
+                        .style("opacity","0");
 
                       d3.selectAll("text.income_anno")
                         .style("opacity","0");
@@ -290,8 +343,17 @@
                     if(d=="Crosstab") {
                       force.on('tick',tick_crosstab).start();
 
+                      d3.selectAll("text.total_number")
+                        .style("opacity","0");
+
+                      d3.selectAll("text.democracy_number")
+                        .style("opacity","0");      
+
                       d3.selectAll("text.democracy_anno")
-                        .style("opacity","1");
+                        .style("opacity","1");  
+
+                      d3.selectAll("text.income_number")
+                        .style("opacity","0");
 
                       d3.selectAll("text.income_anno")
                         .style("opacity","1");
@@ -300,7 +362,7 @@
                     d3.selectAll(".buttons div")
                             .style("background-color", "rgba(240,240,240,.3")
                             .style("color","black");
-debugger;
+
                     d3.select(this)
                             .style("background-color", "black")
                             .style("color", "white");
@@ -313,10 +375,6 @@ debugger;
 /* Add Elements */
 
 
-
-/*************************************************************************************************/
-/*************************************************************************************************/
-/* Assigning Interaction to Elements */
 
                 var force = d3.layout.force()
                                     .nodes(nodes)
@@ -335,66 +393,13 @@ debugger;
                         .append("div")
                         .text(function(d){return d;});
 
+
                 
 
                 var svg = d3.select("body").append("svg")
                     .attr("width", width)
                     .attr("height", height);
 
-                svg.append("text")
-                                .attr("text-anchor","end")
-                                .attr("class","democracy_anno")
-                                .attr("x",width)
-                                .attr("y",height/d1)
-                                .text("Democracy")
-                                .style("font-family","verdana")
-                                .style("font-size","12px")
-                                .style("fill","#666666")
-                                .style("opacity","0");
-
-                svg.append("text")
-                                .attr("text-anchor","end")
-                                .attr("class","democracy_anno")
-                                .attr("x",width)
-                                .attr("y",height/d2)
-                                .text("Not Democracy")
-                                .style("font-family","verdana")
-                                .style("font-size","12px")
-                                .style("fill","#666666")
-                                .style("opacity","0");
-
-                svg.append("text")
-                                .attr("text-anchor","middle")
-                                .attr("class","income_anno")
-                                .attr("x",width/i1)
-                                .attr("y",height/1.1)
-                                .text("High Income")
-                                .style("font-family","verdana")
-                                .style("font-size","12px")
-                                .style("fill","#666666")
-                                .style("opacity","0");
-
-                 svg.append("text")
-                                .attr("text-anchor","middle")
-                                .attr("class","income_anno")
-                                .attr("x",width/i2)
-                                .attr("y",height/1.1)
-                                .text("Middle Income")
-                                .style("font-family","verdana")
-                                .style("font-size","12px")
-                                .style("fill","#666666")
-                                .style("opacity","0");
-
-                   svg.append("text")
-                                .attr("text-anchor","middle")
-                                .attr("class","income_anno")
-                                .attr("x",width/i3)
-                                .attr("y",height/1.1)
-                                .text("Low Income")
-                                .style("font-family","verdana")
-                                .style("font-size","12px")
-                                .style("fill","#666666")
-                                .style("opacity","0");
 
                 var node = svg.selectAll("circle")
                     .data(nodes)
@@ -429,7 +434,141 @@ debugger;
 
 
 
- 
+ /*************************************************************************************************/
+ /* ANNOTATIONS */
+
+                svg.append("text")
+                                .attr("text-anchor","end")
+                                .attr("class","total_number")
+                                .attr("x",width)
+                                .attr("y",height/2)
+                                .text(total + " Million")
+                                .style("font-family","verdana")
+                                .style("font-size","24px")
+                                .style("fill","#888888")
+                                .style("opacity","1");
+
+/*************************************************************************************************/
+
+                svg.append("text")
+                                .attr("text-anchor","end")
+                                .attr("class","democracy_number")
+                                .attr("x",width/1.2)
+                                .attr("y",height/d1)
+                                .text(democracy_total + " Million")
+                                .style("font-family","verdana")
+                                .style("font-size","20px")
+                                .style("fill","#888888")
+                                .style("opacity","0");
+
+                svg.append("text")
+                                .attr("text-anchor","end")
+                                .attr("class","democracy_number")
+                                .attr("x",width/1.2)
+                                .attr("y",height/d2)
+                                .text(not_democracy_total + " Million")
+                                .style("font-family","verdana")
+                                .style("font-size","20px")
+                                .style("fill","#888888")
+                                .style("opacity","0");
+
+
+                svg.append("text")
+                                .attr("text-anchor","end")
+                                .attr("class","democracy_anno")
+                                .attr("x",width)
+                                .attr("y",height/d1)
+                                .text("Democracy")
+                                .style("font-family","verdana")
+                                .style("font-size","16px")
+                                .style("fill","#666666")
+                                .style("opacity","0");
+
+                svg.append("text")
+                                .attr("text-anchor","end")
+                                .attr("class","democracy_anno")
+                                .attr("x",width)
+                                .attr("y",height/d2)
+                                .text("Not Democracy")
+                                .style("font-family","verdana")
+                                .style("font-size","16px")
+                                .style("fill","#666666")
+                                .style("opacity","0");
+
+/*************************************************************************************************/
+
+                svg.append("text")
+                                .attr("text-anchor","middle")
+                                .attr("class","income_number")
+                                .attr("x",width/i1)
+                                .attr("y",height/1.2)
+                                .text(high_income_total + " Million")
+                                .style("font-family","verdana")
+                                .style("font-size","20px")
+                                .style("fill","#888888")
+                                .style("opacity","0");
+
+                 svg.append("text")
+                                .attr("text-anchor","middle")
+                                .attr("class","income_number")
+                                .attr("x",width/i2)
+                                .attr("y",height/1.2)
+                                .text(middle_income_total + " Million")
+                                .style("font-family","verdana")
+                                .style("font-size","20px")
+                                .style("fill","#888888")
+                                .style("opacity","0");
+
+                   svg.append("text")
+                                .attr("text-anchor","middle")
+                                .attr("class","income_number")
+                                .attr("x",width/i3)
+                                .attr("y",height/1.2)
+                                .text(low_income_total + " Million")
+                                .style("font-family","verdana")
+                                .style("font-size","20px")
+                                .style("fill","#888888")
+                                .style("opacity","0");
+
+/*************************************************************************************************/
+
+                  svg.append("text")
+                                .attr("text-anchor","middle")
+                                .attr("class","income_anno")
+                                .attr("x",width/i1)
+                                .attr("y",height/1.1)
+                                .text("High Income")
+                                .style("font-family","verdana")
+                                .style("font-size","16px")
+                                .style("fill","#666666")
+                                .style("opacity","0");
+
+                 svg.append("text")
+                                .attr("text-anchor","middle")
+                                .attr("class","income_anno")
+                                .attr("x",width/i2)
+                                .attr("y",height/1.1)
+                                .text("Middle Income")
+                                .style("font-family","verdana")
+                                .style("font-size","16px")
+                                .style("fill","#666666")
+                                .style("opacity","0");
+
+                  svg.append("text")
+                                .attr("text-anchor","middle")
+                                .attr("class","income_anno")
+                                .attr("x",width/i3)
+                                .attr("y",height/1.1)
+                                .text("Low Income")
+                                .style("font-family","verdana")
+                                .style("font-size","16px")
+                                .style("fill","#666666")
+                                .style("opacity","0");
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Assigning Interaction to Elements */
 
                 buttons.on("click", button_on);
 /*************************************************************************************************/
