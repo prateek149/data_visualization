@@ -151,6 +151,7 @@ debugger;
 
                 function cluster_initial(alpha) {
                   return function(d) {
+                    var alpha2 = alpha;
                     var centerx = width/2;
                     var centery = height/2;
                     var x = d.x - centerx,
@@ -158,7 +159,7 @@ debugger;
                         l = Math.sqrt(x * x + y * y),
                         r = d.r;
                     if (l != r) {
-                      l = (l - r) / l * 0.5* alpha;
+                      l = (l - r) / l * 0.5* alpha2;
                       d.x -= x *= l;
                       d.y -= y *= l;
                     }
@@ -592,7 +593,7 @@ debugger;
         <script type="text/javascript">
         
         // Get the data
-        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/poverty/data/poverty_democracy.csv", function(d) {
+        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/poverty/data/poverty_democracy_v2.csv", function(d) {
             if (d.poor_pop=="") { return null; }
             if (d.poor_pop=="..") { return null; }
             if (d.democracy=="") { return null; }
