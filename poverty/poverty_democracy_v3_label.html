@@ -99,15 +99,14 @@
               middle_income_total = rounding(middle_income_total);
               high_income_total = rounding(high_income_total);
 
-debugger;
-
-
 
 /*************************************************************************************************/
 /*************************************************************************************************/
 /* Interactive Functions */
                 
-
+                function charge(d) {
+                  return -Math.pow(d.r, 2.0)/8;
+                }
 
                 function tick_initial(e) {
                     node
@@ -389,11 +388,12 @@ debugger;
                 var force = d3.layout.force()
                                     .nodes(nodes)
                                     .size([width, height])
-                                    .gravity(0)
-                                    .charge(0)
+                                    .gravity(-.005)
+                                    .charge(charge)
                                     .friction(.6)
                                     .on("tick", tick_initial)
                                     .start();
+
 
                 var buttons = d3.select("body")
                         .append("div")
@@ -403,7 +403,6 @@ debugger;
                         .enter()
                         .append("div")
                         .text(function(d){return d;});
-
 
                 
 
@@ -418,11 +417,12 @@ debugger;
                     .append("g")
                     .call(force.drag);
 
+
                 node.append("circle")
                     //.style("fill", function(d) { return color(d.cluster); })
                     .style("fill", function(d) { return "#aaaacc"; })
                     .transition()
-                    .duration(3000)
+                    .duration(5000)
                     .delay(function(d, i) { return i * 5; })
                     .attrTween("r", function(d) {
                       var i = d3.interpolate(0, d.r);
@@ -430,12 +430,12 @@ debugger;
                     });
 
                 node.append("text")
-                  .attr("dy", ".3em")
+                  .attr("dy", "2px")
                   .style("text-anchor", "middle")
                   .style("font-family", "Helvetica")
                   .style("font-size", function(d){
-                    if(d.r>30) {return 11;}
-                    if(d.r>20) {return 7;}
+                    if(d.r>30) {return 12;}
+                    if(d.r>20) {return 8;}
                     if(d.r>15) {return 5;}
                     if(d.r>10) {return 4;}
                     if(d.r>5) {return 3;}
