@@ -594,6 +594,7 @@ debugger;
         
         // Get the data
         d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/poverty/data/poverty_democracy_v2.csv", function(d) {
+          debugger;
             if (d.poor_pop=="") { return null; }
             if (d.poor_pop=="..") { return null; }
             if (d.democracy=="") { return null; }
