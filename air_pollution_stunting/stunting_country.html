@@ -134,15 +134,11 @@
 /* Interactive Functions */
 
                     function line_on (d) {
-                        d3.selectAll(".countries path")
-                            .transition()
-                            .duration(100)
-                            .style("stroke-width",".7");
 
                         d3.select(this)
                             .transition()
                             .duration(100)
-                            .style("stroke-width","4");
+                            .style("stroke-width","4.5");
 
                         var buttonid = d.key;
                         buttonid = buttonid.replace(" ", "\\ ");
@@ -152,6 +148,20 @@
                             .duration(100)
                             .style("font-weight","bold")
                             .style("font-size","10px");
+
+                        var filtered = latest_values.filter(function(d1) { 
+                            if(d1.key == d.key) {return d1;}
+                        });                 
+
+                        var temp_text = "Stunting Rate in " + filtered[0].key + 
+                        " in " +  d3.timeFormat("%Y")(filtered[0].year) + " was " + filtered[0].value +"%";
+
+
+                        d3.selectAll("text.title")
+                            .transition()
+                            .duration(100)
+                            .text(temp_text)
+                            .attr("fill",color(d.key));
 
                      };
 
@@ -172,16 +182,16 @@
                             .style("font-weight","normal")
                             .style("font-size","10px");
 
+                        d3.selectAll("text.title")
+                            .transition()
+                            .duration(100)
+                            .text("Stunting Rates by Country")
+                            .attr("fill","#000");;
+
                      };
 
 
                     function button_on (d) { 
-
-                        d3.selectAll(".countries path")
-                            .transition()
-                            .duration(100)
-                            .style("stroke-width",".7");
-
 
                         var pathid = d.key;
                         pathid = pathid.replace(" ", "\\ ");
@@ -189,7 +199,7 @@
                          d3.select(".line#"+pathid)
                             .transition()
                             .duration(100)
-                            .style("stroke-width","4");
+                            .style("stroke-width","4.5");
 
                         d3.select(this)
                             .transition()
@@ -199,8 +209,7 @@
 
                         var filtered = latest_values.filter(function(d1) { 
                             if(d1.key == d.key) {return d1;}
-                        });
-debugger;                    
+                        });                 
 
                         var temp_text = "Stunting Rate in " + filtered[0].key + 
                         " in " +  d3.timeFormat("%Y")(filtered[0].year) + " was " + filtered[0].value +"%";
@@ -265,6 +274,39 @@ debugger;
                         .attr("font-size","14px")
                         .text("Stunting Rates by Country");
 
+
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","description")
+                        .attr("x", 10)
+                        .attr("y", 25)
+                        .attr("fill", "#777")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","9px")
+                        .text("Stunting rate is percentage of children aged 0–59 months who are below minus two ");
+
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","description")
+                        .attr("x", 10)
+                        .attr("y", 35)
+                        .attr("fill", "#777")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","9px")
+                        .text("standard deviations from median height-for-age of the WHO Child Growth Standards.");
+
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","source")
+                        .attr("x", 10)
+                        .attr("y", 50)
+                        .attr("fill", "#777")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","9px")
+                        .text("Source: UNICEF");
 
                     var lines = svg.append("g")
                                     .selectAll(".countries")
