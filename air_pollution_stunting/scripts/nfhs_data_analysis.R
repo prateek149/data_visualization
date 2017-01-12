@@ -26,8 +26,10 @@ b$stunting_rate <- b$stunting/b$total
 
 b$pm10 <- -999
 b[which(b$fuel_type=="Dung"),]$pm10 <- 35
+b[which(b$fuel_type=="Wood"),]$pm10 <- 8
 b[which(b$fuel_type=="Kerosene"),]$pm10 <- 2
 b[which(b$fuel_type=="LPG"),]$pm10 <- 0
-b[which(b$fuel_type=="Wood"),]$pm10 <- 8
 
 
+write.csv(b[which(b$fuel_type!="-999"),],
+          "/Users/prateekmittal/Dropbox/data_visualization/air_pollution_stunting/data/stunting_fuel.csv")

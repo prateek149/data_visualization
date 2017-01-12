@@ -4,17 +4,6 @@
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <style>
-            div.tooltip {
-              position: absolute;
-              text-align: center;
-              /*width: 60px;*/
-              /*height: 28px;*/
-              padding: 2px;
-              font: 12px sans-serif;
-              background: lightsteelblue;
-              border: 0px;
-              border-radius: 2px;
-            }
         </style>
 
         <script type="text/javascript">
@@ -30,38 +19,186 @@
                     width = w - margin.left - margin.right,
                     height = h - margin.top - margin.bottom;
 
-                    var x0 = d3.scaleBand()
-                        .rangeRound([0, width])
-                        .paddingInner(0.2);
-
-                    var x1 = d3.scaleBand()
-                        .padding(0.15);
+                    var x = d3.scaleBand()
+                        .rangeRound([0, width]);
 
                     var y = d3.scaleLinear()
                         .rangeRound([height, 0]);
 
-                    var z = d3.scaleOrdinal()
-                        .range(["#555a74", "#a0543c", "#ff8c00"]);
+                    var r = d3.scaleLinear()
+                        .rangeRound([8, 40])
+                        .domain([0,7]);
 
-                    var keys = data.columns.slice(1);
+                    data.sort(function(a, b) {
+                        return (a.stunting_rate - b.stunting_rate); });
 
-                    x0.domain(data.map(function(d) { return d.fuel_type; }));
+                    x.domain(data.map(function(d) { return d.fuel_type; }));
 
-                    x1.domain(keys).rangeRound([0, x0.bandwidth()]);
-
-                    var y_max = d3.max(data, function(d) { return d3.max(keys, function(key) { return +d[key]; }); });
-                    y_max = y_max + 5
+                    var y_max = d3.max(data, function(d) {return d.stunting_rate;});
+                    y_max = y_max + 10;
 
                     y.domain([0, y_max]).nice();
 
 
 /*************************************************************************************************/
 /*************************************************************************************************/
-/* Add Elements */
+/* Interactive FUnction */
 
-                    var div = d3.select("body").append("div")
-                        .attr("class", "tooltip")
-                        .style("opacity", 0);
+                    function page1_mouseover(d)
+                    {
+                        d3.selectAll(".page1_text circle")
+                            .attr("fill","#EF5544");
+                    }
+
+                    function page1_mouseout(d)
+                    {
+                        d3.selectAll(".page1_text circle")
+                            .attr("fill","#7777cc");
+                    }
+
+                    function page2_mouseover(d)
+                    {
+                        d3.selectAll(".page2_text circle")
+                            .attr("fill","#EF5544");
+                    }
+
+                    function page2_mouseout(d)
+                    {
+                        d3.selectAll(".page2_text circle")
+                            .attr("fill","#7777cc");
+                    }
+
+
+                    function page1_transition(d)
+                    {
+                        d3.selectAll(".page1_text")
+                            .remove();
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page2_text")
+                            .attr("x", 10)
+                            .attr("y", 13)
+                            .attr("fill", "#000")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "start")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","18px")
+                            .text("PM10 Emissions by Fuel Type Per Meal");
+
+                        var page2_button = svg.append("g")
+                        .attr("class","page2_text");
+
+                        page2_button
+                            .append("circle")
+                            .attr("cx","390")
+                            .attr("cy","10")
+                            .attr("r","30")
+                            .attr("fill","#7777cc");
+
+                        page2_button
+                            .append("text")
+                            .attr("x","390")
+                            .attr("y","15")
+                            .attr("text-anchor","middle")
+                            .attr("font-size","16px")
+                            .attr("fill","white")
+                            .attr("font-family","Helvetica")
+                            .text("NEXT");
+
+                        var bubbles = svg.append("g")
+                            .selectAll("g")
+                            .data(data)
+                            .enter().append("circle")
+                            .attr("class","circles_class")
+                            .attr("cx", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                            .attr("cy", function(d) { return height/1.5; })
+                            //.attr("cy", function(d) { return y(d.stunting_rate); })
+                            .transition()
+                            .duration(1000)
+                            .attrTween("r", function(d) {
+                                var i = d3.interpolate(0, r(Math.sqrt(d.pm10)));
+                                return function(t) { return i(t); };
+                            });
+
+                        var emission_values = svg.append("g")
+                            .selectAll("g")
+                            .data(data)
+                            .enter().append("text")
+                            .attr("class","circles_text_class")
+                            .attr("x", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                            .attr("y", function(d) { return height/1.5 + 5; })
+                            //.attr("cy", function(d) { return y(d.stunting_rate); })
+                            .attr("fill", "#bbbbbb")
+                            .attr("text-anchor","middle")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","13px")
+                            .text(function(d) {return d.pm10;});
+
+
+                        svg.append("g")
+                            .attr("class", "xaxis")
+                            .attr("transform", "translate(0," + height + ")")
+                            .call(d3.axisBottom(x));
+
+                        d3.selectAll(".xaxis .tick text").style("font-size","14px");
+
+                        page2_button.on("mouseover",page2_mouseover);
+                        page2_button.on("mouseout",page2_mouseout);
+                        page2_button.on("click",page2_transition);
+
+
+                    }
+
+
+                    function page2_transition(d) {
+                        d3.selectAll(".page2_text")
+                            .remove();
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page3_text")
+                            .attr("x", 10)
+                            .attr("y", 13)
+                            .attr("fill", "#000")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "start")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","18px")
+                            .text("Stunting Rate by Fuel Type");
+
+                        d3.selectAll("circle.circles_class")
+                            .transition()
+                            .duration(700)
+                            .attr("cy", function(d) { return y(d.stunting_rate); });
+
+                        d3.selectAll("text.circles_text_class")
+                            .transition()
+                            .duration(700)
+                            .attr("y", function(d) { return y(d.stunting_rate) + 5; })
+                            .attr("opacity","0");
+
+                        svg.append("g")
+                            .attr("class", "yaxis")
+                            .call(d3.axisLeft(y).tickFormat(function(d) { return d + "%"; }).ticks(5));
+
+                        svg.append("g")
+                            .selectAll("g")
+                            .data(data)
+                            .enter().append("line")
+                            .attr("x1", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                            .attr("x2", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                            .attr("y1", function(d) { return y(d.stunting_rate); })
+                            .attr("y2", function(d) { return height; })
+                            .attr("stroke-width",".5px")
+                            .attr("stroke","rgba(0,0,0,.3)")
+                            .attr("stroke-dasharray","2,4");
+
+                    }
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Add Elements */
 
                     var svg = d3.select("body").append("svg")
                         .attr("width", width + margin.left + margin.right)
@@ -69,71 +206,95 @@
                         .append("g")
                         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+/*************************************************************************************************/
+
                     svg.append("g")
                         .append("text")
+                        .attr("class","page1_text")
                         .attr("x", 10)
-                        .attr("y", 13)
+                        .attr("y", 20)
                         .attr("fill", "#000")
                         .attr("font-weight", "bold")
                         .attr("text-anchor", "start")
                         .attr("font-family","Helvetica")
-                        .attr("font-size","18px")
-                        .text("Percentage Stunting by Fuel Type");
+                        .attr("font-size","22px")
+                        .text("Fuel Type");
 
                     svg.append("g")
-                        .selectAll("g")
-                        .data(data)
-                        .enter().append("g")
-                          .attr("transform", function(d) { return "translate(" + x0(d.fuel_type) + ",0)"; })
-                        .selectAll("rect")
-                        .data(function(d) { return keys.map(function(key) { return {key: key, value: d[key]}; }); })
-                        .enter().append("rect")
-                          .attr("x", function(d) { return x1(d.key); })
-                          .attr("y", function(d) { return y(d.value); })
-                          .attr("width", x1.bandwidth())
-                          .attr("height", function(d) { return height - y(d.value); })
-                          .attr("fill", function(d) { return z(d.key); })
-                          .on("mouseover", function(d) {
-                                div.transition()
-                                .duration(200)
-                                .style("opacity", .9);
-                                div.html(d.value)     
-                                    .style("left", (d3.event.pageX) + "px")             
-                                    .style("top", (d3.event.pageY) + "px");
-                                });
-
-
-                    svg.append("g")
-                        .attr("class", "axis")
-                        .attr("transform", "translate(0," + height + ")")
-                        .call(d3.axisBottom(x0));
-
-                    svg.append("g")
-                        .attr("class", "axis")
-                        .call(d3.axisLeft(y).tickFormat(function(d) { return d + "%"; }).ticks(5));
-
-                    var legend = svg.append("g")
-                        .attr("font-family", "Helvetica")
-                        .attr("font-size", "11px")
-                        .attr("text-anchor", "end")
-                        .selectAll("g")
-                        .data(keys)
-                        .enter().append("g")
-                        .attr("transform", function(d, i) { return "translate(0," + (22 + i * 20) + ")"; });
-
-                    legend.append("rect")
+                        .append("text")
+                        .attr("class","page1_text")
                         .attr("x", 10)
-                        .attr("width", 20)
-                        .attr("height", 15)
-                        .attr("fill", z);
+                        .attr("y", 60)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","16px")
+                        .attr("font-style","italic")
+                        .attr("fill","#EF5544")
+                        .text("affects");
 
-                    legend.append("text")
-                        .attr("x", 35)
-                        .attr("y", 9)
-                        .attr("dy", "0.32em")
-                        .attr("text-anchor","start")
-                        .text(function(d) { return d; });
-                        
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","page1_text")
+                        .attr("x", 10)
+                        .attr("y", 100)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","22px")
+                        .text("PM10 Emissions");
+
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","page1_text")
+                        .attr("x", 10)
+                        .attr("y", 140)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","16px")
+                        .attr("font-style","italic")
+                        .attr("fill","#EF5544")
+                        .text("affects");
+
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","page1_text")
+                        .attr("x", 10)
+                        .attr("y", 180)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","22px")
+                        .text("Stunting Rate");
+
+                    var page1_button = svg.append("g")
+                        .attr("class","page1_text");
+
+                    page1_button
+                        .append("circle")
+                        .attr("cx","250")
+                        .attr("cy","92")
+                        .attr("r","30")
+                        .attr("fill","#7777cc");
+
+                    page1_button
+                        .append("text")
+                        .attr("x","250")
+                        .attr("y","98")
+                        .attr("text-anchor","middle")
+                        .attr("font-size","16px")
+                        .attr("fill","white")
+                        .attr("font-family","Helvetica")
+                        .text("NEXT");
+
+                    page1_button.on("mouseover",page1_mouseover);
+                    page1_button.on("mouseout",page1_mouseout);
+                    page1_button.on("click",page1_transition);
 
             };
 
@@ -142,9 +303,9 @@
 
         <script type="text/javascript">
         // Get the data
-        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/air_pollution_stunting/data/stunting_fuel_demo.csv", function(d) {
-            d.stunting = +d.stunting;
-            d.sev_stunting = +d.sev_stunting;
+        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/air_pollution_stunting/data/stunting_fuel.csv", function(d) {
+            d.stunting_rate = +d.stunting_rate;
+            d.stunting_rate = 100*d.stunting_rate;
             return d;        
         }, draw);
 

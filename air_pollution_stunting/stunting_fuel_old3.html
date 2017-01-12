@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <style>
+        </style>
+
+        <script type="text/javascript">
+
+            function draw(data) {
+
+                    var w = 500;
+                    var h = 400;
+
+                    var m = 30;
+
+                    var margin = {top: m, right: m, bottom: m, left: m},
+                    width = w - margin.left - margin.right,
+                    height = h - margin.top - margin.bottom;
+
+                    var x = d3.scaleBand()
+                        .rangeRound([0, width]);
+
+                    var y = d3.scaleLinear()
+                        .rangeRound([height, 0]);
+
+                    var r = d3.scaleLinear()
+                        .rangeRound([3, 40])
+                        .domain([0,7]);
+
+                    data.sort(function(a, b) {
+                        return (a.stunting_rate - b.stunting_rate); });
+
+                    x.domain(data.map(function(d) { return d.fuel_type; }));
+
+                    var y_max = d3.max(data, function(d) {return d.stunting_rate;});
+                    y_max = y_max + 10;
+
+                    y.domain([0, y_max]).nice();
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Interactive FUnction */
+
+                    function move(d)
+                    {
+                        d3.selectAll("circle.circles_class")
+                            .transition()
+                            .duration(700)
+                            .attr("cy", function(d) { return y(d.stunting_rate); });
+
+                        d3.selectAll(".yaxis")
+                        .transition()
+                        .duration(300)
+                        .attr("opacity","1");
+                    }
+
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Add Elements */
+
+                    var svg = d3.select("body").append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom + 20)
+                        .append("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+/*************************************************************************************************/
+
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","page1_text")
+                        .attr("x", 10)
+                        .attr("y", 13)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","18px")
+                        .text("Fuel Type affects PM10 Emissions which affects Stunting Rate");
+
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","page2_text")
+                        .attr("x", 10)
+                        .attr("y", 13)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","18px")
+                        .text("Percentage Stunting by Fuel Type")
+                        .attr("opacity","0");
+/*
+                    svg.append("g")
+                        .selectAll("g")
+                        .data(data)
+                        .enter().append("line")
+                        .attr("x1", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                        .attr("x2", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                        .attr("y1", function(d) { return y(d.stunting_rate); })
+                        .attr("y2", function(d) { return height; })
+                        .attr("stroke-width","1px")
+                        .attr("stroke","#ccc")
+                        .attr("stroke-dasharray","2,2");
+
+                        .transition()
+                    .duration(5000)
+                    .delay(function(d, i) { return i * 5; })
+                    .attrTween("r", function(d) {
+                      var i = d3.interpolate(0, d.r);
+                      return function(t) { return d.r = i(t); };
+                    });
+
+                    var bubbles = svg.append("g")
+                        .selectAll("g")
+                        .data(data)
+                        .enter().append("circle")
+                        .on("mouseover",move)
+                        .attr("class","circles_class")
+                        .attr("cx", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                        .attr("cy", function(d) { return height/1.3 })
+                        //.attr("cy", function(d) { return y(d.stunting_rate); })
+                        .transition()
+                        .duration(1000)
+                        .attrTween("r", function(d) {
+                            var i = d3.interpolate(0, r(Math.sqrt(d.pm10)));
+                            return function(t) { return i(t); };
+                        });
+
+
+                    svg.append("g")
+                        .attr("class", "xaxis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(d3.axisBottom(x));
+
+                    svg.append("g")
+                        .attr("class", "yaxis")
+                        .call(d3.axisLeft(y).tickFormat(function(d) { return d + "%"; }).ticks(5))
+                        .attr("opacity","0");
+
+                    d3.selectAll(".xaxis .tick text").style("font-size","13px")
+    */                    
+
+            };
+
+        </script>
+<body>
+
+        <script type="text/javascript">
+        // Get the data
+        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/air_pollution_stunting/data/stunting_fuel.csv", function(d) {
+            d.stunting_rate = +d.stunting_rate;
+            d.stunting_rate = 100*d.stunting_rate;
+            return d;        
+        }, draw);
+
+        </script>
+</body>
+</html>
+
