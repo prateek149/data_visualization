@@ -26,7 +26,7 @@
                         .rangeRound([height, 0]);
 
                     var r = d3.scaleLinear()
-                        .rangeRound([5, 40])
+                        .rangeRound([7, 50])
                         .domain([0,7]);
 
                     data.sort(function(a, b) {
@@ -40,7 +40,172 @@
                     y.domain([0, y_max]).nice();
 
 
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Interactive FUnction */
 
+                    function page1_mouseover(d)
+                    {
+                        d3.selectAll(".page1_text circle")
+                            .attr("fill","#ee6666");
+                    }
+
+                    function page1_mouseout(d)
+                    {
+                        d3.selectAll(".page1_text circle")
+                            .attr("fill","#7777cc");
+                    }
+
+                    function page2_mouseover(d)
+                    {
+                        d3.selectAll(".page2_text circle")
+                            .attr("fill","#ee6666");
+                    }
+
+                    function page2_mouseout(d)
+                    {
+                        d3.selectAll(".page2_text circle")
+                            .attr("fill","#7777cc");
+                    }
+
+                    function page1_transition(d)
+                    {
+                        d3.selectAll(".page1_text")
+                            .remove();
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page2_text")
+                            .attr("x", 10)
+                            .attr("y", 13)
+                            .attr("fill", "#000")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "start")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","18px")
+                            .text("PM10 Emissions by Fuel Type Per Meal");
+
+                        var page2_button = svg.append("g")
+                        .attr("class","page2_text");
+
+                        page2_button
+                            .append("circle")
+                            .attr("cx","390")
+                            .attr("cy","10")
+                            .attr("r","30")
+                            .attr("fill","#7777cc");
+
+                        page2_button
+                            .append("text")
+                            .attr("x","390")
+                            .attr("y","15")
+                            .attr("text-anchor","middle")
+                            .attr("font-size","16px")
+                            .attr("fill","white")
+                            .attr("font-family","Helvetica")
+                            .text("NEXT");
+
+                        var bubbles = svg.append("g")
+                            .selectAll("g")
+                            .data(data)
+                            .enter().append("circle")
+                            .attr("class","circles_class")
+                            .attr("cx", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                            .attr("cy", function(d) { return height/1.5; })
+                            //.attr("cy", function(d) { return y(d.stunting_rate); })
+                            .transition()
+                            .duration(1000)
+                            .attrTween("r", function(d) {
+                                var i = d3.interpolate(0, r(Math.sqrt(d.pm10)));
+                                return function(t) { return i(t); };
+                            });
+
+                        var emission_values = svg.append("g")
+                            .selectAll("g")
+                            .data(data)
+                            .enter().append("text")
+                            .attr("class","circles_text_class")
+                            .attr("x", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                            .attr("y", function(d) { return height/1.5 + 4.5; })
+                            //.attr("cy", function(d) { return y(d.stunting_rate); })
+                            .attr("fill", "#bbbbbb")
+                            .attr("text-anchor","middle")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","13px")
+                            .text(function(d) {return d.pm10;});
+
+
+                        svg.append("g")
+                            .attr("class", "xaxis")
+                            .attr("transform", "translate(0," + height + ")")
+                            .call(d3.axisBottom(x));
+
+                        d3.selectAll(".xaxis .tick text").style("font-size","14px");
+
+                        page2_button.on("mouseover",page2_mouseover);
+                        page2_button.on("mouseout",page2_mouseout);
+                        page2_button.on("click",page2_transition);
+
+
+                    }
+
+
+                    function page2_transition(d) {
+                        d3.selectAll(".page2_text")
+                            .remove();
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page3_text")
+                            .attr("x", 10)
+                            .attr("y", 13)
+                            .attr("fill", "#000")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "start")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","18px")
+                            .text("Stunting Rate by Fuel Type");
+
+                        d3.selectAll("circle.circles_class")
+                            .transition()
+                            .duration(700)
+                            .attr("cy", function(d) { return y(d.stunting_rate); });
+
+                        d3.selectAll("text.circles_text_class")
+                            .transition()
+                            .duration(700)
+                            .attr("y", function(d) { return y(d.stunting_rate) + 4.5; })
+                            .attr("opacity","0");
+
+                        svg.append("g")
+                            .attr("class", "yaxis")
+                            .call(d3.axisLeft(y).tickFormat(function(d) { return d + "%"; }).ticks(5));
+
+                        svg.append("g")
+                            .selectAll("g")
+                            .data(data)
+                            .enter().append("line")
+                            .attr("x1", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                            .attr("x2", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                            .attr("y1", function(d) { return y(d.stunting_rate); })
+                            .attr("y2", function(d) { return height; })
+                            .attr("stroke-width",".5px")
+                            .attr("stroke","rgba(0,0,0,.3)")
+                            .attr("stroke-dasharray","2,4");
+
+                        svg.append("g")
+                            .selectAll("g")
+                            .data(data)
+                            .enter().append("line")
+                            .attr("x1", function(d) { return 0; })
+                            .attr("x2", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                            .attr("y1", function(d) { return y(d.stunting_rate); })
+                            .attr("y2", function(d) { return y(d.stunting_rate); })
+                            .attr("stroke-width",".5px")
+                            .attr("stroke","rgba(0,0,0,.3)")
+                            .attr("stroke-dasharray","2,4");
+
+                    }
 
 /*************************************************************************************************/
 /*************************************************************************************************/
@@ -52,60 +217,95 @@
                         .append("g")
                         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+/*************************************************************************************************/
+
                     svg.append("g")
                         .append("text")
+                        .attr("class","page1_text")
                         .attr("x", 10)
-                        .attr("y", 13)
+                        .attr("y", 20)
                         .attr("fill", "#000")
                         .attr("font-weight", "bold")
                         .attr("text-anchor", "start")
                         .attr("font-family","Helvetica")
-                        .attr("font-size","18px")
-                        .text("Percentage Stunting by Fuel Type");
-/*
-                    svg.append("g")
-                        .selectAll("g")
-                        .data(data)
-                        .enter().append("g")
-                        .attr("transform", function(d) { return "translate(" + (x(d.fuel_type) + 25) + ",0)"; })
-                        .append("rect")
-                          .attr("y", function(d) { debugger;
-                            return y(d.stunting_rate); })
-                          .attr("height", function(d) { return height - y(d.stunting_rate); })
-                          .attr("width","50px")
-                          .attr("fill","black");
-*/
+                        .attr("font-size","22px")
+                        .text("Fuel Type");
 
                     svg.append("g")
-                        .selectAll("g")
-                        .data(data)
-                        .enter().append("line")
-                        .attr("x1", function(d) { return x(d.fuel_type) + width/8 + .5; })
-                        .attr("x2", function(d) { return x(d.fuel_type) + width/8 + .5; })
-                        .attr("y1", function(d) { return y(d.stunting_rate); })
-                        .attr("y2", function(d) { return height; })
-                        .attr("stroke-width","1px")
-                        .attr("stroke","#ccc")
-                        .attr("stroke-dasharray","2,2");
+                        .append("text")
+                        .attr("class","page1_text")
+                        .attr("x", 10)
+                        .attr("y", 60)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","16px")
+                        .attr("font-style","italic")
+                        .attr("fill","#EF5544")
+                        .text("affects");
 
                     svg.append("g")
-                        .selectAll("g")
-                        .data(data)
-                        .enter().append("circle")
-                        .attr("cx", function(d) { return x(d.fuel_type) + width/8 + .5; })
-                        .attr("cy", function(d) { return y(d.stunting_rate); })
-                        .attr("r", function(d) { return r(Math.sqrt(d.pm10));});
-
-
-                    svg.append("g")
-                        .attr("class", "axis")
-                        .attr("transform", "translate(0," + height + ")")
-                        .call(d3.axisBottom(x));
+                        .append("text")
+                        .attr("class","page1_text")
+                        .attr("x", 10)
+                        .attr("y", 100)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","22px")
+                        .text("PM10 Emissions");
 
                     svg.append("g")
-                        .attr("class", "axis")
-                        .call(d3.axisLeft(y).tickFormat(function(d) { return d + "%"; }).ticks(5));
-                        
+                        .append("text")
+                        .attr("class","page1_text")
+                        .attr("x", 10)
+                        .attr("y", 140)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","16px")
+                        .attr("font-style","italic")
+                        .attr("fill","#EF5544")
+                        .text("affects");
+
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","page1_text")
+                        .attr("x", 10)
+                        .attr("y", 180)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "start")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","22px")
+                        .text("Stunting Rate");
+
+                    var page1_button = svg.append("g")
+                        .attr("class","page1_text");
+
+                    page1_button
+                        .append("circle")
+                        .attr("cx","250")
+                        .attr("cy","92")
+                        .attr("r","30")
+                        .attr("fill","#7777cc");
+
+                    page1_button
+                        .append("text")
+                        .attr("x","250")
+                        .attr("y","98")
+                        .attr("text-anchor","middle")
+                        .attr("font-size","16px")
+                        .attr("fill","white")
+                        .attr("font-family","Helvetica")
+                        .text("NEXT");
+
+                    page1_button.on("mouseover",page1_mouseover);
+                    page1_button.on("mouseout",page1_mouseout);
+                    page1_button.on("click",page1_transition);
 
             };
 

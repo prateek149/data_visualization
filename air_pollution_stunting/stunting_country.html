@@ -127,6 +127,11 @@
                     nested.sort(function(a, b) {
                         return d3.descending(a.value.data[a.value.data.length-1][1], b.value.data[b.value.data.length-1][1]);  });
 
+                    nested.sort(function(a, b) {
+                        if(a.key=="INDONESIA" && b.key=="BANGLADESH") {return 1}
+                        return  -1;
+                    });
+
 
 
 /*************************************************************************************************/
