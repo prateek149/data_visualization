@@ -140,7 +140,10 @@
 
                     function line_on (d) {
 
-                        d3.select(this)
+                        var pathid = d.key;
+                        pathid = pathid.replace(" ", "\\ ");
+
+                         d3.select(".line#"+pathid)
                             .transition()
                             .duration(100)
                             .style("stroke-width","4.5");
@@ -253,6 +256,64 @@
 
                     };
 
+                     function bubble_on (d) {
+
+                        debugger;
+
+                        var point_text = d3.timeFormat("%Y")(d.year) + " : " + d.stunting + "%";
+
+                        var point_anno = svg.append("g")
+                            .append("text")
+                            .attr("class","point_anno")
+                            .attr("x", x(d.year) + 5)
+                            .attr("y", y(d.stunting) - 5)
+                            .attr("fill", "#000")
+                            .attr("text-anchor", "start")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","11px")
+                            .text(point_text);
+
+                        var pathid = d.country;
+                        pathid = pathid.replace(" ", "\\ ");
+
+                         d3.select(".line#"+pathid)
+                            .transition()
+                            .duration(100)
+                            .style("stroke-width","4.5");
+
+                        var buttonid = d.country;
+                        buttonid = buttonid.replace(" ", "\\ ");
+
+                        d3.select(".buttons div#"+buttonid)
+                            .transition()
+                            .duration(100)
+                            .style("font-weight","bold")
+                            .style("font-size","10px");
+
+                     };
+
+                     function bubble_out (d) { 
+                        d3.selectAll(".point_anno")
+                            .remove();
+
+                        d3.selectAll(".countries path")
+                            .transition()
+                            .duration(100)
+                            .style("stroke-width","1");
+
+                        d3.selectAll(".countries #INDIA")
+                            .transition()
+                            .duration(100)
+                            .style("stroke-width","3");
+
+                        d3.selectAll(".buttons div")
+                            .transition()
+                            .duration(100)
+                            .style("font-weight","normal")
+                            .style("font-size","10px");
+                     };
+
+
 
 /*************************************************************************************************/
 /*************************************************************************************************/
@@ -331,6 +392,23 @@
                                     /*.style("stroke-width", "1.5")*/
                                     .style("fill", function(d) { return "none"; });
 
+                    var lines_buffer = svg.append("g")
+                                    .selectAll(".countries_buffer")
+                                    .data(nested, function(d) { 
+                                        return d.key;})
+                                    .enter()
+                                    .append("g")
+                                    .attr("class", "countries_buffer")
+                                    .append("path")
+                                    .attr("class", "line")
+                                    .attr("id",function(d) { 
+                                        return d.key;})
+                                    .attr("d", function(d) {return valueline(d.value.data)})
+                                    .style("stroke", function(d) { return color(d.key); })
+                                    .style("opacity", "0")
+                                    .style("stroke-width", "4")
+                                    .style("fill", function(d) { return "none"; });
+
                     var bubbles = svg.append('g')
                                .attr("class","bubble")
                                .selectAll("circle")
@@ -378,11 +456,14 @@
 /*************************************************************************************************/
 /* Assigning Interaction to Elements */
 
-                    lines.on("mouseover",line_on)
+                    lines_buffer.on("mouseover",line_on)
                         .on("mouseout",line_out);
 
                     buttons.on("mouseover", button_on)
                        .on("mouseout", button_out);
+
+                    bubbles.on("mouseover", bubble_on)
+                        .on("mouseout", bubble_out);
 
 /*************************************************************************************************/
 /*************************************************************************************************/
