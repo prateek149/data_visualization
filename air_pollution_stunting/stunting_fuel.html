@@ -74,6 +74,30 @@
                             .attr("font-size","17px")
                             .text("PM10 Emissions by Fuel Type Per Meal");
 
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page2_text")
+                            .attr("x", width/5)
+                            .attr("y", 150)
+                            .attr("fill", "#333377")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "middle")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","16px")
+                            .text("Liquid Fuels");
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page2_text")
+                            .attr("x", width/1.4)
+                            .attr("y", 150)
+                            .attr("fill", "#222200")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "middle")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","16px")
+                            .text("Solid Fuels");
+
                         var page2_button_back = svg.append("g")
                         .attr("class","button page2_text");
 
