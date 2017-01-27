@@ -27,7 +27,7 @@
 
                     var r = d3.scaleLinear()
                         .rangeRound([7, 50])
-                        .domain([0,2]);
+                        .domain([0,1.7]);
 
                     data.sort(function(a, b) {
                         return (a.stunting_rate - b.stunting_rate); });
@@ -110,9 +110,13 @@
                             .data(data)
                             .enter().append("circle")
                             .attr("class","circles_class")
-                            .attr("cx", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                            .attr("cx", function(d) { return x(d.fuel_type) + width/10 + .5; })
                             .attr("cy", function(d) { return height/1.5; })
-                            //.attr("cy", function(d) { return y(d.stunting_rate); })
+                            .attr("fill",function(d) {
+                                if(d.fuel_type=="LPG" || d.fuel_type=="Kerosene") {return "#333377";}
+                                return "#222200"
+
+                            })
                             .transition()
                             .duration(1000)
                             .attrTween("r", function(d) {
@@ -125,14 +129,46 @@
                             .data(data)
                             .enter().append("text")
                             .attr("class","circles_text_class")
-                            .attr("x", function(d) { return x(d.fuel_type) + width/8 + .5; })
-                            .attr("y", function(d) { return height/1.5 + 4.5; })
-                            //.attr("cy", function(d) { return y(d.stunting_rate); })
-                            .attr("fill", "#bbbbbb")
+                            .attr("x", function(d) { return x(d.fuel_type) + width/10 + .5; })
+                            .attr("y", function(d) {
+                                if(d.fuel_type=="LPG") {return height/1.5 + 4.5;}
+                                return height/1.5 + 1; 
+                            })
+                            .attr("fill", "#AAAAAA")
                             .attr("text-anchor","middle")
                             .attr("font-family","Helvetica")
                             .attr("font-size","13px")
                             .text(function(d) {return d.pm10;});
+
+                        var emission_units = svg.append("g")
+                            .selectAll("g")
+                            .data(data)
+                            .enter().append("text")
+                            .attr("class","circles_text_class_units")
+                            .attr("x", function(d) { return x(d.fuel_type) + width/10 + .5; })
+                            .attr("y", function(d) {
+                                if(d.fuel_type=="LPG") {return height/1.5 + 13.5;}
+                                return height/1.5 + 10; 
+                            })
+                            //.attr("cy", function(d) { return y(d.stunting_rate); })
+                            .attr("fill", "#AAAAAA")
+                            .attr("text-anchor","middle")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","9px")
+                            .text("g/meal");
+
+                        var ref_lines = svg.append("g")
+                            .selectAll("g")
+                            .data(data)
+                            .enter().append("line")
+                            .attr("class","reference_lines")
+                            .attr("x1", function(d) { return x(d.fuel_type) + width/10 + .5; })
+                            .attr("x2", function(d) { return x(d.fuel_type) + width/10 + .5; })
+                            .attr("y1", function(d) { return height/1.5; })
+                            .attr("y2", function(d) { return height; })
+                            .attr("stroke-width",".5px")
+                            .attr("stroke","rgba(0,0,0,.3)")
+                            .attr("stroke-dasharray","2,4");
 
 
                         svg.append("g")
@@ -154,6 +190,9 @@
                         d3.selectAll(".page2_text")
                             .remove();
 
+                        d3.selectAll(".reference_lines")
+                            .remove();
+
                         svg.append("g")
                             .append("text")
                             .attr("class","page3_text")
@@ -164,7 +203,7 @@
                             .attr("text-anchor", "start")
                             .attr("font-family","Helvetica")
                             .attr("font-size","18px")
-                            .text("Stunting Rate by Fuel Type");
+                            .text("Stunting Rate & Emissions by Fuel Type");
 
                         d3.selectAll("circle.circles_class")
                             .transition()
@@ -174,8 +213,18 @@
                         d3.selectAll("text.circles_text_class")
                             .transition()
                             .duration(700)
-                            .attr("y", function(d) { return y(d.stunting_rate) + 4.5; })
-                            .attr("opacity","0");
+                            .attr("y", function(d) {
+                                if(d.fuel_type=="LPG") {return y(d.stunting_rate) + 4.5;;}
+                                return y(d.stunting_rate) + 1; 
+                            });
+
+                        d3.selectAll("text.circles_text_class_units")
+                            .transition()
+                            .duration(700)
+                            .attr("y", function(d) {
+                                if(d.fuel_type=="LPG") {return y(d.stunting_rate) + 13.5;}
+                                return y(d.stunting_rate) + 10;
+                            });
 
                         svg.append("g")
                             .attr("class", "yaxis")
@@ -185,8 +234,8 @@
                             .selectAll("g")
                             .data(data)
                             .enter().append("line")
-                            .attr("x1", function(d) { return x(d.fuel_type) + width/8 + .5; })
-                            .attr("x2", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                            .attr("x1", function(d) { return x(d.fuel_type) + width/10 + .5; })
+                            .attr("x2", function(d) { return x(d.fuel_type) + width/10 + .5; })
                             .attr("y1", function(d) { return y(d.stunting_rate); })
                             .attr("y2", function(d) { return height; })
                             .attr("stroke-width",".5px")
@@ -198,7 +247,7 @@
                             .data(data)
                             .enter().append("line")
                             .attr("x1", function(d) { return 0; })
-                            .attr("x2", function(d) { return x(d.fuel_type) + width/8 + .5; })
+                            .attr("x2", function(d) { return x(d.fuel_type) + width/10 + .5; })
                             .attr("y1", function(d) { return y(d.stunting_rate); })
                             .attr("y2", function(d) { return y(d.stunting_rate); })
                             .attr("stroke-width",".5px")
@@ -228,7 +277,7 @@
                         .attr("font-weight", "bold")
                         .attr("text-anchor", "start")
                         .attr("font-family","Helvetica")
-                        .attr("font-size","22px")
+                        .attr("font-size","16px")
                         .text("Fuel Type");
 
                     svg.append("g")
@@ -254,7 +303,7 @@
                         .attr("font-weight", "bold")
                         .attr("text-anchor", "start")
                         .attr("font-family","Helvetica")
-                        .attr("font-size","22px")
+                        .attr("font-size","16px")
                         .text("PM10 Emissions");
 
                     svg.append("g")
@@ -280,7 +329,7 @@
                         .attr("font-weight", "bold")
                         .attr("text-anchor", "start")
                         .attr("font-family","Helvetica")
-                        .attr("font-size","22px")
+                        .attr("font-size","16px")
                         .text("Stunting Rate");
 
                     var page1_button = svg.append("g")
