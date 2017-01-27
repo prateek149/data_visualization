@@ -30,7 +30,7 @@ b$pm10 <- -999
 b[which(b$fuel_type=="Dung"),]$pm10 <- 1.6
 b[which(b$fuel_type=="Wood"),]$pm10 <- 0.4
 b[which(b$fuel_type=="Crop Residue"),]$pm10 <- 1.4
-b[which(b$fuel_type=="Kerosene"),]$pm10 <- 0.08
+b[which(b$fuel_type=="Kerosene"),]$pm10 <- 0.1
 b[which(b$fuel_type=="LPG"),]$pm10 <- 0
 
 
