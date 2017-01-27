@@ -77,11 +77,11 @@
                         svg.append("g")
                             .append("text")
                             .attr("class","page2_text")
-                            .attr("x", width/5)
+                            .attr("x", width/3)
                             .attr("y", 150)
                             .attr("fill", "#333377")
                             .attr("font-weight", "bold")
-                            .attr("text-anchor", "middle")
+                            .attr("text-anchor", "end")
                             .attr("font-family","Helvetica")
                             .attr("font-size","16px")
                             .text("Liquid Fuels");
@@ -89,14 +89,24 @@
                         svg.append("g")
                             .append("text")
                             .attr("class","page2_text")
-                            .attr("x", width/1.4)
+                            .attr("x", width/2.2)
                             .attr("y", 150)
                             .attr("fill", "#222200")
                             .attr("font-weight", "bold")
-                            .attr("text-anchor", "middle")
+                            .attr("text-anchor", "start")
                             .attr("font-family","Helvetica")
                             .attr("font-size","16px")
                             .text("Solid Fuels");
+
+                        svg.append("g")
+                            .append("line")
+                            .attr("class","reference_lines")
+                            .attr("x1", width/2.5)
+                            .attr("x2", width/2.5)
+                            .attr("y1", 137)
+                            .attr("y2", height)
+                            .attr("stroke-width",".5px")
+                            .attr("stroke","rgba(0,0,0,.3)");
 
                         var page2_button_back = svg.append("g")
                         .attr("class","button page2_text");
