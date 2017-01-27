@@ -16,6 +16,8 @@ a$fuel_type <- "-999"
 a[which(a$v161 == 2),]$fuel_type <- "LPG"
 a[which(a$v161 == 5),]$fuel_type <- "Kerosene"
 a[which(a$v161 == 8),]$fuel_type <- "Wood"
+a[which(a$v161 == 10),]$fuel_type <- "Crop Residue"
+a[which(a$v161 == 9),]$fuel_type <- "Crop Residue"
 a[which(a$v161 == 11),]$fuel_type <- "Dung"
 
 b <- sqldf("SELECT fuel_type, COUNT(fuel_type) AS total,
@@ -25,9 +27,10 @@ b <- sqldf("SELECT fuel_type, COUNT(fuel_type) AS total,
 b$stunting_rate <- b$stunting/b$total
 
 b$pm10 <- -999
-b[which(b$fuel_type=="Dung"),]$pm10 <- 35
-b[which(b$fuel_type=="Wood"),]$pm10 <- 8
-b[which(b$fuel_type=="Kerosene"),]$pm10 <- 2
+b[which(b$fuel_type=="Dung"),]$pm10 <- 1.6
+b[which(b$fuel_type=="Wood"),]$pm10 <- 0.4
+b[which(b$fuel_type=="Crop Residue"),]$pm10 <- 1.4
+b[which(b$fuel_type=="Kerosene"),]$pm10 <- 0.08
 b[which(b$fuel_type=="LPG"),]$pm10 <- 0
 
 
