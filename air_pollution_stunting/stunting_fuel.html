@@ -26,7 +26,7 @@
                         .rangeRound([height, 0]);
 
                     var r = d3.scaleLinear()
-                        .rangeRound([7, 50])
+                        .rangeRound([9, 50])
                         .domain([0,1.7]);
 
                     data.sort(function(a, b) {
@@ -40,67 +40,76 @@
                     y.domain([0, y_max]).nice();
 
 
+
 /*************************************************************************************************/
 /*************************************************************************************************/
 /* Interactive FUnction */
 
-                    function page1_mouseover(d)
+                    function button_mouseover(d)
                     {
-                        d3.selectAll(".page1_text circle")
+                        d3.selectAll(".button circle")
                             .attr("fill","#ee6666");
                     }
 
-                    function page1_mouseout(d)
+                    function button_mouseout(d)
                     {
-                        d3.selectAll(".page1_text circle")
+                        d3.selectAll(".button circle")
                             .attr("fill","#7777cc");
                     }
 
-                    function page2_mouseover(d)
-                    {
-                        d3.selectAll(".page2_text circle")
-                            .attr("fill","#ee6666");
-                    }
-
-                    function page2_mouseout(d)
-                    {
-                        d3.selectAll(".page2_text circle")
-                            .attr("fill","#7777cc");
-                    }
 
                     function page1_transition(d)
                     {
-                        d3.selectAll(".page1_text")
-                            .remove();
+                        svg.selectAll("*").remove();
 
                         svg.append("g")
                             .append("text")
                             .attr("class","page2_text")
-                            .attr("x", 10)
-                            .attr("y", 13)
+                            .attr("x", 40)
+                            .attr("y", 16)
                             .attr("fill", "#000")
                             .attr("font-weight", "bold")
                             .attr("text-anchor", "start")
                             .attr("font-family","Helvetica")
-                            .attr("font-size","18px")
+                            .attr("font-size","17px")
                             .text("PM10 Emissions by Fuel Type Per Meal");
 
-                        var page2_button = svg.append("g")
-                        .attr("class","page2_text");
+                        var page2_button_back = svg.append("g")
+                        .attr("class","button page2_text");
 
-                        page2_button
+                        page2_button_back
+                            .append("circle")
+                            .attr("cx","10")
+                            .attr("cy","10")
+                            .attr("r","22")
+                            .attr("fill","#7777cc");
+
+                        page2_button_back
+                            .append("text")
+                            .attr("x","10")
+                            .attr("y","14")
+                            .attr("text-anchor","middle")
+                            .attr("font-size","13px")
+                            .attr("fill","white")
+                            .attr("font-family","Helvetica")
+                            .text("BACK");
+
+                        var page2_button_next = svg.append("g")
+                        .attr("class","button page2_text");
+
+                        page2_button_next
                             .append("circle")
                             .attr("cx","390")
                             .attr("cy","10")
-                            .attr("r","30")
+                            .attr("r","22")
                             .attr("fill","#7777cc");
 
-                        page2_button
+                        page2_button_next
                             .append("text")
                             .attr("x","390")
-                            .attr("y","15")
+                            .attr("y","14")
                             .attr("text-anchor","middle")
-                            .attr("font-size","16px")
+                            .attr("font-size","13px")
                             .attr("fill","white")
                             .attr("font-family","Helvetica")
                             .text("NEXT");
@@ -178,9 +187,13 @@
 
                         d3.selectAll(".xaxis .tick text").style("font-size","14px");
 
-                        page2_button.on("mouseover",page2_mouseover);
-                        page2_button.on("mouseout",page2_mouseout);
-                        page2_button.on("click",page2_transition);
+                        page2_button_next.on("mouseover",button_mouseover);
+                        page2_button_next.on("mouseout",button_mouseout);
+                        page2_button_next.on("click",page2_transition);
+
+                        page2_button_back.on("mouseover",button_mouseover);
+                        page2_button_back.on("mouseout",button_mouseout);
+                        page2_button_back.on("click",page1_start);
 
 
                     }
@@ -193,16 +206,36 @@
                         d3.selectAll(".reference_lines")
                             .remove();
 
+                        var page3_button_back = svg.append("g")
+                        .attr("class","button page2_text");
+
+                        page3_button_back
+                            .append("circle")
+                            .attr("cx","28")
+                            .attr("cy","8")
+                            .attr("r","22")
+                            .attr("fill","#7777cc");
+
+                        page3_button_back
+                            .append("text")
+                            .attr("x","28")
+                            .attr("y","12")
+                            .attr("text-anchor","middle")
+                            .attr("font-size","13px")
+                            .attr("fill","white")
+                            .attr("font-family","Helvetica")
+                            .text("BACK");
+
                         svg.append("g")
                             .append("text")
                             .attr("class","page3_text")
-                            .attr("x", 10)
+                            .attr("x", 60)
                             .attr("y", 13)
                             .attr("fill", "#000")
                             .attr("font-weight", "bold")
                             .attr("text-anchor", "start")
                             .attr("font-family","Helvetica")
-                            .attr("font-size","18px")
+                            .attr("font-size","17px")
                             .text("Stunting Rate & Emissions by Fuel Type");
 
                         d3.selectAll("circle.circles_class")
@@ -254,107 +287,248 @@
                             .attr("stroke","rgba(0,0,0,.3)")
                             .attr("stroke-dasharray","2,4");
 
+                        page3_button_back.on("mouseover",button_mouseover);
+                        page3_button_back.on("mouseout",button_mouseout);
+                        page3_button_back.on("click",page1_transition);
+
                     }
+
+                    function page1_start() {
+
+                        svg.selectAll("*").remove();
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page1_text")
+                            .attr("x", 5)
+                            .attr("y", 90)
+                            .attr("fill", "#000")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "middle")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","20px")
+                            .text("Fuel");
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page1_text")
+                            .attr("x", 5)
+                            .attr("y", 110)
+                            .attr("fill", "#000")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "middle")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","20px")
+                            .text("Type");
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page1_text")
+                            .attr("x", 100)
+                            .attr("y", 100)
+                            .attr("fill", "#000")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "start")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","20px")
+                            .text("Emissions");
+
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page1_text")
+                            .attr("x", 300)
+                            .attr("y", 90)
+                            .attr("fill", "#000")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "middle")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","20px")
+                            .text("Stunting");
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page1_text")
+                            .attr("x", 300)
+                            .attr("y", 110)
+                            .attr("fill", "#000")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "middle")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","20px")
+                            .text("Rate");
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page1_text")
+                            .attr("x", 65)
+                            .attr("y", 108)
+                            .attr("fill", "#EF5544")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "middle")
+                            .attr("font-family","Futura")
+                            .attr("font-size","40px")
+                            .text(">");
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page1_text")
+                            .attr("x", 230)
+                            .attr("y", 108)
+                            .attr("fill", "#EF5544")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "middle")
+                            .attr("font-family","Futura")
+                            .attr("font-size","40px")
+                            .text(">");
+
+                        var page1_button_next = svg.append("g")
+                        .attr("class","button page1_text");
+
+                        page1_button_next
+                            .append("circle")
+                            .attr("cx","400")
+                            .attr("cy","92")
+                            .attr("r","22")
+                            .attr("fill","#7777cc");
+
+                        page1_button_next
+                            .append("text")
+                            .attr("x","400")
+                            .attr("y","97")
+                            .attr("text-anchor","middle")
+                            .attr("font-size","13px")
+                            .attr("fill","white")
+                            .attr("font-family","Helvetica")
+                            .text("NEXT");
+
+                        page1_button_next.on("mouseover",button_mouseover);
+                        page1_button_next.on("mouseout",button_mouseout);
+                        page1_button_next.on("click",page1_transition);
+
+                    };
+
+
 
 /*************************************************************************************************/
 /*************************************************************************************************/
 /* Add Elements */
-
                     var svg = d3.select("body").append("svg")
                         .attr("width", width + margin.left + margin.right)
                         .attr("height", height + margin.top + margin.bottom + 20)
                         .append("g")
                         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-/*************************************************************************************************/
 
                     svg.append("g")
                         .append("text")
                         .attr("class","page1_text")
-                        .attr("x", 10)
-                        .attr("y", 20)
+                        .attr("x", 5)
+                        .attr("y", 90)
                         .attr("fill", "#000")
                         .attr("font-weight", "bold")
-                        .attr("text-anchor", "start")
+                        .attr("text-anchor", "middle")
                         .attr("font-family","Helvetica")
-                        .attr("font-size","16px")
-                        .text("Fuel Type");
+                        .attr("font-size","20px")
+                        .text("Fuel");
 
                     svg.append("g")
                         .append("text")
                         .attr("class","page1_text")
-                        .attr("x", 10)
-                        .attr("y", 60)
+                        .attr("x", 5)
+                        .attr("y", 110)
                         .attr("fill", "#000")
                         .attr("font-weight", "bold")
-                        .attr("text-anchor", "start")
+                        .attr("text-anchor", "middle")
                         .attr("font-family","Helvetica")
-                        .attr("font-size","16px")
-                        .attr("font-style","italic")
-                        .attr("fill","#EF5544")
-                        .text("affects");
+                        .attr("font-size","20px")
+                        .text("Type");
 
                     svg.append("g")
                         .append("text")
                         .attr("class","page1_text")
-                        .attr("x", 10)
+                        .attr("x", 100)
                         .attr("y", 100)
                         .attr("fill", "#000")
                         .attr("font-weight", "bold")
                         .attr("text-anchor", "start")
                         .attr("font-family","Helvetica")
-                        .attr("font-size","16px")
-                        .text("PM10 Emissions");
+                        .attr("font-size","20px")
+                        .text("Emissions");
+
 
                     svg.append("g")
                         .append("text")
                         .attr("class","page1_text")
-                        .attr("x", 10)
-                        .attr("y", 140)
+                        .attr("x", 300)
+                        .attr("y", 90)
                         .attr("fill", "#000")
                         .attr("font-weight", "bold")
-                        .attr("text-anchor", "start")
+                        .attr("text-anchor", "middle")
                         .attr("font-family","Helvetica")
-                        .attr("font-size","16px")
-                        .attr("font-style","italic")
-                        .attr("fill","#EF5544")
-                        .text("affects");
+                        .attr("font-size","20px")
+                        .text("Stunting");
 
                     svg.append("g")
                         .append("text")
                         .attr("class","page1_text")
-                        .attr("x", 10)
-                        .attr("y", 180)
+                        .attr("x", 300)
+                        .attr("y", 110)
                         .attr("fill", "#000")
                         .attr("font-weight", "bold")
-                        .attr("text-anchor", "start")
+                        .attr("text-anchor", "middle")
                         .attr("font-family","Helvetica")
-                        .attr("font-size","16px")
-                        .text("Stunting Rate");
+                        .attr("font-size","20px")
+                        .text("Rate");
 
-                    var page1_button = svg.append("g")
-                        .attr("class","page1_text");
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","page1_text")
+                        .attr("x", 65)
+                        .attr("y", 108)
+                        .attr("fill", "#EF5544")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "middle")
+                        .attr("font-family","Futura")
+                        .attr("font-size","40px")
+                        .text(">");
 
-                    page1_button
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","page1_text")
+                        .attr("x", 230)
+                        .attr("y", 108)
+                        .attr("fill", "#EF5544")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "middle")
+                        .attr("font-family","Futura")
+                        .attr("font-size","40px")
+                        .text(">");
+
+                    var page1_button_next = svg.append("g")
+                        .attr("class","button page1_text");
+
+                    page1_button_next
                         .append("circle")
-                        .attr("cx","250")
+                        .attr("cx","400")
                         .attr("cy","92")
-                        .attr("r","30")
+                        .attr("r","22")
                         .attr("fill","#7777cc");
 
-                    page1_button
+                    page1_button_next
                         .append("text")
-                        .attr("x","250")
-                        .attr("y","98")
+                        .attr("x","400")
+                        .attr("y","97")
                         .attr("text-anchor","middle")
-                        .attr("font-size","16px")
+                        .attr("font-size","13px")
                         .attr("fill","white")
                         .attr("font-family","Helvetica")
                         .text("NEXT");
 
-                    page1_button.on("mouseover",page1_mouseover);
-                    page1_button.on("mouseout",page1_mouseout);
-                    page1_button.on("click",page1_transition);
+                    page1_button_next.on("mouseover",button_mouseover);
+                    page1_button_next.on("mouseout",button_mouseout);
+                    page1_button_next.on("click",page1_transition);
+                    
 
             };
 
