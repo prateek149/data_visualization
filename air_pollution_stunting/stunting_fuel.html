@@ -49,13 +49,13 @@
                     {
                         d3.selectAll(".button circle")
                             .attr("fill","#ee6666");
-                    }
+                    };
 
                     function button_mouseout(d)
                     {
                         d3.selectAll(".button circle")
                             .attr("fill","#7777cc");
-                    }
+                    };
 
 
                     function page1_transition(d)
@@ -73,6 +73,20 @@
                             .attr("font-family","Helvetica")
                             .attr("font-size","17px")
                             .text("PM10 Emissions by Fuel Type Per Meal");
+
+                        svg.append("g")
+                            .append("a")
+                            .attr("xlink:href", "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1745777/")
+                            .attr("xlink:target","_blank")
+                            .append("text")
+                            .attr("class","page2_text")
+                            .attr("x", 40)
+                            .attr("y", 35)
+                            .attr("fill", "#777")
+                            .attr("text-anchor", "start")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","9px")
+                            .text("Source: Smith et al. (2000)");
 
                         svg.append("g")
                             .append("text")
@@ -230,7 +244,7 @@
                         page2_button_back.on("click",page1_start);
 
 
-                    }
+                    };
 
 
                     function page2_transition(d) {
@@ -270,16 +284,30 @@
                             .attr("text-anchor", "start")
                             .attr("font-family","Helvetica")
                             .attr("font-size","17px")
-                            .text("Stunting Rate & Emissions by Fuel Type");
+                            .text("Stunting Rate & PM10 Emissions by Fuel Type");
+
+                        svg.append("g")
+                            .append("a")
+                            .attr("xlink:href", "http://rchiips.org/nfhs/nfhs3.shtml")
+                            .attr("xlink:target","_blank")
+                            .append("text")
+                            .attr("class","page3_text")
+                            .attr("x", 60)
+                            .attr("y", 35)
+                            .attr("fill", "#777")
+                            .attr("text-anchor", "start")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","9px")
+                            .text("Source: National Family Health Survey 2005-06");
 
                         d3.selectAll("circle.circles_class")
                             .transition()
-                            .duration(700)
+                            .duration(1000)
                             .attr("cy", function(d) { return y(d.stunting_rate); });
 
                         d3.selectAll("text.circles_text_class")
                             .transition()
-                            .duration(700)
+                            .duration(1050)
                             .attr("y", function(d) {
                                 if(d.fuel_type=="LPG") {return y(d.stunting_rate) + 4.5;;}
                                 return y(d.stunting_rate) + 1; 
@@ -287,7 +315,7 @@
 
                         d3.selectAll("text.circles_text_class_units")
                             .transition()
-                            .duration(700)
+                            .duration(1100)
                             .attr("y", function(d) {
                                 if(d.fuel_type=="LPG") {return y(d.stunting_rate) + 13.5;}
                                 return y(d.stunting_rate) + 10;
@@ -325,11 +353,23 @@
                         page3_button_back.on("mouseout",button_mouseout);
                         page3_button_back.on("click",page1_transition);
 
-                    }
+                    };
 
                     function page1_start() {
 
                         svg.selectAll("*").remove();
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page1_text")
+                            .attr("x", 200)
+                            .attr("y", 10)
+                            .attr("fill", "#666666")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "middle")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","19px")
+                            .text("Association between Fuel Type and Stunting");
 
                         svg.append("g")
                             .append("text")
@@ -358,11 +398,23 @@
                         svg.append("g")
                             .append("text")
                             .attr("class","page1_text")
-                            .attr("x", 100)
-                            .attr("y", 100)
+                            .attr("x", 150)
+                            .attr("y", 90)
                             .attr("fill", "#000")
                             .attr("font-weight", "bold")
-                            .attr("text-anchor", "start")
+                            .attr("text-anchor", "middle")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","20px")
+                            .text("PM10");
+
+                        svg.append("g")
+                            .append("text")
+                            .attr("class","page1_text")
+                            .attr("x", 150)
+                            .attr("y", 110)
+                            .attr("fill", "#000")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "middle")
                             .attr("font-family","Helvetica")
                             .attr("font-size","20px")
                             .text("Emissions");
@@ -453,6 +505,17 @@
                         .append("g")
                         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","page1_text")
+                        .attr("x", 200)
+                        .attr("y", 10)
+                        .attr("fill", "#666666")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "middle")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","19px")
+                        .text("Association between Fuel Type and Stunting");
 
                     svg.append("g")
                         .append("text")
@@ -481,15 +544,26 @@
                     svg.append("g")
                         .append("text")
                         .attr("class","page1_text")
-                        .attr("x", 100)
-                        .attr("y", 100)
+                        .attr("x", 150)
+                        .attr("y", 90)
                         .attr("fill", "#000")
                         .attr("font-weight", "bold")
-                        .attr("text-anchor", "start")
+                        .attr("text-anchor", "middle")
+                        .attr("font-family","Helvetica")
+                        .attr("font-size","20px")
+                        .text("PM10");
+
+                    svg.append("g")
+                        .append("text")
+                        .attr("class","page1_text")
+                        .attr("x", 150)
+                        .attr("y", 110)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "middle")
                         .attr("font-family","Helvetica")
                         .attr("font-size","20px")
                         .text("Emissions");
-
 
                     svg.append("g")
                         .append("text")
