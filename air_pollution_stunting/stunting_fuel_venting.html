@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <style>
+        </style>
+
+        <script type="text/javascript">
+
+            function draw(data) {
+
+                    var w = 500;
+                    var h = 400;
+
+                    var m = 30;
+
+                    var margin = {top: m, right: m, bottom: m, left: m},
+                    width = w - margin.left - margin.right,
+                    height = h - margin.top - margin.bottom;
+
+                    var x = d3.scaleBand()
+                        .rangeRound([0, width]);
+
+                    var y = d3.scaleLinear()
+                        .rangeRound([height, 0]);
+
+                    var r = d3.scaleLinear()
+                        .rangeRound([9, 50])
+                        .domain([0,1.7]);
+
+                    data.sort(function(a, b) {
+                        return (a.stunting_rate - b.stunting_rate); });
+
+                    x.domain(data.map(function(d) { return d.fuel_type; }));
+
+                    var y_max = d3.max(data, function(d) {return d.stunting_rate;});
+                    y_max = y_max + 10;
+
+                    y.domain([0, y_max]).nice();
+
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Interactive FUnction */
+
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Add Elements */
+                
+            };
+
+        </script>
+<body>
+
+        <script type="text/javascript">
+        // Get the data
+        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/air_pollution_stunting/data/stunting_fuel_venting.csv", function(d) {
+            d.stunting_rate = +d.stunting_rate;
+            d.stunting_rate = 100*d.stunting_rate;
+            return d;        
+        }, draw);
+
+        </script>
+</body>
+</html>
+
