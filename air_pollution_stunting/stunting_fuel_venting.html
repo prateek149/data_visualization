@@ -25,31 +25,176 @@
                     var y = d3.scaleLinear()
                         .rangeRound([height, 0]);
 
-                    var r = d3.scaleLinear()
-                        .rangeRound([9, 50])
-                        .domain([0,1.7]);
-
-                    data.sort(function(a, b) {
-                        return (a.stunting_rate - b.stunting_rate); });
-
-                    x.domain(data.map(function(d) { return d.fuel_type; }));
-
                     var y_max = d3.max(data, function(d) {return d.stunting_rate;});
                     y_max = y_max + 10;
 
                     y.domain([0, y_max]).nice();
 
 
+                    var data_overall = data.filter(function (d) {
+                        return d.separate_kitchen==-1; });
+
+                    data_overall.sort(function(a, b) {
+                        return (a.stunting_rate - b.stunting_rate); });
+
+                    x.domain(data_overall.map(function(d) { return d.fuel_type; }));
+
+                    var data_none = data.filter(function (d) {
+                        return d.window==0 & d.separate_kitchen==0; });
+
+                    var data_window = data.filter(function (d) {
+                        return d.window==1 & d.separate_kitchen==0; });
+
+                    var data_separate_kitchen = data.filter(function (d) {
+                        return d.window==0 & d.separate_kitchen==1; });
+
+                    var data_both = data.filter(function (d) {
+                        return d.window==1 & d.separate_kitchen==1; });
+
+                    var button_data = ["No Ventilation","Window Available","Separate Kitchen","Both Window & Separate Kitchen"];
 
 /*************************************************************************************************/
 /*************************************************************************************************/
-/* Interactive FUnction */
+/* Interactive Function */
+                    
+                    function bubble_move(d)
+
+                    {
+                        if(d=="No Ventilation") {var data_new = data_none;}
+                        if(d=="Window Available") {var data_new = data_window;}
+                        if(d=="Separate Kitchen") {var data_new = data_separate_kitchen;}
+                        if(d=="Both Window & Separate Kitchen") {var data_new = data_both;}
+
+                        var bubbles_new = d3.selectAll("circle.circles_class")
+                            .data(data_new, function(d) {return d.fuel_type})
+                            .transition()
+                            .duration(1000)
+                            .attr("cy", function(d) { return y(d.stunting_rate); });
+
+                        d3.selectAll("circle.button")
+                            .transition()
+                            .duration(200)
+                            .attr("fill","#EEEEEE");
+
+                        d3.select(this)
+                            .transition()
+                            .duration(200)
+                            .attr("fill","black");
+
+                    };
+
+                    function bubble_over(d)
+                    {
+
+                        var point_text = d3.format(".1f")(d.stunting_rate) + "%";
+
+                        var point_anno = svg.append("g")
+                            .append("text")
+                            .attr("class","point_anno")
+                            .attr("x", x(d.fuel_type) + width/6 + 12)
+                            .attr("y", y(d.stunting_rate) + 4)
+                            .attr("fill", "#000")
+                            .attr("text-anchor", "start")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","12px")
+                            .text(point_text);
+
+                    };
+
+                    function bubble_out(d)
+                    {
+
+                        d3.selectAll(".point_anno").remove();
+
+                    };
+
+
 
 
 
 /*************************************************************************************************/
 /*************************************************************************************************/
 /* Add Elements */
+                    
+                    var svg = d3.select("body").append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom + 20)
+                        .append("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+                    var buttons = svg.append("g")
+                            .selectAll("g")
+                            .data(button_data)
+                            .enter().append("circle")
+                            .attr("class","button")
+                            .attr("cx", "287")
+                            .attr("cy", function(d,i) { return 15*i; })
+                            .attr("fill","#EEEEEE")
+                            .attr("stroke","#555555")
+                            .attr("stroke-width","2")
+                            .attr("r","5");
+
+                    var buttons_text = svg.append("g")
+                            .selectAll("g")
+                            .data(button_data)
+                            .enter().append("text")
+                            .attr("class","button")
+                            .attr("text-anchor","start")
+                            .attr("x", "300")
+                            .attr("y", function(d,i) { return 4 + 15*i; })
+                            .attr("fill","#555555")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","11px")
+                            .text(function(d) {return d;});
+
+                    var ref_bubbles = svg.append("g")
+                            .selectAll("g")
+                            .data(data_overall)
+                            .enter().append("circle")
+                            .attr("class","ref_circles_class")
+                            .attr("cx", function(d) { return x(d.fuel_type) + width/6; })
+                            .attr("cy", function(d) { return y(d.stunting_rate); })
+                            .attr("fill","#BBBBBB")
+                            .attr("r","6");
+
+                    var bubbles = svg.append("g")
+                            .selectAll("g")
+                            .data(data_overall)
+                            .enter().append("circle")
+                            .attr("class","circles_class")
+                            .attr("cx", function(d) { return x(d.fuel_type) + width/6; })
+                            .attr("cy", function(d) { return y(d.stunting_rate); })
+                            .attr("id",function(d) {return d.fuel_type;})
+                            .attr("fill","#000000")
+                            .attr("r","6");
+
+                    svg.append("g")
+                            .attr("class", "xaxis")
+                            .attr("transform", "translate(0," + height + ")")
+                            .call(d3.axisBottom(x));
+
+                    svg.append("g")
+                            .attr("class", "yaxis")
+                            .call(d3.axisLeft(y).tickFormat(function(d) { return d + "%"; }).ticks(5));
+                    d3.selectAll(".xaxis .tick text").style("font-size","14px");
+
+                     var ref_lines = svg.append("g")
+                            .selectAll("g")
+                            .data(data_overall)
+                            .enter().append("line")
+                            .attr("class","reference_lines")
+                            .attr("x1", function(d) { return x(d.fuel_type) + width/6; })
+                            .attr("x2", function(d) { return x(d.fuel_type) + width/6; })
+                            .attr("y1", function(d) { return y(d.stunting_rate); })
+                            .attr("y2", function(d) { return height; })
+                            .attr("stroke-width",".5px")
+                            .attr("stroke","rgba(0,0,0,.3)")
+                            .attr("stroke-dasharray","2,4");
+
+                    bubbles.on("mouseover",bubble_over);
+                    bubbles.on("mouseout",bubble_out);
+                    buttons.on("click",bubble_move);
                 
             };
 
@@ -58,9 +203,11 @@
 
         <script type="text/javascript">
         // Get the data
-        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/air_pollution_stunting/data/stunting_fuel_venting.csv", function(d) {
+        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/air_pollution_stunting/data/stunting_fuel_ventilation.csv", function(d) {
             d.stunting_rate = +d.stunting_rate;
             d.stunting_rate = 100*d.stunting_rate;
+            d.separate_kitchen = +d.separate_kitchen;
+            d.window = +d.window;
             return d;        
         }, draw);
 
