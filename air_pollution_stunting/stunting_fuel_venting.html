@@ -51,7 +51,7 @@
                     var data_both = data.filter(function (d) {
                         return d.window==1 & d.separate_kitchen==1; });
 
-                    var button_data = ["No Ventilation","Window Available","Separate Kitchen","Both Window & Separate Kitchen"];
+                    var button_data = ["Overall","No Ventilation","Window Available","Separate Kitchen","Both Window & Separate Kitchen"];
 
 /*************************************************************************************************/
 /*************************************************************************************************/
@@ -60,6 +60,7 @@
                     function bubble_move(d)
 
                     {
+                        if(d=="Overall") {var data_new = data_overall;}
                         if(d=="No Ventilation") {var data_new = data_none;}
                         if(d=="Window Available") {var data_new = data_window;}
                         if(d=="Separate Kitchen") {var data_new = data_separate_kitchen;}
@@ -73,13 +74,13 @@
 
                         d3.selectAll("circle.button")
                             .transition()
-                            .duration(200)
+                            .duration(100)
                             .attr("fill","#EEEEEE");
 
                         d3.select(this)
                             .transition()
-                            .duration(200)
-                            .attr("fill","black");
+                            .duration(100)
+                            .attr("fill","#FFDD11");
 
                     };
 
@@ -123,14 +124,30 @@
                         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
+                    svg.append("g")
+                            .append("text")
+                            .attr("class","page2_text")
+                            .attr("x", 10)
+                            .attr("y", 12)
+                            .attr("fill", "#000")
+                            .attr("font-weight", "bold")
+                            .attr("text-anchor", "start")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","15px")
+                            .text("Stunting Rate by Fuel Type & Ventilation");
+
+
                     var buttons = svg.append("g")
                             .selectAll("g")
                             .data(button_data)
                             .enter().append("circle")
                             .attr("class","button")
-                            .attr("cx", "287")
-                            .attr("cy", function(d,i) { return 15*i; })
-                            .attr("fill","#EEEEEE")
+                            .attr("cx", "14")
+                            .attr("cy", function(d,i) { return 25 + 15*i; })
+                            .attr("fill",function(d) {
+                                if(d=="Overall") {return "#FFDD11";}
+                                return "#EEEEEE";
+                            })
                             .attr("stroke","#555555")
                             .attr("stroke-width","2")
                             .attr("r","5");
@@ -141,8 +158,8 @@
                             .enter().append("text")
                             .attr("class","button")
                             .attr("text-anchor","start")
-                            .attr("x", "300")
-                            .attr("y", function(d,i) { return 4 + 15*i; })
+                            .attr("x", "26")
+                            .attr("y", function(d,i) { return 29 + 15*i; })
                             .attr("fill","#555555")
                             .attr("font-family","Helvetica")
                             .attr("font-size","11px")
@@ -153,7 +170,7 @@
                             .data(data_overall)
                             .enter().append("circle")
                             .attr("class","ref_circles_class")
-                            .attr("cx", function(d) { return x(d.fuel_type) + width/6; })
+                            .attr("cx", function(d) { return x(d.fuel_type) + width/10; })
                             .attr("cy", function(d) { return y(d.stunting_rate); })
                             .attr("fill","#BBBBBB")
                             .attr("r","6");
@@ -163,10 +180,14 @@
                             .data(data_overall)
                             .enter().append("circle")
                             .attr("class","circles_class")
-                            .attr("cx", function(d) { return x(d.fuel_type) + width/6; })
+                            .attr("cx", function(d) { return x(d.fuel_type) + width/10; })
                             .attr("cy", function(d) { return y(d.stunting_rate); })
                             .attr("id",function(d) {return d.fuel_type;})
-                            .attr("fill","#000000")
+                            .attr("fill",function(d) {
+                                if(d.fuel_type=="LPG" || d.fuel_type=="Kerosene") {return "#333377";}
+                                return "#222200"
+
+                            })
                             .attr("r","6");
 
                     svg.append("g")
@@ -184,8 +205,8 @@
                             .data(data_overall)
                             .enter().append("line")
                             .attr("class","reference_lines")
-                            .attr("x1", function(d) { return x(d.fuel_type) + width/6; })
-                            .attr("x2", function(d) { return x(d.fuel_type) + width/6; })
+                            .attr("x1", function(d) { return x(d.fuel_type) + width/10; })
+                            .attr("x2", function(d) { return x(d.fuel_type) + width/10; })
                             .attr("y1", function(d) { return y(d.stunting_rate); })
                             .attr("y2", function(d) { return height; })
                             .attr("stroke-width",".5px")
