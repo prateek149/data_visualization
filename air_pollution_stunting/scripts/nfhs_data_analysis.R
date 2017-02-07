@@ -50,9 +50,9 @@ c <- sqldf("SELECT fuel_type, separate_kitchen, window,COUNT(fuel_type) AS total
            FROM a GROUP BY fuel_type,separate_kitchen, window ")
 c$stunting_rate <- c$stunting/c$total
 
-c <- c[which(c$fuel_type %in% c("Crop Residue","Wood","Dung")),]
+c <- c[which(c$fuel_type != "-999"),]
 
-for (i in c("Crop Residue","Wood","Dung"))
+for (i in unique(c$fuel_type))
 {
   total <- sum(c[which(c$fuel_type==i),]$total)
   stunting <- sum(c[which(c$fuel_type==i),]$stunting)
