@@ -92,7 +92,7 @@
                         var point_anno = svg.append("g")
                             .append("text")
                             .attr("class","point_anno")
-                            .attr("x", x(d.fuel_type) + width/6 + 12)
+                            .attr("x", x(d.fuel_type) + width/6 - 10)
                             .attr("y", y(d.stunting_rate) + 4)
                             .attr("fill", "#000")
                             .attr("text-anchor", "start")
@@ -130,13 +130,24 @@
                             .append("text")
                             .attr("class","title_text")
                             .attr("x", 10)
-                            .attr("y", 12)
+                            .attr("y", 0)
                             .attr("fill", "#000")
                             .attr("font-weight", "bold")
                             .attr("text-anchor", "start")
                             .attr("font-family","Helvetica")
                             .attr("font-size","15px")
                             .text("Stunting Rate by Fuel Type & Ventilation");
+
+                    svg.append("g")
+                            .append("text")
+                            .attr("class","title_text")
+                            .attr("x", 10)
+                            .attr("y", 19)
+                            .attr("fill", "#000")
+                            .attr("text-anchor", "start")
+                            .attr("font-family","Helvetica")
+                            .attr("font-size","12px")
+                            .text("Select One");
 
                     svg.append("g")
                             .append("text")
@@ -179,7 +190,7 @@
                             .enter().append("circle")
                             .attr("class","button")
                             .attr("cx", "14")
-                            .attr("cy", function(d,i) { return 25 + 15*i; })
+                            .attr("cy", function(d,i) { return 30 + 15*i; })
                             .attr("fill",function(d) {
                                 if(d=="Overall") {return "#FFDD11";}
                                 return "#EEEEEE";
@@ -195,7 +206,7 @@
                             .attr("class","button")
                             .attr("text-anchor","start")
                             .attr("x", "26")
-                            .attr("y", function(d,i) { return 29 + 15*i; })
+                            .attr("y", function(d,i) { return 34 + 15*i; })
                             .attr("fill","#555555")
                             .attr("font-family","Helvetica")
                             .attr("font-size","11px")
