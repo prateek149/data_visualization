@@ -87,7 +87,7 @@
                         d3.select(this)
                             .transition()
                             .duration(100)
-                            .attr("fill","#FFDD11");
+                            .attr("fill","#000000");
 
                     };
 
@@ -199,7 +199,7 @@
                             .attr("cx", "14")
                             .attr("cy", function(d,i) { return 30 + 15*i; })
                             .attr("fill",function(d) {
-                                if(d=="Overall") {return "#FFDD11";}
+                                if(d=="Overall") {return "#000000";}
                                 return "#EEEEEE";
                             })
                             .attr("stroke","#555555")

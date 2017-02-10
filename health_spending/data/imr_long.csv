@@ -1,0 +1,685 @@
+state,year,imr
+Assam,2013,54
+Madhya Pradesh,2013,54
+Odisha,2013,51
+Uttar Pradesh,2013,50
+Meghalaya,2013,47
+Rajasthan,2013,47
+Chhattisgarh,2013,46
+Bihar,2013,42
+Haryana,2013,41
+India,2013,40
+Andhra Pradesh,2013,39
+Jammu & Kashmir,2013,37
+Jharkhand,2013,37
+Gujarat,2013,36
+Himachal Pradesh,2013,35
+Mizoram,2013,35
+Arunachal Pradesh,2013,32
+Uttarakhand,2013,32
+Dadra and Nagar Haveli,2013,31
+Karnataka,2013,31
+West Bengal,2013,31
+Punjab,2013,26
+Tripura,2013,26
+Andaman & Nicobar Islands,2013,24
+Delhi,2013,24
+Lakshadweep,2013,24
+Maharashtra,2013,24
+Sikkim,2013,22
+Chandigarh,2013,21
+Tamil Nadu,2013,21
+Daman and Diu,2013,20
+Nagaland,2013,18
+Puducherry,2013,17
+Kerala,2013,12
+Manipur,2013,10
+Goa,2013,9
+Madhya Pradesh,2012,56
+Assam,2012,55
+Odisha,2012,53
+Uttar Pradesh,2012,53
+Meghalaya,2012,49
+Rajasthan,2012,49
+Chhattisgarh,2012,47
+Bihar,2012,43
+Haryana,2012,42
+India,2012,42
+Andhra Pradesh,2012,41
+Jammu & Kashmir,2012,39
+Gujarat,2012,38
+Jharkhand,2012,38
+Himachal Pradesh,2012,36
+Mizoram,2012,35
+Uttarakhand,2012,34
+Arunachal Pradesh,2012,33
+Dadra and Nagar Haveli,2012,33
+Karnataka,2012,32
+West Bengal,2012,32
+Punjab,2012,28
+Tripura,2012,28
+Delhi,2012,25
+Maharashtra,2012,25
+Andaman & Nicobar Islands,2012,24
+Lakshadweep,2012,24
+Sikkim,2012,24
+Daman and Diu,2012,22
+Tamil Nadu,2012,21
+Chandigarh,2012,20
+Nagaland,2012,18
+Puducherry,2012,17
+Kerala,2012,12
+Goa,2012,10
+Manipur,2012,10
+Madhya Pradesh,2011,59
+Odisha,2011,57
+Uttar Pradesh,2011,57
+Assam,2011,55
+Meghalaya,2011,52
+Rajasthan,2011,52
+Chhattisgarh,2011,48
+Bihar,2011,44
+Haryana,2011,44
+India,2011,44
+Andhra Pradesh,2011,43
+Gujarat,2011,41
+Jammu & Kashmir,2011,41
+Jharkhand,2011,39
+Himachal Pradesh,2011,38
+Uttarakhand,2011,36
+Dadra and Nagar Haveli,2011,35
+Karnataka,2011,35
+Mizoram,2011,34
+Arunachal Pradesh,2011,32
+West Bengal,2011,32
+Punjab,2011,30
+Tripura,2011,29
+Delhi,2011,28
+Sikkim,2011,26
+Maharashtra,2011,25
+Lakshadweep,2011,24
+Andaman & Nicobar Islands,2011,23
+Daman and Diu,2011,22
+Tamil Nadu,2011,22
+Nagaland,2011,21
+Chandigarh,2011,20
+Puducherry,2011,19
+Kerala,2011,12
+Goa,2011,11
+Manipur,2011,11
+Madhya Pradesh,2010,62
+Odisha,2010,61
+Uttar Pradesh,2010,61
+Assam,2010,58
+Meghalaya,2010,55
+Rajasthan,2010,55
+Chhattisgarh,2010,51
+Bihar,2010,48
+Haryana,2010,48
+India,2010,47
+Andhra Pradesh,2010,46
+Gujarat,2010,44
+Jammu & Kashmir,2010,43
+Jharkhand,2010,42
+Himachal Pradesh,2010,40
+Dadra and Nagar Haveli,2010,38
+Karnataka,2010,38
+Uttarakhand,2010,38
+Mizoram,2010,37
+Punjab,2010,34
+Arunachal Pradesh,2010,31
+West Bengal,2010,31
+Delhi,2010,30
+Sikkim,2010,30
+Maharashtra,2010,28
+Tripura,2010,27
+Andaman & Nicobar Islands,2010,25
+Lakshadweep,2010,25
+Tamil Nadu,2010,24
+Daman and Diu,2010,23
+Nagaland,2010,23
+Chandigarh,2010,22
+Puducherry,2010,22
+Manipur,2010,14
+Kerala,2010,13
+Goa,2010,10
+Madhya Pradesh,2009,67
+Odisha,2009,65
+Uttar Pradesh,2009,63
+Assam,2009,61
+Meghalaya,2009,59
+Rajasthan,2009,59
+Chhattisgarh,2009,54
+Bihar,2009,52
+Haryana,2009,51
+India,2009,50
+Andhra Pradesh,2009,49
+Gujarat,2009,48
+Himachal Pradesh,2009,45
+Jammu & Kashmir,2009,45
+Jharkhand,2009,44
+Karnataka,2009,41
+Uttarakhand,2009,41
+Punjab,2009,38
+Dadra and Nagar Haveli,2009,37
+Mizoram,2009,36
+Sikkim,2009,34
+Delhi,2009,33
+West Bengal,2009,33
+Arunachal Pradesh,2009,32
+Maharashtra,2009,31
+Tripura,2009,31
+Tamil Nadu,2009,28
+Andaman & Nicobar Islands,2009,27
+Nagaland,2009,26
+Chandigarh,2009,25
+Lakshadweep,2009,25
+Daman and Diu,2009,24
+Puducherry,2009,22
+Manipur,2009,16
+Kerala,2009,12
+Goa,2009,11
+Madhya Pradesh,2008,70
+Odisha,2008,69
+Uttar Pradesh,2008,67
+Assam,2008,64
+Rajasthan,2008,63
+Meghalaya,2008,58
+Chhattisgarh,2008,57
+Bihar,2008,56
+Haryana,2008,54
+India,2008,53
+Andhra Pradesh,2008,52
+Gujarat,2008,50
+Jammu & Kashmir,2008,49
+Jharkhand,2008,46
+Karnataka,2008,45
+Himachal Pradesh,2008,44
+Uttarakhand,2008,44
+Punjab,2008,41
+Mizoram,2008,37
+Delhi,2008,35
+West Bengal,2008,35
+Dadra and Nagar Haveli,2008,34
+Tripura,2008,34
+Maharashtra,2008,33
+Sikkim,2008,33
+Arunachal Pradesh,2008,32
+Andaman & Nicobar Islands,2008,31
+Daman and Diu,2008,31
+Lakshadweep,2008,31
+Tamil Nadu,2008,31
+Chandigarh,2008,28
+Nagaland,2008,26
+Puducherry,2008,25
+Manipur,2008,14
+Kerala,2008,12
+Goa,2008,10
+Madhya Pradesh,2007,72
+Odisha,2007,71
+Uttar Pradesh,2007,69
+Assam,2007,66
+Rajasthan,2007,65
+Chhattisgarh,2007,59
+Bihar,2007,58
+Meghalaya,2007,56
+Haryana,2007,55
+India,2007,55
+Andhra Pradesh,2007,54
+Gujarat,2007,52
+Jammu & Kashmir,2007,51
+Jharkhand,2007,48
+Uttarakhand,2007,48
+Himachal Pradesh,2007,47
+Karnataka,2007,47
+Punjab,2007,43
+Tripura,2007,39
+Arunachal Pradesh,2007,37
+West Bengal,2007,37
+Delhi,2007,36
+Tamil Nadu,2007,35
+Andaman & Nicobar Islands,2007,34
+Dadra and Nagar Haveli,2007,34
+Maharashtra,2007,34
+Sikkim,2007,34
+Chandigarh,2007,27
+Daman and Diu,2007,27
+Puducherry,2007,25
+Lakshadweep,2007,24
+Mizoram,2007,23
+Nagaland,2007,21
+Goa,2007,13
+Kerala,2007,13
+Manipur,2007,12
+Madhya Pradesh,2006,74
+Odisha,2006,73
+Uttar Pradesh,2006,71
+Assam,2006,67
+Rajasthan,2006,67
+Chhattisgarh,2006,61
+Bihar,2006,60
+Haryana,2006,57
+India,2006,57
+Andhra Pradesh,2006,56
+Gujarat,2006,53
+Meghalaya,2006,53
+Jammu & Kashmir,2006,52
+Himachal Pradesh,2006,50
+Jharkhand,2006,49
+Karnataka,2006,48
+Punjab,2006,44
+Uttarakhand,2006,43
+Arunachal Pradesh,2006,40
+West Bengal,2006,38
+Delhi,2006,37
+Tamil Nadu,2006,37
+Tripura,2006,36
+Dadra and Nagar Haveli,2006,35
+Maharashtra,2006,35
+Sikkim,2006,33
+Andaman & Nicobar Islands,2006,31
+Daman and Diu,2006,28
+Puducherry,2006,28
+Lakshadweep,2006,25
+Mizoram,2006,25
+Chandigarh,2006,23
+Nagaland,2006,20
+Goa,2006,15
+Kerala,2006,15
+Manipur,2006,11
+Madhya Pradesh,2005,76
+Odisha,2005,75
+Uttar Pradesh,2005,73
+Assam,2005,68
+Rajasthan,2005,68
+Chhattisgarh,2005,63
+Bihar,2005,61
+Haryana,2005,60
+India,2005,58
+Andhra Pradesh,2005,57
+Gujarat,2005,54
+Jammu & Kashmir,2005,50
+Jharkhand,2005,50
+Karnataka,2005,50
+Himachal Pradesh,2005,49
+Meghalaya,2005,49
+Punjab,2005,44
+Dadra and Nagar Haveli,2005,42
+Uttarakhand,2005,42
+West Bengal,2005,38
+Arunachal Pradesh,2005,37
+Tamil Nadu,2005,37
+Maharashtra,2005,36
+Delhi,2005,35
+Tripura,2005,31
+Sikkim,2005,30
+Daman and Diu,2005,28
+Puducherry,2005,28
+Andaman & Nicobar Islands,2005,27
+Lakshadweep,2005,22
+Mizoram,2005,20
+Chandigarh,2005,19
+Nagaland,2005,18
+Goa,2005,16
+Kerala,2005,14
+Manipur,2005,13
+Madhya Pradesh,2004,79
+Odisha,2004,77
+Uttar Pradesh,2004,72
+Rajasthan,2004,67
+Assam,2004,66
+Bihar,2004,61
+Haryana,2004,61
+Chhattisgarh,2004,60
+Andhra Pradesh,2004,59
+India,2004,58
+Meghalaya,2004,54
+Gujarat,2004,53
+Himachal Pradesh,2004,51
+Jammu & Kashmir,2004,49
+Jharkhand,2004,49
+Karnataka,2004,49
+Dadra and Nagar Haveli,2004,48
+Punjab,2004,45
+Uttarakhand,2004,42
+Tamil Nadu,2004,41
+West Bengal,2004,40
+Arunachal Pradesh,2004,38
+Daman and Diu,2004,37
+Maharashtra,2004,36
+Delhi,2004,32
+Sikkim,2004,32
+Tripura,2004,32
+Lakshadweep,2004,30
+Puducherry,2004,24
+Chandigarh,2004,21
+Andaman & Nicobar Islands,2004,19
+Mizoram,2004,19
+Goa,2004,17
+Nagaland,2004,17
+Manipur,2004,14
+Kerala,2004,12
+Nagaland,2003,NA
+Odisha,2003,83
+Madhya Pradesh,2003,82
+Uttar Pradesh,2003,76
+Rajasthan,2003,75
+Chhattisgarh,2003,70
+Assam,2003,67
+Bihar,2003,60
+India,2003,60
+Andhra Pradesh,2003,59
+Haryana,2003,59
+Gujarat,2003,57
+Meghalaya,2003,57
+Dadra and Nagar Haveli,2003,54
+Karnataka,2003,52
+Jharkhand,2003,51
+Punjab,2003,49
+West Bengal,2003,46
+Jammu & Kashmir,2003,45
+Tamil Nadu,2003,43
+Himachal Pradesh,2003,42
+Maharashtra,2003,42
+Uttarakhand,2003,41
+Daman and Diu,2003,39
+Arunachal Pradesh,2003,34
+Sikkim,2003,33
+Tripura,2003,32
+Delhi,2003,28
+Lakshadweep,2003,26
+Puducherry,2003,24
+Chandigarh,2003,19
+Andaman & Nicobar Islands,2003,18
+Goa,2003,16
+Manipur,2003,16
+Mizoram,2003,16
+Kerala,2003,11
+Nagaland,2002,NA
+Odisha,2002,87
+Madhya Pradesh,2002,85
+Uttar Pradesh,2002,80
+Rajasthan,2002,78
+Chhattisgarh,2002,73
+Assam,2002,70
+India,2002,63
+Andhra Pradesh,2002,62
+Haryana,2002,62
+Bihar,2002,61
+Himachal Pradesh,2002,61
+Meghalaya,2002,61
+Gujarat,2002,60
+Dadra and Nagar Haveli,2002,56
+Karnataka,2002,55
+Jharkhand,2002,51
+Punjab,2002,51
+West Bengal,2002,49
+Jammu & Kashmir,2002,45
+Maharashtra,2002,45
+Tamil Nadu,2002,44
+Daman and Diu,2002,42
+Uttarakhand,2002,41
+Arunachal Pradesh,2002,37
+Sikkim,2002,34
+Tripura,2002,34
+Delhi,2002,30
+Lakshadweep,2002,25
+Puducherry,2002,22
+Chandigarh,2002,21
+Goa,2002,17
+Andaman & Nicobar Islands,2002,15
+Manipur,2002,14
+Mizoram,2002,14
+Kerala,2002,10
+Nagaland,2001,NA
+Odisha,2001,91
+Madhya Pradesh,2001,86
+Uttar Pradesh,2001,83
+Rajasthan,2001,80
+Chhattisgarh,2001,77
+Assam,2001,74
+Andhra Pradesh,2001,66
+Haryana,2001,66
+India,2001,66
+Bihar,2001,62
+Jharkhand,2001,62
+Gujarat,2001,60
+Dadra and Nagar Haveli,2001,58
+Karnataka,2001,58
+Meghalaya,2001,56
+Punjab,2001,52
+West Bengal,2001,51
+Tamil Nadu,2001,49
+Jammu & Kashmir,2001,48
+Uttarakhand,2001,48
+Maharashtra,2001,45
+Himachal Pradesh,2001,43
+Sikkim,2001,42
+Daman and Diu,2001,40
+Arunachal Pradesh,2001,39
+Tripura,2001,39
+Lakshadweep,2001,33
+Delhi,2001,29
+Chandigarh,2001,24
+Puducherry,2001,22
+Manipur,2001,20
+Goa,2001,19
+Mizoram,2001,19
+Andaman & Nicobar Islands,2001,18
+Kerala,2001,11
+Nagaland,2000,NA
+Odisha,2000,95
+Madhya Pradesh,2000,87
+Uttar Pradesh,2000,83
+Chhattisgarh,2000,79
+Rajasthan,2000,79
+Assam,2000,75
+Jharkhand,2000,70
+India,2000,68
+Haryana,2000,67
+Andhra Pradesh,2000,65
+Bihar,2000,62
+Gujarat,2000,62
+Dadra and Nagar Haveli,2000,58
+Meghalaya,2000,58
+Karnataka,2000,57
+Punjab,2000,52
+Himachal Pradesh,2000,51
+Tamil Nadu,2000,51
+West Bengal,2000,51
+Jammu & Kashmir,2000,50
+Uttarakhand,2000,50
+Sikkim,2000,49
+Daman and Diu,2000,48
+Maharashtra,2000,48
+Arunachal Pradesh,2000,44
+Tripura,2000,41
+Delhi,2000,32
+Chandigarh,2000,28
+Lakshadweep,2000,27
+Andaman & Nicobar Islands,2000,23
+Goa,2000,23
+Manipur,2000,23
+Puducherry,2000,23
+Mizoram,2000,21
+Kerala,2000,14
+Nagaland,1999,NA
+Odisha,1999,97
+Madhya Pradesh,1999,90
+Uttar Pradesh,1999,84
+Rajasthan,1999,81
+Chhattisgarh,1999,78
+Assam,1999,76
+Jharkhand,1999,71
+India,1999,70
+Haryana,1999,68
+Andhra Pradesh,1999,66
+Bihar,1999,63
+Gujarat,1999,63
+Karnataka,1999,58
+Dadra and Nagar Haveli,1999,56
+Meghalaya,1999,56
+Himachal Pradesh,1999,54
+Punjab,1999,53
+Jammu & Kashmir,1999,52
+Tamil Nadu,1999,52
+Uttarakhand,1999,52
+West Bengal,1999,52
+Sikkim,1999,49
+Maharashtra,1999,48
+Arunachal Pradesh,1999,43
+Tripura,1999,42
+Daman and Diu,1999,35
+Lakshadweep,1999,32
+Delhi,1999,31
+Chandigarh,1999,28
+Andaman & Nicobar Islands,1999,25
+Manipur,1999,25
+Puducherry,1999,22
+Goa,1999,21
+Mizoram,1999,19
+Kerala,1999,14
+Nagaland,1998,NA
+Uttarakhand,1998,NA
+Madhya Pradesh,1998,98
+Odisha,1998,98
+Chhattisgarh,1998,94
+Uttar Pradesh,1998,85
+Rajasthan,1998,83
+Assam,1998,76
+India,1998,72
+Haryana,1998,70
+Himachal Pradesh,1998,68
+Bihar,1998,67
+Andhra Pradesh,1998,66
+Gujarat,1998,64
+Jharkhand,1998,62
+Dadra and Nagar Haveli,1998,61
+Karnataka,1998,58
+Punjab,1998,54
+Tamil Nadu,1998,53
+West Bengal,1998,53
+Meghalaya,1998,52
+Sikkim,1998,52
+Daman and Diu,1998,51
+Maharashtra,1998,49
+Tripura,1998,49
+Jammu & Kashmir,1998,45
+Arunachal Pradesh,1998,44
+Delhi,1998,36
+Chandigarh,1998,32
+Andaman & Nicobar Islands,1998,30
+Lakshadweep,1998,26
+Manipur,1998,25
+Goa,1998,23
+Mizoram,1998,23
+Puducherry,1998,21
+Kerala,1998,16
+Jammu & Kashmir,1997,NA
+Nagaland,1997,NA
+Uttarakhand,1997,NA
+Odisha,1997,96
+Madhya Pradesh,1997,94
+Chhattisgarh,1997,89
+Rajasthan,1997,85
+Uttar Pradesh,1997,85
+Assam,1997,76
+Bihar,1997,71
+India,1997,71
+Haryana,1997,68
+Jharkhand,1997,68
+Andhra Pradesh,1997,63
+Dadra and Nagar Haveli,1997,63
+Himachal Pradesh,1997,63
+Gujarat,1997,62
+West Bengal,1997,55
+Meghalaya,1997,54
+Karnataka,1997,53
+Tamil Nadu,1997,53
+Punjab,1997,51
+Sikkim,1997,51
+Tripura,1997,51
+Arunachal Pradesh,1997,47
+Maharashtra,1997,47
+Chandigarh,1997,40
+Daman and Diu,1997,38
+Lakshadweep,1997,36
+Delhi,1997,35
+Andaman & Nicobar Islands,1997,33
+Manipur,1997,30
+Puducherry,1997,22
+Goa,1997,19
+Mizoram,1997,19
+Kerala,1997,12
+Andaman & Nicobar Islands,1996,NA
+Arunachal Pradesh,1996,NA
+Chandigarh,1996,NA
+Chhattisgarh,1996,NA
+Dadra and Nagar Haveli,1996,NA
+Daman and Diu,1996,NA
+Delhi,1996,NA
+Goa,1996,NA
+Jammu & Kashmir,1996,NA
+Jharkhand,1996,NA
+Lakshadweep,1996,NA
+Manipur,1996,NA
+Meghalaya,1996,NA
+Mizoram,1996,NA
+Nagaland,1996,NA
+Puducherry,1996,NA
+Sikkim,1996,NA
+Tripura,1996,NA
+Uttarakhand,1996,NA
+Madhya Pradesh,1996,97
+Odisha,1996,95
+Rajasthan,1996,85
+Uttar Pradesh,1996,85
+Assam,1996,74
+India,1996,72
+Bihar,1996,71
+Haryana,1996,68
+Andhra Pradesh,1996,65
+Himachal Pradesh,1996,63
+Gujarat,1996,61
+West Bengal,1996,55
+Karnataka,1996,53
+Tamil Nadu,1996,53
+Punjab,1996,51
+Maharashtra,1996,48
+Kerala,1996,14
+Andaman & Nicobar Islands,1995,NA
+Arunachal Pradesh,1995,NA
+Chandigarh,1995,NA
+Chhattisgarh,1995,NA
+Dadra and Nagar Haveli,1995,NA
+Daman and Diu,1995,NA
+Delhi,1995,NA
+Goa,1995,NA
+Jammu & Kashmir,1995,NA
+Jharkhand,1995,NA
+Lakshadweep,1995,NA
+Manipur,1995,NA
+Meghalaya,1995,NA
+Mizoram,1995,NA
+Nagaland,1995,NA
+Puducherry,1995,NA
+Sikkim,1995,NA
+Tripura,1995,NA
+Uttarakhand,1995,NA
+Odisha,1995,103
+Madhya Pradesh,1995,99
+Rajasthan,1995,86
+Uttar Pradesh,1995,86
+Assam,1995,77
+India,1995,74
+Bihar,1995,73
+Haryana,1995,69
+Andhra Pradesh,1995,67
+Himachal Pradesh,1995,63
+Gujarat,1995,62
+Karnataka,1995,62
+West Bengal,1995,58
+Maharashtra,1995,55
+Punjab,1995,54
+Tamil Nadu,1995,54
+Kerala,1995,15
