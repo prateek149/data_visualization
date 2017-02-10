@@ -19,6 +19,9 @@
                     width = w - margin.left - margin.right,
                     height = h - margin.top - margin.bottom;
 
+                    var liquid_fuel_color = "#849AA9";
+                    var solid_fuel_color = "#A4A182";
+
                     var x = d3.scaleBand()
                         .rangeRound([0, width]);
 
@@ -57,8 +60,12 @@
 /*************************************************************************************************/
 /* Interactive Function */
                     
-                    function bubble_move(d)
+                    function button_over(d)
+                    {
+                        d3.select(this).style("cursor", "hand");
+                    };                    
 
+                    function button_click(d)
                     {
                         if(d=="Overall") {var data_new = data_overall;}
                         if(d=="No Ventilation") {var data_new = data_none;}
@@ -143,19 +150,18 @@
                             .attr("class","title_text")
                             .attr("x", 10)
                             .attr("y", 18)
-                            .attr("fill", "#000")
-                            .attr("font-weight", "bold")
+                            .attr("fill", "#555555")
                             .attr("text-anchor", "start")
                             .attr("font-family","Helvetica")
                             .attr("font-size","12px")
-                            .text("Select One");
+                            .text("Select one ventilation option from list");
 
                     svg.append("g")
                             .append("text")
                             .attr("class","fuel_type_text")
                             .attr("x", 122)
                             .attr("y", 370)
-                            .attr("fill", "#333377")
+                            .attr("fill", liquid_fuel_color)
                             .attr("text-anchor", "middle")
                             .attr("font-family","Helvetica")
                             .attr("font-size","13px")
@@ -166,7 +172,7 @@
                             .attr("class","fuel_type_text")
                             .attr("x", 237)
                             .attr("y", 370)
-                            .attr("fill", "#222200")
+                            .attr("fill", solid_fuel_color)
                             .attr("text-anchor", "middle")
                             .attr("font-family","Helvetica")
                             .attr("font-size","13px")
@@ -179,10 +185,10 @@
                             .attr("class","fuel_ref_line")
                             .attr("x1", function(d) { return 180; })
                             .attr("x2", function(d) { return 180; })
-                            .attr("y1", function(d) { return 320; })
+                            .attr("y1", function(d) { return 310; })
                             .attr("y2", function(d) { return 380; })
-                            .attr("stroke-width",".5px")
-                            .attr("stroke","rgba(0,0,0,.2)");
+                            .attr("stroke-width","2px")
+                            .attr("stroke","rgba(0,0,0,.05)");
 
 
                     var buttons = svg.append("g")
@@ -220,7 +226,7 @@
                             .attr("class","ref_circles_class")
                             .attr("cx", function(d) { return x(d.fuel_type) + width/10; })
                             .attr("cy", function(d) { return y(d.stunting_rate); })
-                            .attr("fill","#BBBBBB")
+                            .attr("fill","#E5E5E5")
                             .attr("r","6");
 
                     var bubbles = svg.append("g")
@@ -232,8 +238,8 @@
                             .attr("cy", function(d) { return y(d.stunting_rate); })
                             .attr("id",function(d) {return d.fuel_type;})
                             .attr("fill",function(d) {
-                                if(d.fuel_type=="LPG" || d.fuel_type=="Kerosene") {return "#333377";}
-                                return "#222200"
+                                if(d.fuel_type=="LPG" || d.fuel_type=="Kerosene") {return liquid_fuel_color;}
+                                return solid_fuel_color;
 
                             })
                             .attr("r","6");
@@ -263,7 +269,9 @@
 
                     bubbles.on("mouseover",bubble_over);
                     bubbles.on("mouseout",bubble_out);
-                    buttons.on("click",bubble_move);
+                    buttons.on("click",button_click);
+                    buttons.on("mouseover",button_over);
+                    
                     //buttons_text.on("click",bubble_move)
                 
             };

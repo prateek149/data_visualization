@@ -19,6 +19,9 @@
                     width = w - margin.left - margin.right,
                     height = h - margin.top - margin.bottom;
 
+                    var liquid_fuel_color = "#849AA9";
+                    var solid_fuel_color = "#A4A182";
+
                     var x = d3.scaleBand()
                         .rangeRound([0, width]);
 
@@ -93,7 +96,7 @@
                             .attr("class","page2_text")
                             .attr("x", width/3)
                             .attr("y", 150)
-                            .attr("fill", "#333377")
+                            .attr("fill", liquid_fuel_color)
                             .attr("font-weight", "bold")
                             .attr("text-anchor", "end")
                             .attr("font-family","Helvetica")
@@ -105,7 +108,7 @@
                             .attr("class","page2_text")
                             .attr("x", width/2.2)
                             .attr("y", 150)
-                            .attr("fill", "#222200")
+                            .attr("fill", solid_fuel_color)
                             .attr("font-weight", "bold")
                             .attr("text-anchor", "start")
                             .attr("font-family","Helvetica")
@@ -170,8 +173,8 @@
                             .attr("cx", function(d) { return x(d.fuel_type) + width/10 + .5; })
                             .attr("cy", function(d) { return height/1.5; })
                             .attr("fill",function(d) {
-                                if(d.fuel_type=="LPG" || d.fuel_type=="Kerosene") {return "#333377";}
-                                return "#222200"
+                                if(d.fuel_type=="LPG" || d.fuel_type=="Kerosene") {return liquid_fuel_color;}
+                                return solid_fuel_color;
 
                             })
                             .transition()
@@ -191,7 +194,7 @@
                                 if(d.fuel_type=="LPG") {return height/1.5 + 4.5;}
                                 return height/1.5 + 1; 
                             })
-                            .attr("fill", "#AAAAAA")
+                            .attr("fill", "#222222")
                             .attr("text-anchor","middle")
                             .attr("font-family","Helvetica")
                             .attr("font-size","13px")
@@ -208,7 +211,7 @@
                                 return height/1.5 + 10; 
                             })
                             //.attr("cy", function(d) { return y(d.stunting_rate); })
-                            .attr("fill", "#AAAAAA")
+                            .attr("fill", "#222222")
                             .attr("text-anchor","middle")
                             .attr("font-family","Helvetica")
                             .attr("font-size","9px")
