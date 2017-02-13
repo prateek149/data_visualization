@@ -4,53 +4,11 @@
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <style>
-            div.tooltip {
-              position: absolute;
-              text-align: center;
-              /*width: 60px;*/
-              /*height: 28px;*/
-              padding: 2px;
-              font: 12px sans-serif;
-              background: lightsteelblue;
-              border: 0px;
-              border-radius: 2px;
-            }
-
-            div.buttons {
-                position: fixed;
-                top: 35px;
-                left: 400px;
-            } 
-
-            div.buttons div {
-                background-color: rgba(220,220,220,.2);
-                border-style : solid;
-                border-color: rgba(0,0,0,0);
-                border-width: 1px;
-                padding: 1px;
-                padding-left: 3px;
-                width: 85px;
-                overflow: hidden;
-                margin: 0px;
-                font-family: verdana;
-                font-size: 10px;
-                color: black;
-                text-align: left;
-            }
-
-            .countries {
-                stroke-width: 1;
-
-            }
-
-            .countries #INDIA {
-                stroke-width: 3;
-            }
         </style>
 
         <script type="text/javascript">
 
-            function draw(data) {
+            function draw(data1,data2,data3) {
 
                     var w = 500;
                     var h = 400;
@@ -61,6 +19,38 @@
                     width = w - margin.left - margin.right,
                     height = h - margin.top - margin.bottom;
 
+                    data1.forEach(function(d) {
+                        d.public_health_gdp = +d.public_health_gdp;
+                        d.year = d3.timeParse("%Y")(d.year);
+                    });
+
+                    var gdp_max = d3.max(data1, function(d) { return d.public_health_gdp; });
+
+                    data2.forEach(function(d) {
+                        d.mmr = +d.mmr;
+                        d.year = d3.timeParse("%Y")(d.year);
+                    });
+
+                    var mmr_max = d3.max(data2, function(d) { return d.mmr; });
+
+                    data3.forEach(function(d) {
+                        d.sc = +d.sc;
+                        d.phc = +d.phc;
+                        d.chc = +d.chc;
+                        d.year = d3.timeParse("%Y")(d.year);
+                        d.value = d.sc; //Selecting variable to visualize
+                    });
+
+                    var fac_max = d3.max(data3, function(d) { return d.value; });
+debugger;
+
+                    var x = d3.scaleTime()
+                        .range([0, width])
+                        .domain(d3.extent(data3, function(d) { return d.year; }));
+
+                    var y = d3.scaleLinear()
+                        .range([height, 0])
+                        .domain([0, 90]);
 
 /*************************************************************************************************/
 /*************************************************************************************************/
@@ -96,15 +86,13 @@
 
         
         // Get the data
-        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/air_pollution_stunting/data/stunting_data.csv", function(d) {
-            var max_year = 2015;
-            if (d.stunting=="") { return null; }
-            d.stunting = +d.stunting;
-            if (+d.year > max_year) { return null; }
-            d.year = d3.timeParse("%Y")(d.year);
-            
-            return d;        
-        }, draw);
+        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/health_spending/data/public_health_spending_gdp.csv", function(a) {
+            d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/health_spending/data/mmr_long.csv", function(b) {
+                d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/health_spending/data/facilities_timeseries.csv", function(c) {
+                    draw(a,b,c);
+                });  
+           });       
+        });
 
         </script>
 </body>
