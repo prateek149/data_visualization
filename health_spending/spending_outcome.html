@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <style>
+            div.tooltip {
+              position: absolute;
+              text-align: center;
+              /*width: 60px;*/
+              /*height: 28px;*/
+              padding: 2px;
+              font: 12px sans-serif;
+              background: lightsteelblue;
+              border: 0px;
+              border-radius: 2px;
+            }
+
+            div.buttons {
+                position: fixed;
+                top: 35px;
+                left: 400px;
+            } 
+
+            div.buttons div {
+                background-color: rgba(220,220,220,.2);
+                border-style : solid;
+                border-color: rgba(0,0,0,0);
+                border-width: 1px;
+                padding: 1px;
+                padding-left: 3px;
+                width: 85px;
+                overflow: hidden;
+                margin: 0px;
+                font-family: verdana;
+                font-size: 10px;
+                color: black;
+                text-align: left;
+            }
+
+            .countries {
+                stroke-width: 1;
+
+            }
+
+            .countries #INDIA {
+                stroke-width: 3;
+            }
+        </style>
+
+        <script type="text/javascript">
+
+            function draw(data) {
+
+                    var w = 500;
+                    var h = 400;
+
+                    var m = 30;
+
+                    var margin = {top: m, right: m, bottom: m, left: m},
+                    width = w - margin.left - margin.right,
+                    height = h - margin.top - margin.bottom;
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Data preparation */
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Interactive Functions */
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Add Elements */
+
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Assigning Interaction to Elements */
+
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* End of the draw functions*/
+            };
+
+        </script>
+<body>
+
+        <script type="text/javascript">
+
+        
+        // Get the data
+        d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/air_pollution_stunting/data/stunting_data.csv", function(d) {
+            var max_year = 2015;
+            if (d.stunting=="") { return null; }
+            d.stunting = +d.stunting;
+            if (+d.year > max_year) { return null; }
+            d.year = d3.timeParse("%Y")(d.year);
+            
+            return d;        
+        }, draw);
+
+        </script>
+</body>
+</html>
+
