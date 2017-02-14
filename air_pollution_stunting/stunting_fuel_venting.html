@@ -35,21 +35,21 @@
 
 
                     var data_overall = data.filter(function (d) {
-                        return d.separate_kitchen==-1; });
+                        return (d.window==-1 & d.separate_kitchen==-1); });
 
                     data_overall.sort(function(a, b) {
                         return (a.stunting_rate - b.stunting_rate); });
 
                     x.domain(data_overall.map(function(d) { return d.fuel_type; }));
-debugger;
+
                     var data_none = data.filter(function (d) {
                         return d.window==0 & d.separate_kitchen==0; });
 
                     var data_window = data.filter(function (d) {
-                        return d.window==1 & d.separate_kitchen==0; });
+                        return d.window==1 & d.separate_kitchen==-1; });
 
                     var data_separate_kitchen = data.filter(function (d) {
-                        return d.window==0 & d.separate_kitchen==1; });
+                        return d.window==-1 & d.separate_kitchen==1; });
 
                     var data_both = data.filter(function (d) {
                         return d.window==1 & d.separate_kitchen==1; });
