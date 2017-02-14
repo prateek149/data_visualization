@@ -19,6 +19,8 @@
                     width = w - margin.left - margin.right,
                     height = h - margin.top - margin.bottom;
 
+
+                    // GDP Data
                     data1.forEach(function(d) {
                         d.public_health_gdp = +d.public_health_gdp;
                         d.year = d3.timeParse("%Y")(d.year);
@@ -26,31 +28,48 @@
 
                     var gdp_max = d3.max(data1, function(d) { return d.public_health_gdp; });
 
+                    var gdp_scale = d3.scaleLinear()
+                        .range([height, 0])
+                        .domain([0, gdp_max]);
+
+                    var gdp_line = d3.line()
+                        .x(function(d) { return x(d.year); })
+                        .y(function(d) { return gdp_scale(d.public_health_gdp); });
+
+                    // MMR Data
                     data2.forEach(function(d) {
                         d.mmr = +d.mmr;
                         d.year = d3.timeParse("%Y")(d.year);
                     });
-
                     var mmr_max = d3.max(data2, function(d) { return d.mmr; });
+                    var mmr_scale = d3.scaleLinear()
+                        .range([height, 0])
+                        .domain([0, mmr_max]);
+                    var mmr_line = d3.line()
+                        .x(function(d) { return x(d.year); })
+                        .y(function(d) { return mmr_scale(d.mmr); });
 
+
+                    // Facility Data
                     data3.forEach(function(d) {
                         d.sc = +d.sc;
                         d.phc = +d.phc;
                         d.chc = +d.chc;
                         d.year = d3.timeParse("%Y")(d.year);
-                        d.value = d.sc; //Selecting variable to visualize
+                        d.value = d.sc + d.phc + d.chc; //Selecting variable to visualize
                     });
-
                     var fac_max = d3.max(data3, function(d) { return d.value; });
-debugger;
+                    var fac_scale = d3.scaleLinear()
+                        .range([height, 0])
+                        .domain([0, fac_max]);
+                    var fac_line = d3.line()
+                        .x(function(d) { return x(d.year); })
+                        .y(function(d) { return fac_scale(d.value); });
+
 
                     var x = d3.scaleTime()
                         .range([0, width])
                         .domain(d3.extent(data3, function(d) { return d.year; }));
-
-                    var y = d3.scaleLinear()
-                        .range([height, 0])
-                        .domain([0, 90]);
 
 /*************************************************************************************************/
 /*************************************************************************************************/
@@ -65,6 +84,55 @@ debugger;
 /*************************************************************************************************/
 /*************************************************************************************************/
 /* Add Elements */
+                    var svg = d3.select("body")
+                        .append("svg")
+                            .attr("width", width + margin.left + margin.right)
+                            .attr("height", height + margin.top + margin.bottom)
+                        .append("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+                    svg.append("path")
+                      .datum(data1)
+                      .attr("fill", "none")
+                      .attr("stroke", "steelblue")
+                      .attr("stroke-linejoin", "round")
+                      .attr("stroke-linecap", "round")
+                      .attr("stroke-width", 1.5)
+                      .attr("d", gdp_line);
+
+                    svg.append("path")
+                      .datum(data2)
+                      .attr("fill", "none")
+                      .attr("stroke", "steelblue")
+                      .attr("stroke-linejoin", "round")
+                      .attr("stroke-linecap", "round")
+                      .attr("stroke-width", 1.5)
+                      .attr("d", mmr_line);
+
+                    svg.append("path")
+                      .datum(data3)
+                      .attr("fill", "none")
+                      .attr("stroke", "steelblue")
+                      .attr("stroke-linejoin", "round")
+                      .attr("stroke-linecap", "round")
+                      .attr("stroke-width", 1.5)
+                      .attr("d", fac_line);
+
+                    svg.append("g")
+                        .attr("class", "axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(d3.axisBottom(x).ticks(4));
+
+                    var fuel_ref_line = svg.append("line")
+                            .attr("class","fuel_ref_line")
+                            .attr("x1", x(2005))
+                            .attr("x2", x(2005))
+                            .attr("y1", 0)
+                            .attr("y2", 300)
+                            .attr("stroke-width","2px")
+                            .attr("stroke","rgba(0,0,0,.05)");
+
 
 
 

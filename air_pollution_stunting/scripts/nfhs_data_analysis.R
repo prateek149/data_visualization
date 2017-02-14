@@ -48,7 +48,6 @@ write.csv(b[which(b$fuel_type!="-999"),],
 c <- sqldf("SELECT fuel_type, separate_kitchen, window,COUNT(fuel_type) AS total,
            SUM(stunting) AS stunting
            FROM a GROUP BY fuel_type,separate_kitchen, window ")
-c$stunting_rate <- c$stunting/c$total
 
 c <- c[which(c$fuel_type != "-999"),]
 
@@ -56,10 +55,24 @@ for (i in unique(c$fuel_type))
 {
   total <- sum(c[which(c$fuel_type==i),]$total)
   stunting <- sum(c[which(c$fuel_type==i),]$stunting)
-  stunting_rate <- stunting/total
   c <- rbind(c, data.frame(fuel_type=i,separate_kitchen=-1,window=-1,total=total,
-                        stunting=stunting,stunting_rate=stunting_rate))
+                           stunting=stunting))
+  #Window records
+  total <- sum(c[which(c$fuel_type==i & c$window==1),]$total)
+  stunting <- sum(c[which(c$fuel_type==i & c$window==1),]$stunting)
+  stunting_rate <- stunting/total
+  c <- rbind(c, data.frame(fuel_type=i,separate_kitchen=-1,window=1,total=total,
+                           stunting=stunting))
+  
+  total <- sum(c[which(c$fuel_type==i & c$separate_kitchen==1),]$total)
+  stunting <- sum(c[which(c$fuel_type==i & c$separate_kitchen==1),]$stunting)
+  stunting_rate <- stunting/total
+  c <- rbind(c, data.frame(fuel_type=i,separate_kitchen=1,window=-1,total=total,
+                           stunting=stunting))
+  
 }
+
+c$stunting_rate <- c$stunting/c$total
 
 write.csv(c,
           "/Users/prateekmittal/Dropbox/data_visualization/air_pollution_stunting/data/stunting_fuel_ventilation.csv")

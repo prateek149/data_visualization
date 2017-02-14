@@ -41,7 +41,7 @@
                         return (a.stunting_rate - b.stunting_rate); });
 
                     x.domain(data_overall.map(function(d) { return d.fuel_type; }));
-
+debugger;
                     var data_none = data.filter(function (d) {
                         return d.window==0 & d.separate_kitchen==0; });
 
@@ -281,6 +281,7 @@
 
         <script type="text/javascript">
         // Get the data
+
         d3.csv("https://raw.githubusercontent.com/prateek149/data_visualization/master/air_pollution_stunting/data/stunting_fuel_ventilation.csv", function(d) {
             d.stunting_rate = +d.stunting_rate;
             d.stunting_rate = 100*d.stunting_rate;
