@@ -1,0 +1,285 @@
+state_code,dist_code,state,district
+18,1,Assam,KOKRAJHAR 
+18,2,Assam,DHUBRI 
+18,3,Assam,GOALPARA 
+18,4,Assam,BONGAIGAON 
+18,5,Assam,BARPETA 
+18,6,Assam,KAMRUP 
+18,7,Assam,NALBARI 
+18,8,Assam,DARRANG 
+18,9,Assam,MARIGAON 
+18,10,Assam,NAGAON 
+18,11,Assam,SONITPUR 
+18,12,Assam,LAKHIMPUR 
+18,13,Assam,DHEMAJI 
+18,14,Assam,TINSUKIA 
+18,15,Assam,DIBRUGARH 
+18,16,Assam,SIBSAGAR 
+18,17,Assam,JORHAT 
+18,18,Assam,GOLAGHAT 
+18,19,Assam,KARBI ANGLONG 
+18,20,Assam,NORTH CACHAR HILLS 
+18,21,Assam,CACHAR 
+18,22,Assam,KARIMGANJ 
+18,23,Assam,HAILAKANDI 
+10,1,Bihar,PASHCHIM CHAMPARAN 
+10,2,Bihar,PURBA CHAMPARAN 
+10,3,Bihar,SHEOHAR  
+10,4,Bihar,SITAMARHI 
+10,5,Bihar,MADHUBANI 
+10,6,Bihar,SUPAUL  
+10,7,Bihar,ARARIA 
+10,8,Bihar,KISHANGANJ 
+10,9,Bihar,PURNIA 
+10,10,Bihar,KATIHAR 
+10,11,Bihar,MADHEPURA 
+10,12,Bihar,SAHARSA 
+10,13,Bihar,DARBHANGA 
+10,14,Bihar,MUZAFFARPUR 
+10,15,Bihar,GOPALGANJ 
+10,16,Bihar,SIWAN 
+10,17,Bihar,SARAN 
+10,18,Bihar,VAISHALI 
+10,19,Bihar,SAMASTIPUR 
+10,20,Bihar,BEGUSARAI 
+10,21,Bihar,KHAGARIA 
+10,22,Bihar,BHAGALPUR  
+10,23,Bihar,BANKA  
+10,24,Bihar,MUNGER 
+10,25,Bihar,LAKHISARAI 
+10,26,Bihar,SHEIKHPURA 
+10,27,Bihar,NALANDA 
+10,28,Bihar,PATNA  
+10,29,Bihar,BHOJPUR 
+10,30,Bihar,BUXAR 
+10,31,Bihar,KAIMUR (BHABUA) 
+10,32,Bihar,ROHTAS 
+10,33,Bihar,JEHANABAD  
+10,34,Bihar,AURANGABAD  
+10,35,Bihar,GAYA  
+10,36,Bihar,NAWADA 
+10,37,Bihar,JAMUI 
+22,1,Chhattisgarh,KORIYA 
+22,2,Chhattisgarh,SURGUJA 
+22,3,Chhattisgarh,JASHPUR 
+22,4,Chhattisgarh,RAIGARH 
+22,5,Chhattisgarh,KORBA 
+22,6,Chhattisgarh,JANJGIR - CHAMPA 
+22,7,Chhattisgarh,BILASPUR 
+22,8,Chhattisgarh,KAWARDHA 
+22,9,Chhattisgarh,RAJNANDGAON 
+22,10,Chhattisgarh,DURG 
+22,11,Chhattisgarh,RAIPUR 
+22,12,Chhattisgarh,MAHASAMUND 
+22,13,Chhattisgarh,DHAMTARI 
+22,14,Chhattisgarh,KANKER 
+22,15,Chhattisgarh,BASTAR 
+22,16,Chhattisgarh,DANTEWADA 
+20,1,Jharkhand,GARHWA 
+20,2,Jharkhand,PALAMU 
+20,3,Jharkhand,CHATRA 
+20,4,Jharkhand,HAZARIBAGH 
+20,5,Jharkhand,KODARMA 
+20,6,Jharkhand,GIRIDIH 
+20,7,Jharkhand,DEOGHAR 
+20,8,Jharkhand,GODDA 
+20,9,Jharkhand,SAHIBGANJ 
+20,10,Jharkhand,PAKAUR 
+20,11,Jharkhand,DUMKA 
+20,12,Jharkhand,DHANBAD 
+20,13,Jharkhand,BOKARO 
+20,14,Jharkhand,RANCHI 
+20,15,Jharkhand,LOHARDAGA 
+20,16,Jharkhand,GUMLA 
+20,17,Jharkhand,PASHCHIMI SINGHBHUM 
+20,18,Jharkhand,PURBI SINGHBHUM 
+21,1,Odisha,BARGARH 
+21,2,Odisha,JHARSUGUDA 
+21,3,Odisha,SAMBALPUR 
+21,4,Odisha,DEBAGARH 
+21,5,Odisha,SUNDARGARH 
+21,6,Odisha,KENDUJHAR 
+21,7,Odisha,MAYURBHANJ 
+21,8,Odisha,BALESHWAR 
+21,9,Odisha,BHADRAK 
+21,10,Odisha,KENDRAPARA 
+21,11,Odisha,JAGATSINGHAPUR 
+21,12,Odisha,CUTTACK 
+21,13,Odisha,JAJAPUR 
+21,14,Odisha,DHENKANAL 
+21,15,Odisha,ANUGUL 
+21,16,Odisha,NAYAGARH 
+21,17,Odisha,KHORDHA 
+21,18,Odisha,PURI 
+21,19,Odisha,GANJAM 
+21,20,Odisha,GAJAPATI 
+21,21,Odisha,KANDHAMAL 
+21,22,Odisha,BAUDH 
+21,23,Odisha,SONAPUR 
+21,24,Odisha,BALANGIR 
+21,25,Odisha,NUAPADA 
+21,26,Odisha,KALAHANDI 
+21,27,Odisha,RAYAGADA 
+21,28,Odisha,NABARANGAPUR 
+21,29,Odisha,KORAPUT 
+21,30,Odisha,MALKANGIRI 
+23,1,Madhya Pradesh,SHEOPUR 
+23,2,Madhya Pradesh,MORENA 
+23,3,Madhya Pradesh,BHIND 
+23,4,Madhya Pradesh,GWALIOR 
+23,5,Madhya Pradesh,DATIA 
+23,6,Madhya Pradesh,SHIVPURI 
+23,7,Madhya Pradesh,GUNA 
+23,8,Madhya Pradesh,TIKAMGARH 
+23,9,Madhya Pradesh,CHHATARPUR 
+23,10,Madhya Pradesh,PANNA 
+23,11,Madhya Pradesh,SAGAR 
+23,12,Madhya Pradesh,DAMOH 
+23,13,Madhya Pradesh,SATNA 
+23,14,Madhya Pradesh,REWA 
+23,15,Madhya Pradesh,UMARIA 
+23,16,Madhya Pradesh,SHAHDOL 
+23,17,Madhya Pradesh,SIDHI 
+23,18,Madhya Pradesh,NEEMUCH 
+23,19,Madhya Pradesh,MANDSAUR 
+23,20,Madhya Pradesh,RATLAM 
+23,21,Madhya Pradesh,UJJAIN 
+23,22,Madhya Pradesh,SHAJAPUR 
+23,23,Madhya Pradesh,DEWAS 
+23,24,Madhya Pradesh,JHABUA 
+23,25,Madhya Pradesh,DHAR 
+23,26,Madhya Pradesh,INDORE 
+23,27,Madhya Pradesh,WEST NIMAR 
+23,28,Madhya Pradesh,BARWANI 
+23,29,Madhya Pradesh,EAST NIMAR 
+23,30,Madhya Pradesh,RAJGARH 
+23,31,Madhya Pradesh,VIDISHA 
+23,32,Madhya Pradesh,BHOPAL 
+23,33,Madhya Pradesh,SEHORE 
+23,34,Madhya Pradesh,RAISEN 
+23,35,Madhya Pradesh,BETUL 
+23,36,Madhya Pradesh,HARDA 
+23,37,Madhya Pradesh,HOSHANGABAD 
+23,38,Madhya Pradesh,KATNI 
+23,39,Madhya Pradesh,JABALPUR 
+23,40,Madhya Pradesh,NARSIMHAPUR 
+23,41,Madhya Pradesh,DINDORI 
+23,42,Madhya Pradesh,MANDLA 
+23,43,Madhya Pradesh,CHHINDWARA 
+23,44,Madhya Pradesh,SEONI 
+23,45,Madhya Pradesh,BALAGHAT 
+08,1,Rajasthan,GANGANAGAR 
+08,2,Rajasthan,HANUMANGARH 
+08,3,Rajasthan,BIKANER 
+08,4,Rajasthan,CHURU 
+08,5,Rajasthan,JHUNJHUNUN 
+08,6,Rajasthan,ALWAR 
+08,7,Rajasthan,BHARATPUR 
+08,8,Rajasthan,DHAULPUR 
+08,9,Rajasthan,KARAULI 
+08,10,Rajasthan,SAWAI MADHOPUR 
+08,11,Rajasthan,DAUSA 
+08,12,Rajasthan,JAIPUR 
+08,13,Rajasthan,SIKAR 
+08,14,Rajasthan,NAGAUR 
+08,15,Rajasthan,JODHPUR 
+08,16,Rajasthan,JAISALMER 
+08,17,Rajasthan,BARMER 
+08,18,Rajasthan,JALOR 
+08,19,Rajasthan,SIROHI 
+08,20,Rajasthan,PALI 
+08,21,Rajasthan,AJMER 
+08,22,Rajasthan,TONK 
+08,23,Rajasthan,BUNDI 
+08,24,Rajasthan,BHILWARA 
+08,25,Rajasthan,RAJSAMAND 
+08,26,Rajasthan,UDAIPUR 
+08,27,Rajasthan,DUNGARPUR 
+08,28,Rajasthan,BANSWARA 
+08,29,Rajasthan,CHITTAURGARH 
+08,30,Rajasthan,KOTA 
+08,31,Rajasthan,BARAN 
+08,32,Rajasthan,JHALAWAR 
+09,1,Uttar Pradesh,SAHARANPUR 
+09,2,Uttar Pradesh,MUZAFFARNAGAR 
+09,3,Uttar Pradesh,BIJNOR 
+09,4,Uttar Pradesh,MORADABAD 
+09,5,Uttar Pradesh,RAMPUR 
+09,6,Uttar Pradesh,JYOTIBA PHULE NAGAR 
+09,7,Uttar Pradesh,MEERUT 
+09,8,Uttar Pradesh,BAGHPAT 
+09,9,Uttar Pradesh,GHAZIABAD 
+09,10,Uttar Pradesh,GAUTAM BUDDHA NAGAR 
+09,11,Uttar Pradesh,BULANDSHAHR  
+09,12,Uttar Pradesh,ALIGARH 
+09,13,Uttar Pradesh,HATHRAS 
+09,14,Uttar Pradesh,MATHURA 
+09,15,Uttar Pradesh,AGRA 
+09,16,Uttar Pradesh,FIROZABAD 
+09,17,Uttar Pradesh,ETAH 
+09,18,Uttar Pradesh,MAINPURI 
+09,19,Uttar Pradesh,BUDAUN 
+09,20,Uttar Pradesh,BAREILLY 
+09,21,Uttar Pradesh,PILIBHIT 
+09,22,Uttar Pradesh,SHAHJAHANPUR 
+09,23,Uttar Pradesh,LAKHIMPUR KHERI 
+09,24,Uttar Pradesh,SITAPUR 
+09,25,Uttar Pradesh,HARDOI 
+09,26,Uttar Pradesh,UNNAO 
+09,27,Uttar Pradesh,LUCKNOW 
+09,28,Uttar Pradesh,RAE BARELI 
+09,29,Uttar Pradesh,FARRUKHABAD 
+09,30,Uttar Pradesh,KANNAUJ 
+09,31,Uttar Pradesh,ETAWAH 
+09,32,Uttar Pradesh,AURAIYA 
+09,33,Uttar Pradesh,KANPUR DEHAT 
+09,34,Uttar Pradesh,KANPUR NAGAR 
+09,35,Uttar Pradesh,JALAUN  
+09,36,Uttar Pradesh,JHANSI 
+09,37,Uttar Pradesh,LALITPUR 
+09,38,Uttar Pradesh,HAMIRPUR 
+09,39,Uttar Pradesh,MAHOBA 
+09,40,Uttar Pradesh,BANDA 
+09,41,Uttar Pradesh,CHITRAKOOT 
+09,42,Uttar Pradesh,FATEHPUR 
+09,43,Uttar Pradesh,PRATAPGARH 
+09,44,Uttar Pradesh,KAUSHAMBI 
+09,45,Uttar Pradesh,ALLAHABAD  
+09,46,Uttar Pradesh,BARABANKI 
+09,47,Uttar Pradesh,FAIZABAD 
+09,48,Uttar Pradesh,AMBEDKAR NAGAR 
+09,49,Uttar Pradesh,SULTANPUR 
+09,50,Uttar Pradesh,BAHRAICH 
+09,51,Uttar Pradesh,SHRAWASTI 
+09,52,Uttar Pradesh,BALRAMPUR  
+09,53,Uttar Pradesh,GONDA 
+09,54,Uttar Pradesh,SIDDHARTHNAGAR 
+09,55,Uttar Pradesh,BASTI 
+09,56,Uttar Pradesh,SANT KABIR NAGAR 
+09,57,Uttar Pradesh,MAHARAJGANJ 
+09,58,Uttar Pradesh,GORAKHPUR 
+09,59,Uttar Pradesh,KUSHINAGAR  
+09,60,Uttar Pradesh,DEORIA 
+09,61,Uttar Pradesh,AZAMGARH 
+09,62,Uttar Pradesh,MAU 
+09,63,Uttar Pradesh,BALLIA 
+09,64,Uttar Pradesh,JAUNPUR 
+09,65,Uttar Pradesh,GHAZIPUR 
+09,66,Uttar Pradesh,CHANDAULI 
+09,67,Uttar Pradesh,VARANASI 
+09,68,Uttar Pradesh,SANT RAVIDAS NAGAR BHADOHI 
+09,69,Uttar Pradesh,MIRZAPUR 
+09,70,Uttar Pradesh,SONBHADRA 
+05,1,Uttarakhand,UTTARKASHI 
+05,2,Uttarakhand,CHAMOLI 
+05,3,Uttarakhand,RUDRAPRAYAG
+05,4,Uttarakhand,TEHRI GARHWAL 
+05,5,Uttarakhand,DEHRADUN 
+05,6,Uttarakhand,GARHWAL 
+05,7,Uttarakhand,PITHORAGARH 
+05,8,Uttarakhand,BAGESHWAR 
+05,9,Uttarakhand,ALMORA 
+05,10,Uttarakhand,CHAMPAWAT 
+05,11,Uttarakhand,NAINITAL 
+05,12,Uttarakhand,UDHAM SINGH NAGAR 
+05,13,Uttarakhand,HARDWAR 
