@@ -111,7 +111,7 @@
                         .attr("x",anno_x).attr("y",anno_y)
                         .attr("font-size",10).style("color","black")
                         .append("tspan").text("District:   ")
-                        .append("tspan").text(d.properties.DISTRICT +  " , " + d.properties.ST_NM).attr("font-size",12).style("fill",alt_color);
+                        .append("tspan").text(d.properties.DISTRICT +  " , " + d.properties.state_name).attr("font-size",12).style("fill",alt_color);
 
                     anno_text.append("text")
                         .attr("x",anno_x).attr("y",anno_y + dy)
@@ -213,7 +213,7 @@
 
 <body>
   <script type="text/javascript">
-    d3.json("/c_section/data/test_geojson.json", draw);
+    d3.json("https://raw.githubusercontent.com/prateek149/data_visualization/master/c_section/data/test_geojson.json", draw);
   </script>
 </body>
 
