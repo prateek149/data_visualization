@@ -260,11 +260,23 @@
 
                         var point_text = d3.timeFormat("%Y")(d.year) + " : " + d.stunting + "%";
 
+                        var x_anno = x(d.year) + 5;
+                        var y_anno = y(d.stunting) - 5;
+                        
+                        if(d.year.getFullYear()==2012) {x_anno = x(d.year) - 10;}
+                        if(d.year.getFullYear()==2013) {
+                            x_anno = x(d.year) - 20;
+                            y_anno = y(d.stunting) - 10;
+                        }
+                        if(d.year.getFullYear()==2014) {
+                            x_anno = x(d.year) - 35;
+                            y_anno = y(d.stunting) - 20;
+                        }
                         var point_anno = svg.append("g")
                             .append("text")
                             .attr("class","point_anno")
-                            .attr("x", x(d.year) + 5)
-                            .attr("y", y(d.stunting) - 5)
+                            .attr("x", x_anno)
+                            .attr("y", y_anno)
                             .attr("fill", "#000")
                             .attr("text-anchor", "start")
                             .attr("font-family","Helvetica")
