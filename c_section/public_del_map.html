@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style>
+
+    </style>
+
+    <script type="text/javascript"> 
+
+        function draw(geo_data) {
+          debugger;
+
+                "use strict";
+
+                var w = 600;
+                var h = 450;
+                    
+                var m = w/12;
+
+                var margin = {top: m, right: m, bottom: m, left: m},
+                width = w - margin.left - margin.right,
+                height = h - margin.top - margin.bottom;
+
+
+/*************************************************************************************************/
+/* Generating thresholds */
+
+
+
+                var thresholds = [.1,.2,.3,.4,.5];
+
+
+/*************************************************************************************************/
+                var fill_var = "public_del";
+
+                var color_array = ['#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696','#636363','#252525'];
+                var na_color = "#7777aa";
+                var color_array_na = color_array.concat(na_color);
+                
+
+                function color_fill(d) {
+                    
+                    if (d != undefined) { 
+                      if(d < thresholds[0]) { return color_array_na[0];}
+                      if(d >= thresholds[0] && d < thresholds[1]) { return color_array_na[1];}
+                      if(d >= thresholds[1] && d < thresholds[2]) { return color_array_na[2];}
+                      if(d >= thresholds[2] && d < thresholds[3]) { return color_array_na[3];}
+                      if(d >= thresholds[3] && d < thresholds[4]) { return color_array_na[4];}
+                      if(d >= thresholds[4]) { return color_array_na[5];}
+                    }
+                    else { return na_color }
+                };
+
+    
+
+                function legend_cat_text(d,i) {
+                    var text_format = d3.format(",.0%");
+                    if(i == 0) { return "Less than " + text_format(thresholds[0]);}
+                    if(i == 1) { return text_format(thresholds[0]) + " to " + text_format(thresholds[1]);}
+                    if(i == 2) { return text_format(thresholds[1]) + " to " + text_format(thresholds[2]);}
+                    if(i == 3) { return text_format(thresholds[2]) + " to " + text_format(thresholds[3]);}
+                    if(i == 4) { return text_format(thresholds[3]) + " to " + text_format(thresholds[4]);}
+                    if(i == 5) { return text_format(thresholds[4]) + " and higher";}
+                    if(i == 6) { return "No Data";}
+                };
+
+                var svg = d3.select("body")
+                            .append("svg")
+                            .attr("width",width)
+                            .attr("height", height)
+                            .append("g")
+                            .attr("class","map");
+
+                var projection = d3.geoMercator()
+                                   .scale(1)
+                                   .translate([0,0]);
+
+                var path = d3.geoPath().projection(projection);
+              
+                var b = path.bounds(geo_data),
+                  s = 1 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+                  t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+
+                projection
+                    .scale(s)
+                    .translate(t);
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* All the interactive functions */
+
+                function map_mouseover(d) {
+
+                    var alt_color = "#CA7914";
+
+                    var anno_x = width/2.15;
+                    var anno_y = 10;
+                    var dy = 13;
+
+                    var label_text = d3.format(',.0%')(d.properties[fill_var]);
+                        if(d.properties[fill_var] == null) {
+                            iphs_sc_text = "No Data"
+                        };
+
+                    var anno_text = svg.append("g")
+                                        .attr("class","anno_text");
+
+                    anno_text.append("text")
+                        .attr("x",anno_x).attr("y",anno_y)
+                        .attr("font-size",10).style("color","black")
+                        .append("tspan").text("District:   ")
+                        .append("tspan").text(d.properties.DISTRICT +  " , " + d.properties.state_name).attr("font-size",12).style("fill",alt_color);
+
+                    anno_text.append("text")
+                        .attr("x",anno_x).attr("y",anno_y + dy)
+                        .attr("font-size",10).style("color","black")
+                        .append("tspan").text("Public Deliveries:   ")
+                        .append("tspan").text(label_text).attr("font-size",12).style("fill",alt_color);
+                              
+                };
+                  
+                function map_mouseout(d) {
+
+                      svg.selectAll(".anno_text").remove();
+                          
+                };
+
+
+/*************************************************************************************************/
+/*************************************************************************************************/
+/* Adding the SVG elements functions */
+                
+                  var map = svg.append("g").selectAll("path")
+                               .data(geo_data.features)
+                               .enter()  
+                               .append("path")
+                               .attr("d", path)
+                               .attr("class","grid")
+                               .attr("fill", function(d) {
+                                  return(color_fill(d.properties[fill_var])); })
+                               .on("mouseover", map_mouseover)
+                               .on("mouseout", map_mouseout);
+
+                  var title_text = svg.append("text")
+                                .attr("text-anchor","start")
+                                .attr("class","source_text")
+                                .attr("x",0)
+                                .attr("y",height/6)
+                                .text("Public Deliveries % by District")
+                                .style("font-family","verdana")
+                                .style("font-size","11px")
+                                .style("color","black");
+
+                  var source_text = svg.append("text")
+                                .attr("text-anchor","start")
+                                .attr("class","source_text")
+                                .attr("x",0)
+                                .attr("y",height/5)
+                                .text("Source: DLHS-4 & AHS")
+                                .style("font-family","verdana")
+                                .style("font-size","7px")
+                                .style("color","black");
+
+
+/*************************************************************************************************/
+/* Adding Legend */
+
+                  var legend = svg.append("g")
+                                  .attr("class","legend");
+
+
+                  legend.selectAll("rect")
+                        .data(color_array_na)
+                        .enter()
+                        .append("rect")
+                        .attr("class","colors")
+                        .attr("x", width/2.1)
+                        .attr("y", function(d,i){ return (height/1.4 + i*13 + 8); })
+                        .attr("width",15)
+                        .attr("height",10)
+                        .style("fill",function(d,i) { return color_array_na[i]; });
+
+                  legend.selectAll("text.cat_text")
+                        .data(color_array_na)
+                        .enter()
+                        .append("text")
+                        .attr("class","cat_text")
+                        .attr("id", function(d,i){return "q" + i;})
+                        .attr("x", width/1.95)
+                        .attr("y", function(d,i){ return (height/1.4 + i*13 + 8 + 10); })
+                        .attr("font-size",11)
+                        .text(function(d,i){
+                          return legend_cat_text(d,i);});
+
+
+
+                  
+
+
+/*************************************************************************************************/
+/* Adding Buttons */
+
+
+/*************************************************************************************************/
+/* Closing the draw function */
+        };  
+
+    </script>
+
+  </head>
+
+<body>
+  <script type="text/javascript">
+    d3.json("https://raw.githubusercontent.com/prateek149/data_visualization/master/c_section/data/test_geojson.json", draw);
+  </script>
+</body>
+
+</html>

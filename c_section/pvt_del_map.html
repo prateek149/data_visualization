@@ -29,13 +29,13 @@
 
 
 
-                var thresholds = [.05,.1,.15,.25,.50];
+                var thresholds = [.1,.2,.3,.4,.5];
 
 
 /*************************************************************************************************/
-                var fill_var = "c_section_mean";
+                var fill_var = "pvt_del";
 
-                var color_array = ['#a2182b', '#ef8a62', '#e0e0e0', '#999999','#4d4d4d','#1d1d1d'];
+                var color_array = ['#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696','#636363','#252525'];
                 var na_color = "#7777aa";
                 var color_array_na = color_array.concat(na_color);
                 
@@ -99,8 +99,8 @@
                     var anno_y = 10;
                     var dy = 13;
 
-                    var csection_text = d3.format(',.0%')(d.properties.c_section_mean);
-                        if(d.properties.c_section_mean == null) {
+                    var label_text = d3.format(',.0%')(d.properties[fill_var]);
+                        if(d.properties[fill_var] == null) {
                             iphs_sc_text = "No Data"
                         };
 
@@ -116,8 +116,8 @@
                     anno_text.append("text")
                         .attr("x",anno_x).attr("y",anno_y + dy)
                         .attr("font-size",10).style("color","black")
-                        .append("tspan").text("C-Section Rate:   ")
-                        .append("tspan").text(csection_text).attr("font-size",12).style("fill",alt_color);
+                        .append("tspan").text("Private Deliveries:   ")
+                        .append("tspan").text(label_text).attr("font-size",12).style("fill",alt_color);
                               
                 };
                   
@@ -148,7 +148,7 @@
                                 .attr("class","source_text")
                                 .attr("x",0)
                                 .attr("y",height/6)
-                                .text("C-Section Rate by District")
+                                .text("Private Deliveries % by District")
                                 .style("font-family","verdana")
                                 .style("font-size","11px")
                                 .style("color","black");
