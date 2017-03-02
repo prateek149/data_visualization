@@ -29,13 +29,13 @@
 
 
 
-                var thresholds = [60000,120000,240000,360000];
+                var thresholds = [1,2,3,4];
 
 
 /*************************************************************************************************/
-                var fill_var = "pop_surgeon";
+                var fill_var = "gynec_per_1mil";
 
-                var color_array = ['#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696','#636363'];
+                var color_array = ['#d9d9d9', '#bdbdbd', '#969696','#636363','#252525'];
                 var na_color = "#7777aa";
                 var color_array_na = color_array.concat(na_color);
                 
@@ -97,7 +97,7 @@
                     var anno_y = 10;
                     var dy = 13;
 
-                    var label_text = d3.format(',.0%')(d.properties[fill_var]);
+                    var label_text = d3.format(',.0f')(d.properties[fill_var]);
                         if(d.properties[fill_var] == null) {
                             iphs_sc_text = "No Data"
                         };
@@ -114,7 +114,7 @@
                     anno_text.append("text")
                         .attr("x",anno_x).attr("y",anno_y + dy)
                         .attr("font-size",10).style("color","black")
-                        .append("tspan").text("Private Deliveries:   ")
+                        .append("tspan").text("Gynaecologists per 1 Million:   ")
                         .append("tspan").text(label_text).attr("font-size",12).style("fill",alt_color);
                               
                 };
@@ -146,7 +146,7 @@
                                 .attr("class","source_text")
                                 .attr("x",0)
                                 .attr("y",height/6)
-                                .text("Population per")
+                                .text("Number of Govt. Hospitals")
                                 .style("font-family","verdana")
                                 .style("font-size","11px")
                                 .style("color","black");
@@ -156,7 +156,17 @@
                                 .attr("class","source_text")
                                 .attr("x",0)
                                 .attr("y",height/6 + 12)
-                                .text("Hospital with Surgeon")
+                                .text("with Gynaecologist")
+                                .style("font-family","verdana")
+                                .style("font-size","11px")
+                                .style("color","black");
+
+                  var title_text3 = svg.append("text")
+                                .attr("text-anchor","start")
+                                .attr("class","source_text")
+                                .attr("x",0)
+                                .attr("y",height/6 + 24)
+                                .text("per 1 Million People")
                                 .style("font-family","verdana")
                                 .style("font-size","11px")
                                 .style("color","black");
@@ -165,7 +175,7 @@
                                 .attr("text-anchor","start")
                                 .attr("class","source_text")
                                 .attr("x",0)
-                                .attr("y",height/6 + 24)
+                                .attr("y",height/6 + 36)
                                 .text("Source: DLHS-4 & AHS")
                                 .style("font-family","verdana")
                                 .style("font-size","7px")
