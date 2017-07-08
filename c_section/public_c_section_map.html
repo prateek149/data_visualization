@@ -10,13 +10,12 @@
     <script type="text/javascript"> 
 
         function draw(geo_data) {
-          debugger;
 
                 "use strict";
 
                 var w = 600;
                 var h = 450;
-                    
+
                 var m = w/12;
 
                 var margin = {top: m, right: m, bottom: m, left: m},
@@ -35,7 +34,7 @@
 /*************************************************************************************************/
                 var fill_var = "public_c_section";
 
-                var color_array = ['#a2182b', '#ef8a62', '#e0e0e0' ,'#7d7d7d','#1d1d1d'];
+                var color_array = ['#a2182b', '#ef8a62', '#e0e0e0' ,'#7d7d7d','#2d2d2d'];
                 var na_color = "#7777aa";
                 var color_array_na = color_array.concat(na_color);
                 
@@ -94,12 +93,17 @@
                     var alt_color = "#CA7914";
 
                     var anno_x = width/2.15;
-                    var anno_y = 10;
+                    var anno_y = height/11;
                     var dy = 13;
 
                     var label_text = d3.format(',.0%')(d.properties[fill_var]);
                         if(d.properties[fill_var] == null) {
-                            iphs_sc_text = "No Data"
+                            label_text = "No Data"
+                        };
+
+                    var state_name_text = d.properties.state_name;
+                        if(d.properties.state_name == null) {
+                            state_name_text = d.properties.ST_NM;
                         };
 
                     var anno_text = svg.append("g")
@@ -107,15 +111,15 @@
 
                     anno_text.append("text")
                         .attr("x",anno_x).attr("y",anno_y)
-                        .attr("font-size",10).style("color","black")
+                        .attr("font-size",10).style("color","black").style("font-family","verdana")
                         .append("tspan").text("District:   ")
-                        .append("tspan").text(d.properties.DISTRICT +  " , " + d.properties.state_name).attr("font-size",12).style("fill",alt_color);
+                        .append("tspan").text(d.properties.DISTRICT +  " , " + state_name_text).attr("font-size",10).style("fill",alt_color);
 
                     anno_text.append("text")
                         .attr("x",anno_x).attr("y",anno_y + dy)
-                        .attr("font-size",10).style("color","black")
+                        .attr("font-size",10).style("color","black").style("font-family","verdana")
                         .append("tspan").text("C-Section Rate:   ")
-                        .append("tspan").text(label_text).attr("font-size",12).style("fill",alt_color);
+                        .append("tspan").text(label_text).attr("font-size",10).style("fill",alt_color);
                               
                 };
                   
@@ -141,25 +145,48 @@
                                .on("mouseover", map_mouseover)
                                .on("mouseout", map_mouseout);
 
-                  var title_text = svg.append("text")
+                  var title_text1 = svg.append("text")
                                 .attr("text-anchor","start")
                                 .attr("class","source_text")
-                                .attr("x",0)
-                                .attr("y",height/6)
-                                .text("C-Section Rate in Public Inst")
+                                .attr("x",2)
+                                .attr("y",height/11)
+                                .text("C-Section Rate")
                                 .style("font-family","verdana")
-                                .style("font-size","11px")
-                                .style("color","black");
+                                .style("font-size","14px")
+                                .style("font-weight","bold")
+                                .style("fill","black");
+
+                  var title_text2 = svg.append("text")
+                                .attr("text-anchor","start")
+                                .attr("class","source_text")
+                                .attr("x",2)
+                                .attr("y",height/11 + 18)
+                                .text("in Public Institutions")
+                                .style("font-family","verdana")
+                                .style("font-size","12px")
+                                .style("font-weight","bold")
+                                .style("fill","#669966");
+
+                  var title_text3 = svg.append("text")
+                                .attr("text-anchor","start")
+                                .attr("class","source_text")
+                                .attr("x",2)
+                                .attr("y",height/11 + 36)
+                                .text("by District")
+                                .style("font-family","verdana")
+                                .style("font-size","12px")
+                                .style("font-weight","bold")
+                                .style("fill","black");
 
                   var source_text = svg.append("text")
                                 .attr("text-anchor","start")
                                 .attr("class","source_text")
-                                .attr("x",0)
-                                .attr("y",height/5)
+                                .attr("x",2)
+                                .attr("y",height/11 + 52)
                                 .text("Source: DLHS-4 & AHS")
                                 .style("font-family","verdana")
-                                .style("font-size","7px")
-                                .style("color","black");
+                                .style("font-size","10px")
+                                .style("fill","black");
 
 
 /*************************************************************************************************/
